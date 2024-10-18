@@ -13,9 +13,9 @@
     if(($row["nombreU"] == $user) && ($row["contrasena"] == $password)){
         $_SESSION["usuario"] = $user;
         if ($row["tipoU"] === "admin") {
-            header("Location: ../view/admin/dashboardadmin.php");
+            header("Location: ../view/admin/dashboardadmin.html");
         } elseif ($row["tipoU"] === "usuario") {
-            header("Location: ../view/empleado/dashboardempleado.php");
+            header("Location: ../view/empleado/dashboardempleado.html");
         } else {
             header("Location: login.php?error=tipo_usuario");
         }

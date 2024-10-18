@@ -1,0 +1,163 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+/* Estilo del sidebar */
+.sidebar {
+    background-color: #2f5d3b;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    padding: 20px;
+}
+
+.sidebar .user-profile {
+    text-align: center;
+}
+
+.sidebar .user-image {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.sidebar .username {
+    margin-top: 10px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin: 20px 0;
+}
+
+/* Ajustar los elementos del menú con imágenes */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #fff;
+}
+
+.menu-item img {
+    width: 20px; /* Ajusta el tamaño de la imagen */
+    height: 20px;
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.menu-item:hover {
+    background-color: #3b7f53; 
+    border-radius: 5rem;
+}
+
+/* Estilos del contenido principal */
+.main-content {
+    width: 80%;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    color: #333;
+}
+
+header p {
+    color: #555;
+}
+
+/* Estilos de la sección de reportes */
+.reports {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.reports h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.report-box {
+    background-color: #cee3f8;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#productos-vendidos {
+    background-color: #6a8ed0;
+}
+
+#total-ventas {
+    background-color: #a67cdb;
+}
+
+#existencias-productos {
+    background-color: #f1c75f;
+}
+
+#clientes-compras {
+    background-color: #f5a25d;
+}
+
+#mejores-precios {
+    background-color: #55b2d4;
+}
+
+#descargar-clientes, #descargar-productos {
+    background-color: #4bb07a;
+}
+
+.report-box:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.dashboard-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333; /* Color del texto */
+}
+
+.small-image {
+    width: 30px; /* Ajusta el tamaño de la imagen */
+    height: 30px;
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.dashboard-item img, 
+.dashboard-item span {
+    pointer-events: none; /* Desactiva los eventos sobre la imagen y el texto para que el enlace completo sea clicable */
+}
