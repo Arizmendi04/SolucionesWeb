@@ -17,8 +17,14 @@ header {
     padding: 10px 20px;
 }
 
+.logo {
+    display: flex; 
+    align-items: center; 
+}
+
 .logo img {
     width: 50px;
+    margin-right: 10px;
 }
 
 .logo-a {
@@ -62,10 +68,17 @@ main {
 }
 
 .hero {
-    flex: 1; /* Permite que la sección hero ocupe el espacio disponible */
+    flex: 1; 
     display: flex;
-    flex-direction: column; /* Coloca el contenido verticalmente */
-    justify-content: center; /* Centra el contenido verticalmente */
+    flex: 0 0 40%; /* Establece el ancho en un 40% y previene que crezca */
+    flex-direction: column; 
+    justify-content: center; 
+}
+
+.logo-texto{
+    color: #000000;
+    font-size: 1.5em; 
+    text-align: left;
 }
 
 .hero h1 {
