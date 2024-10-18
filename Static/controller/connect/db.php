@@ -1,9 +1,9 @@
 <?php 
     $conn = mysqli_connect(
-        'localhost',  // Cambié la URL al localhost para desarrollo local
-        'root',       // Usuario de la base de datos
-        '',           // Contraseña (vacía por defecto en algunos sistemas)
-        'SoluPlagas'  // Nombre de la base de datos
+        'https://danieltellez.net/',
+        'danielt2_plagas',     
+        'SkRYCSNrepVu',        
+        'danielt2_plagas2024' 
     );
 
     // Verificación de la conexión

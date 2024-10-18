@@ -14,7 +14,7 @@
         </div>
         <nav>
             <a class="logo-a" href="#about">Sobre nosotros</a>
-            <a href="#login" class="login-btn">Iniciar sesión</a>
+            <a href="Static/view/login.php" class="login-btn">Iniciar sesión</a>
         </nav>
     </header>
 
