@@ -1,0 +1,127 @@
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+    margin: 0;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.6rem;
+    background-image: url('../img/fondologin.svg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh; 
+    padding: 0 2rem;
+}
+
+.logo-container {
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para el logo */
+.logo-img {
+    width: 120px; 
+    height: auto;
+    margin-bottom: 1rem; 
+}
+
+/* Para quitar el subrayado del nombre de la empresa */
+.logo {
+    text-decoration: none; 
+}
+
+.logo_nombre {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 1rem; /* Espacio entre el nombre y la línea blanca */
+    position: relative;
+}
+
+/* Agregar la línea blanca debajo del nombre de la empresa */
+.logo-container::after {
+    content: '';
+    display: block;
+    width: 80%; 
+    height: 4px; 
+    background-color: white; 
+    margin: 1rem auto 0 auto; 
+}
+
+/* Sección derecha - Formulario */
+.derecha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 3rem;
+    width: 40%;
+}
+
+.login-box {
+    background-color: rgba(115, 117, 120, 0.436);
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #03492d;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+}
+
+.boton_primario {
+    background-color: #0a600feb; /* Color del botón */
+    color: white;
+    font-size: 1.6rem;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.boton_primario:hover {
+    background-color: #31b627; /* Cambiar color al hacer hover */
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .derecha {
+        width: 100%;
+        padding: 2rem;
+    }
+}

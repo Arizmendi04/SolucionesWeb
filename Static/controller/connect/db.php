@@ -1,8 +1,8 @@
 <?php 
     $conn = mysqli_connect(
-        'https://danieltellez.net/',
-        'danielt2_plagas',     
-        'SkRYCSNrepVu',        
+        'localhost',
+        'root',     
+        '',        
         'danielt2_plagas2024' 
     );
 

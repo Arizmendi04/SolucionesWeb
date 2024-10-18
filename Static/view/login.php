@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <meta name="description" content="Inicio de sesión">
+    <!-- Preload y estilos -->
+    <link rel="preload" href="../css/login.css" as="style">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor header-content">
+            <!-- Sección izquierda con logo y texto -->
+            <div class="izquierda">
+                <a class="logo" href="../../index.php">
+                    <div class="logo-container">
+                        <img class="logo-img" src="../img/logosinletras.png" alt="Logo">
+                        <h1 class="logo_nombre">Soluciones para Plagas</h1>
+                    </div>
+                </a>
+            </div>
+            <!-- Sección derecha con formulario de inicio de sesión -->
+            <div class="derecha">
+                <div class="login-box">
+                    <h2>Iniciar Sesión</h2>
+                    
+                    <form method="POST" name="frm1" id="frm1" action="../controller/autentificacion.php">
+                        <label for="usuario">USUARIO</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
+                        <label for="contrasena">CONTRASEÑA</label>
+                        <input type="password" id="contrasena" name="contrasena" placeholder="*********">
+                        <button type="submit" class="boton_primario">Acceder</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
