@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5c0;
+    padding: 10px 20px;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.logo-a {
+    padding: 10px 20px;
+    color: #000000;
+    font-size: 20px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: rgb(255, 253, 253);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a.login-btn {
+    background-color: #000000;
+    padding: 10px 40px;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+}
+
+nav a.login-btn:hover {
+    background-color: #19e30e;
+}
+
+main {
+    text-align: center;
+    margin: 0 5vw; 
+    padding: 10px 20px;
+    min-height: 100vh;
+    background-color: #3f774d;
+    color: white;
+    border-radius: 3rem;
+    flex: 1;
+    display: flex;
+}
+
+.hero {
+    flex: 1; /* Permite que la sección hero ocupe el espacio disponible */
+    display: flex;
+    flex-direction: column; /* Coloca el contenido verticalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    background-color: #4fc65a;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.images {
+    flex: 1; /* Permite que la sección de imágenes ocupe el espacio restante */
+    display: flex;
+    justify-content: flex-end; 
+    margin: 60px 0;
+}
+
+.images img {
+    width: 100%;
+    height: 90%;
+    border-radius: 15px;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .images img {
+        width: 100%; 
+        height: auto; 
+    }
+    main {
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .hero {
+        text-align: center;
+    }
+}
