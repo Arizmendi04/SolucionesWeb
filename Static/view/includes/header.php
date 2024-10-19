@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Soluciones para Plagas</title>
+    <title>Soluciones Para Plagas</title>
     <link rel="stylesheet" href="../../css/dashboard.css">
 </head>
 <body>
@@ -16,74 +16,61 @@
             <ul>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/dash.png" class="small-image">
+                        <img src="../../img/dash.png" class="small-image" alt="Dashboard">
                         <a href="#">Dashboard</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/ventas.png" class="small-image">
+                        <img src="../../img/ventas.png" class="small-image" alt="Ventas">
                         <a href="#">Ventas</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/products-icon.png" class="small-image">
+                        <img src="../../img/products-icon.png" class="small-image" alt="Productos">
                         <a href="#">Productos</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/proveedor.png" class="small-image">
+                        <img src="../../img/proveedor.png" class="small-image" alt="Proveedores">
                         <a href="#">Proveedores</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/empleado.png" class="small-image">
+                        <img src="../../img/empleado.png" class="small-image" alt="Empleados">
                         <a href="#">Empleados</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/cliente.png" class="small-image">
+                        <img src="../../img/cliente.png" class="small-image" alt="Clientes">
                         <a href="#">Clientes</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/bd.png" class="small-image">
+                        <img src="../../img/bd.png" class="small-image" alt="Base de datos">
                         <a href="#">Base de datos</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/logout.png" class="small-image">
-                        <a href="#">Cerrar sesión</a>
+                        <img src="../../img/logout.png" class="small-image" alt="Cerrar sesión">
+                        <a href="#" id="logoutButton">Cerrar sesión</a>
                     </div>
                 </li>
             </ul>
         </nav>        
     </div>
-
-    <div class="main-content">
-        <header>
-            <h1>Dashboard</h1>
-            <p>Bienvenido Admin!</p>
-        </header>
-        <section class="reports">
-            <h2>Reportes</h2>
-            <div class="report-grid">
-                <a href="#" class="report-box" id="productos-vendidos">Productos más vendidos</a>
-                <a href="#" class="report-box" id="total-ventas">Total de ventas</a>
-                <a href="#" class="report-box" id="existencias-productos">Existencias de productos por proveedor</a>
-                <a href="#" class="report-box" id="clientes-compras">Clientes con más compras</a>
-                <a href="#" class="report-box" id="mejores-precios">Proveedores con mejores precios</a>
-                <a href="#" class="report-box" id="descargar-clientes">Descargar lista de clientes</a>
-                <a href="#" class="report-box" id="descargar-productos">Descargar lista de productos</a>
-            </div>
-        </section>
+    <div class="alert-overlay" id="alertOverlay"></div>
+    <div class="alert-box" id="alertBox">
+        <p id="alertMessage">¿Estás seguro de que quieres cerrar sesión?</p>
+        <button class="alert-button" onclick="confirmLogout()">Cerrar sesión</button>
+        <button class="alert-button" onclick="closeAlert()">Cancelar</button>
     </div>
-    <script src="../../controller/js/admin.js"></script>
+    <script src="../../controller/js/logout.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@ body {
     background-image: url('../img/fondologin.svg'); 
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     height: 100vh;
 }
 
