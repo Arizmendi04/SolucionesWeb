@@ -17,10 +17,10 @@
         } elseif ($row["tipoU"] === "usuario") {
             header("Location: ../view/empleado/dashboardempleado.html");
         } else {
-            header("Location: login.php?error=tipo_usuario");
+            header("Location: ../view/login.php");
         }
     }else{
-        header("Location: login.php");
+        header("Location: ../view/login.php");
     }
 
 ?>
