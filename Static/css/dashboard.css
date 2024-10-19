@@ -97,13 +97,13 @@ body {
 .menu-item {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     color: #fff;
 }
 
 .menu-item img {
-    width: 20px; /* Ajusta el tamaño de la imagen */
-    height: 20px;
+    width: 35px; 
+    height: 35px;
     margin-right: 10px; /* Espacio entre la imagen y el texto */
 }
 
@@ -111,6 +111,7 @@ body {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
+    font-size: 1rem;
 }
 
 .menu-item:hover {
