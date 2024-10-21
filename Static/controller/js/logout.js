@@ -10,7 +10,7 @@ function closeAlert() {
 }
 
 function confirmLogout() {
-    window.location.href = '../../controller/logout.php'; // Cambia esto a tu ruta de cierre de sesión
+    window.location.href = '../../controller/logout.php'; 
 }
 
 // Agrega el evento de clic para el botón de cerrar sesión
