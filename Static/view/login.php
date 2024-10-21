@@ -27,9 +27,9 @@
                     <h2>Iniciar Sesión</h2>
                     
                     <form method="POST" name="frm1" id="frm1" action="../controller/autentificacion.php">
-                        <label for="usuario">USUARIO</label>
+                        <label for="usuario">Usuario</label>
                         <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
-                        <label for="contrasena">CONTRASEÑA</label>
+                        <label for="contrasena">Contraseña</label>
                         <input type="password" id="contrasena" name="contrasena" placeholder="*********">
                         <button type="submit" class="boton_primario">Acceder</button>
                     </form>

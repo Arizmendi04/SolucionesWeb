@@ -10,7 +10,8 @@
     <header>
         <div class="logo">
             <img src="Static/img/logosinletras.png" alt="Soluciones Para Plagas Logo">
-            <p class="logo-texto">Soluciones para Plagas</p>
+
+            <img src="Static/img/letraslogo.png" alt="letras Logo" class="letras-logo">
         </div>
         <nav>
             <a class="logo-a" href="#about">Sobre nosotros</a>
@@ -21,9 +22,7 @@
     <main>
         <section class="hero">
             <h1>¡Bienvenido al sistema de Gestión de Soluciones Para Plagas!</h1>
-
             <br><br>
-
             <p>¡Inicia sesión para acceder a las funciones clave y administrar las operaciones de control de plagas!</p>
         </section>
 

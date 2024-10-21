@@ -11,6 +11,7 @@ footer .contact-info p {
     margin-bottom: 10px;
     color: #3f774d;
     font-size: 1.1em;
+    text-align: left;
 }
 
 .SN{
@@ -22,4 +23,58 @@ footer .contact-info p {
     display:grid;
     grid-template-columns: repeat(3,1fr);
     column-gap: 2rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #fff;
+    gap: 5px;
+}
+
+.menu-item img {
+    width: 40px; 
+    height: 40px;
+    padding: 0px;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 800px) {
+    .menu-item img {
+        width: 30px;
+        height: 30px; 
+        padding: 0;
+    }
+    
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 5px; 
+        color: #fff;
+        gap: 5px;
+    }
+    
+    footer {
+        background-color: rgb(220, 220, 217);
+        padding: 20px;
+        text-align: center;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        width: 100%;
+    }
+    
+    footer .contact-info {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 10px; 
+    }
+    
+    footer .contact-info p {
+        margin-bottom: 5px; 
+        color: #3f774d;
+        font-size: 1em;
+        text-align: center;
+    }
 }

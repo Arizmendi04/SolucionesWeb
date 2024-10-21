@@ -23,14 +23,18 @@ header {
 }
 
 .logo img {
-    width: 50px;
+    width: 75px;
     margin-right: 10px;
 }
 
 .logo-a {
-    padding: 10px 20px;
+    padding: 10px 30px;
     color: #000000;
     font-size: 20px;
+}
+
+.letras-logo {
+    height: 40px;
 }
 
 nav {
@@ -75,15 +79,10 @@ main {
     justify-content: center; 
 }
 
-.logo-texto{
-    color: #000000;
-    font-size: 1.5em; 
-    text-align: left;
-}
-
 .hero h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .hero p {
@@ -92,6 +91,7 @@ main {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
+    text-align: left;
 }
 
 .images {

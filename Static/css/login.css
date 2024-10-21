@@ -6,7 +6,7 @@ body {
     margin: 0;
     font-family: 'PT Sans', sans-serif;
     font-size: 1.6rem;
-    background-image: url('../img/fondologin.svg'); 
+    background-image: url('../img/fondologin.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -70,8 +70,17 @@ body {
     width: 40%;
 }
 
+.izquierda{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 3rem;
+    width: 40%;
+}
+
 .login-box {
-    background-color: rgba(115, 117, 120, 0.436);
+    background-color: rgba(224, 237, 237, 0.436);
     padding: 3rem;
     border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -82,7 +91,7 @@ body {
 h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: #03492d;
+    color: #f9fffd;
 }
 
 label {
@@ -90,7 +99,7 @@ label {
     text-align: left;
     margin-bottom: 0.5rem;
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 
 input {
