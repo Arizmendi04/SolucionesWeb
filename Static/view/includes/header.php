@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../img/products-icon.png" class="small-image" alt="Productos">
+                        <img src="../../img/productos.png" class="small-image" alt="Productos">
                         <a href="#">Productos</a>
                     </div>
                 </li>
