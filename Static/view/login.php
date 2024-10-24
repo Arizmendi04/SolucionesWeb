@@ -6,8 +6,8 @@
     <title>Iniciar sesión</title>
     <meta name="description" content="Inicio de sesión">
     <!-- Preload y estilos -->
-    <link rel="preload" href="../css/login.css" as="style">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="preload" href="../Css/Login.css" as="style">
+    <link rel="stylesheet" href="../Css/Login.css">
 </head>
 <body>
     <header class="header">
@@ -16,7 +16,7 @@
             <div class="izquierda">
                 <a class="logo" href="../../index.php">
                     <div class="logo-container">
-                        <img class="logo-img" src="../img/logosinletras.png" alt="Logo">
+                        <img class="logo-img" src="../Img/logosinletras.png" alt="Logo">
                         <h1 class="logo_nombre">Soluciones para Plagas</h1>
                     </div>
                 </a>
@@ -26,7 +26,7 @@
                 <div class="login-box">
                     <h2>Iniciar Sesión</h2>
                     
-                    <form method="POST" name="frm1" id="frm1" action="../controller/autentificacion.php">
+                    <form method="POST" name="frm1" id="frm1" action="../Controller/Autentificacion.php">
                         <label for="usuario">Usuario</label>
                         <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
                         <label for="contrasena">Contraseña</label>

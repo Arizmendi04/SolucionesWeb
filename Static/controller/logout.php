@@ -1,4 +1,4 @@
-<?php include "../controller/connect/db.php"?>
+<?php include "../Controller/Connect/Db.php"?>
  
 <?php
     session_start();

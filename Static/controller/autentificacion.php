@@ -1,4 +1,4 @@
-<?php include 'connect/db.php';?>
+<?php include 'Connect/Db.php';?>
 
 <?php
     $user = $_POST["usuario"];
@@ -13,14 +13,14 @@
     if(($row["nombreU"] == $user) && ($row["contrasena"] == $password)){
         $_SESSION["usuario"] = $user;
         if ($row["tipoU"] === "admin") {
-            header("Location: ../view/admin/dashboardadmin.php");
+            header("Location: ../View/Admin/DashboardAdmin.php");
         } elseif ($row["tipoU"] === "usuario") {
-            header("Location: ../view/empleado/dashboardempleado.php");
+            header("Location: ../View/Empleado/DashboardEmp.php");
         } else {
-            header("Location: ../view/login.php");
+            header("Location: ../View/Login.php");
         }
     }else{
-        header("Location: ../view/login.php");
+        header("Location: ../View/Login.php");
     }
 
 ?>
