@@ -1,0 +1,193 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #1a73e8;
+    margin: 10px 0;
+}
+
+h2 {
+    text-align: center;
+    color: #1a73e8;
+    margin: 10px 0;
+}
+
+/* Layout */
+.layout {
+    display: flex; /* Para alinear el formulario y la tabla en una fila */
+    justify-content: space-between; /* Espacio entre el formulario y la tabla */
+    margin: 20px;
+}
+
+/* Formulario de registro de empleado */
+.formulario {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 45%; /* Ajustar el ancho del formulario */
+    padding: 10px; /* Reducir el padding */
+}
+
+.formulario label {
+    display: block;
+    margin-bottom: 3px; /* Reducir el margen */
+    color: #333;
+    font-weight: bold;
+}
+
+.formulario input,
+.formulario select {
+    width: calc(100% - 10px);
+    padding: 5px; /* Reducir el padding */
+    margin-bottom: 5px; /* Reducir el margen */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px; /* Reducir el tamaño de fuente */
+}
+
+/* Estilo del botón de enviar */
+.formulario button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px; /* Reducir el padding del botón */
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.formulario button:hover {
+    background-color: #45a049;
+}
+
+/* Tabla para mostrar empleados */
+.tabla {
+    width: calc(100% - 10px);
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.tabla table {
+    width: 100%;
+}
+
+.tabla th {
+    background-color: #4caf50;
+    color: white;
+    padding: 6px; /* Reducir padding */
+    text-align: center;
+    font-size: 10px; /* Reducir tamaño de fuente */
+}
+
+.tabla td {
+    padding: 6px; /* Reducir padding */
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 10px; /* Reducir tamaño de fuente */
+}
+
+.tabla tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tabla tr:hover {
+    background-color: #ddd;
+}
+
+.tabla .boton {
+    padding: 4px 6px; /* Reducir el tamaño del botón */
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.boton.editar {
+    background-color: #1a73e8;
+}
+
+.boton.eliminar {
+    background-color: #f44336;
+}
+
+.boton.editar:hover {
+    background-color: #0f5ab7;
+}
+
+.boton.eliminar:hover {
+    background-color: #d32f2f;
+}
+
+/* Imagen de perfil */
+.tabla img {
+    border-radius: 50%;
+    max-width: 30px; /* Reducir tamaño de imagen */
+    max-height: 30px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .formulario {
+        padding: 10px; /* Reducir el padding en dispositivos más pequeños */
+    }
+
+    .formulario button {
+        padding: 4px; /* Ajustar el tamaño del botón */
+        font-size: 15px; /* Reducir el tamaño de la fuente */
+    }
+
+    .tabla {
+        margin: 20px; /* Aumentar margen en dispositivos más pequeños */
+        width: 100%; /* Ajustar la tabla al 100% */
+    }
+}
+
+.modal {
+    display: none; /* Ocultar por defecto */
+    position: fixed; /* Fijar en la pantalla */
+    z-index: 1; /* En la parte superior */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Habilitar scroll si es necesario */
+    background-color: rgba(0,0,0,0.5); /* Fondo oscuro */
+    justify-content: center; /* Centrar contenido */
+    align-items: center; /* Centrar contenido */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto; /* Margen automático */
+    padding: 20px; /* Espaciado */
+    border: 1px solid #888;
+    border-radius: 8px; /* Bordes redondeados */
+    width: 300px; /* Ancho del modal */
+    text-align: center; /* Centrar texto */
+}
+
+.modal button {
+    margin: 10px; /* Espaciado */
+    padding: 10px; /* Espaciado */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal .confirm {
+    background-color: #4caf50; /* Color verde */
+    color: white;
+}
+
+.modal .cancel {
+    background-color: #f44336; /* Color rojo */
+    color: white;
+}

@@ -41,7 +41,7 @@
                 <li>
                     <div class="menu-item">
                         <img src="../../Img/empleado.png" class="small-image" alt="Empleados">
-                        <a href="#">Empleados</a>
+                        <a href="ViewGestionEmp.php">Empleados</a>
                     </div>
                 </li>
                 <li>
