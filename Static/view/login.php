@@ -26,7 +26,7 @@
                 <div class="login-box">
                     <h2>Iniciar Sesión</h2>
                     
-                    <form method="POST" name="frm1" id="frm1" action="../Controller/Autentificacion.php">
+                    <form method="POST" name="frm1" id="frm1" action="../Controller/Autentificacion.php" onsubmit="return validacionc();">
                         <label for="usuario">Usuario</label>
                         <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
                         <label for="contrasena">Contraseña</label>
@@ -38,5 +38,9 @@
             </div>
         </div>
     </header>
+
+    <!-- Enlazar el archivo Login.js -->
+    <script src="../Controller/Js/Login.js"></script>
+
 </body>
 </html>
