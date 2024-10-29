@@ -1,3 +1,5 @@
+<?php include '../../Controller/Sesion.php'; ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +9,7 @@
     <link rel="stylesheet" href="../../Css/Dashboard.css">
 </head>
 <body>
+
     <div class="sidebar">
         <div class="user-profile">
             <img src="user-placeholder.png" alt="Admin" class="user-image">
