@@ -103,7 +103,7 @@ INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, ca
 ('Juan', 'Perez', 'Masculino', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '555-1111', 'Calle Limon 123', 'url_foto_juan.jpg');
 
 insert into usuario VALUES
-(0, 'Admin', 'Ad2401@', 'Admin', 1);
+(0, 'Admin', 'Ad2401@', 'Admin', 1),
 (0, 'Compras', 'Ju1012@', 'Empleado', 2);
 
 /*DISPARADORES*/
