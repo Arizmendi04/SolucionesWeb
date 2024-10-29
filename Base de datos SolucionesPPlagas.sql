@@ -97,34 +97,38 @@ create table usuario(
     foreign key(noEmpleado) references empleado (noEmpleado) on delete set null on update cascade
 );
 
--- Ingresar datos en la tabla proveedor
-INSERT INTO proveedor (razonSocial, nombreComercial, telefono, correo) VALUES
-('Proveedor A S.A. de C.V.', 'ProveA', '555-1234', 'contacto@provea.com'),
-('Proveedor B S.A. de C.V.', 'ProveB', '555-5678', 'contacto@proveb.com');
 
--- Ingresar datos en la tabla producto
-INSERT INTO producto (nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor) VALUES
-('Insecticida A', 'Insecticida', 'litro', 50, 1.5, 'Insecticida eficaz contra plagas.', 200.00, 'url_de_imagen_a.jpg', 1),
-('Herbicida B', 'Herbicida', 'litro', 30, 1.0, 'Herbicida para control de malezas.', 150.00, 'url_de_imagen_b.jpg', 1),
-('Fertilizante C', 'Fertilizante', 'kilogramo', 20, 2.0, 'Fertilizante de liberación lenta.', 300.00, 'url_de_imagen_c.jpg', 2);
+INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion, urlFotoPerfil) VALUES
+('Sebastian', 'Ramirez', 'Masculino','2000-03-09', '2018-12-12', 45000.00, 'Admin', '7775562703', 'Avenida Teopanzolco 24', 'url_foto_admin'),
+('Juan', 'Perez', 'Masculino', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '555-1111', 'Calle Limon 123', 'url_foto_juan.jpg');
 
--- Ingresar datos en la tabla cliente
-INSERT INTO cliente (clienteRFC, nombreC, razonSocial, email, telefonoC, calle, colonia, localidad, municipio, estado, clienteCP) VALUES
-('RFC123456789', 'Carlos Mendoza', 'Mendoza S.A. de C.V.', 'carlos@ejemplo.com', '555-3333', 'Calle Ejemplo 789', 'Centro', 'Ejemplo', 'Ejemplo', 'Estado Ejemplo', 12345),
-('RFC987654321', 'Ana López', 'López S.A. de C.V.', 'ana@ejemplo.com', '555-4444', 'Calle Prueba 321', 'Centro', 'Prueba', 'Ejemplo', 'Estado Prueba', 54321);
-
--- Ingresar datos en la tabla notaVenta
-INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEmpleado) VALUES
-('2024-01-01', 1000.00, 160.00, 1160.00, 'Pagado', 1, 1),
-('2024-02-01', 500.00, 80.00, 580.00, 'Pendiente', 2, 2);
-
--- Ingresar datos en la tabla usuario
-INSERT INTO usuario (nombreU, contrasena, tipoU, noEmpleado) VALUES
-('admin', 'admin123', 'admin', 1),
-('user', 'user123', 'usuario', 2);
-
+insert into usuario VALUES
+(0, 'Admin', 'Ad2401@', 'Admin', 1);
+(0, 'Compras', 'Ju1012@', 'Empleado', 2);
 
 /*DISPARADORES*/
+/*Disparador para evitar productos duplicados*/
+drop trigger if exists verificarProductoDup;
+delimiter //
+create trigger verificarProductoDup
+before insert on producto
+for each row
+begin
+    if exists (
+        select 1 
+        from producto 
+        where nombreProd = new.nombreProd
+          and tipo = new.tipo
+          and unidadM = new.unidadM
+          and existencia = new.existencia
+          and idProveedor = new.idProveedor
+
+    ) then
+        signal sqlstate '45000'
+        set message_text = 'el producto ya está registrado con los mismos datos que ingresaste';
+    end if;
+end //
+
 /*Disparador que aumenta las existencias de los productos después de que se haya
 registrado una recepcion*/
 drop trigger if exists aumentarExisProd;
@@ -135,12 +139,6 @@ begin
   update producto set existencia = existencia + new.cantidadproducto
   where folio = new.folio;
 end //
-
--- Ingresar datos en la tabla recepcion
-INSERT INTO recepcion (cantidadProducto, fecha, comentario, idProveedor, folio) VALUES
-(20, '2024-01-10', 'Recepción inicial de productos.', 1, 1),
-(10, '2024-01-15', 'Segunda recepción de productos.', 2, 2);
-select *from producto;
 
 /*Disparador que disminuye las existencias de los productos después de que se haya
 registrado una venta*/
@@ -153,13 +151,6 @@ begin
   where folio = new.folio;
 end //
 
--- Ingresar datos en la tabla venta
-INSERT INTO venta (cantidad, total, folio, idNotaVenta) VALUES
-(5, 1000.00, 1, 1),
-(3, 450.00, 2, 2);
-
-select *from producto;
-
 /*Disparador para crearle un usuario a un nuevo empleado que esté siendo registrado. 
 El usuario se creará de la siguiente manera: Primera letra del nombre en minúscula, El resto del nombre,
 Primera letra del apellido en mayúscula, El resto del apellido, Primera letra del cargo en mayúscula,
@@ -167,9 +158,9 @@ El resto del cargo, Número secuencial basado en el ID del empleado. Además, se
 automática:   Primera letra del nombre + primera letra del apellido + 4 números aleatorios + símbolo "!"
 */
 
-drop trigger if exists generar_usuario_empleado;
+drop trigger if exists generarUsuarioEmp;
 delimiter //
-create trigger generar_usuario_empleado
+create trigger generarUsuarioEmp
 after insert on empleado
 for each row
 begin
@@ -203,10 +194,10 @@ begin
   
 end//
 
-/*Disparador para evitar empleados duplicados*/s
-drop trigger if exists verificar_empleado_duplicado;
+/*Disparador para evitar empleados duplicados*/
+drop trigger if exists verificarEmpleadoDup;
 delimiter //
-create trigger verificar_empleado_duplicado
+create trigger verificarEmpleadoDup
 before insert on empleado
 for each row
 begin
@@ -223,13 +214,6 @@ begin
         set message_text = 'el empleado ya está registrado con el mismo nombre, apellido, fecha de nacimiento o teléfono';
     end if;
 end //
-
-
--- Ingresar datos en la tabla empleado
-INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion, urlFotoPerfil) VALUES
-('Juan', 'Pérez', 'Masculino', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '555-1111', 'Calle Falsa 123', 'url_foto_juan.jpg'),
-('María', 'González', 'Femenino', '1985-06-20', '2018-03-15', 14000.00, 'Administrador', '555-2222', 'Avenida Siempre Viva 456', 'url_foto_maria.jpg'),
-('Yatziry', 'Serrano', 'Femenino', '2004-01-24', '2024-04-10', 32000.00, 'Limpieza', '7774931305', 'Calle Privada Chilpancingo #20', 'url_foto_yatziry.jpg');
 
 
 
