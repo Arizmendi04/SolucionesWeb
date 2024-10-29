@@ -94,7 +94,7 @@
                                 <td>{$empleado['direccion']}</td>
                                 <td>
                                     <div class='boton-contenedor'>
-                                        <a href='../../Controller/Empleados.php?accion=editar&id={$empleado['noEmpleado']}' class='boton editar'>Editar</a>
+                                        <a href='/SolucionesWeb/Static/view/admin/modificarEmpleado.php?accion=editar&id={$empleado['noEmpleado']}' class='boton editar'>Editar</a>
                                     <br><br>
                                         <a href='../../Controller/Empleados.php?accion=eliminar&id={$empleado['noEmpleado']}' class='boton eliminar'>Eliminar</a>
                                     </div>
