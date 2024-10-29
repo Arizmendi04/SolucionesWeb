@@ -4,5 +4,5 @@
 <?php
     session_start();
     session_destroy();
-    header("Location: ../View/Login.php");
+    header("Location: /SolucionesWeb/Static/View/Login.php");
 ?>
