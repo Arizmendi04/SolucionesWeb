@@ -19,49 +19,49 @@
             <ul>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/dash.png" class="small-image" alt="Dashboard">
-                        <a href="#">Dashboard</a>
+                        <img src="/Soluciones/Static/Img/dash.png" class="small-image" alt="Dashboard">
+                        <a href="/Soluciones/Static/View/Admin/DashboardAdmin.php">Dashboard</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/ventas.png" class="small-image" alt="Ventas">
+                        <img src="/Soluciones/Static/Img/ventas.png" class="small-image" alt="Ventas">
                         <a href="#">Ventas</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/productos.png" class="small-image" alt="Productos">
+                        <img src="/Soluciones/Static/Img/productos.png" class="small-image" alt="Productos">
                         <a href="#">Productos</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/proveedor.png" class="small-image" alt="Proveedores">
+                        <img src="/Soluciones/Static/Img/proveedor.png" class="small-image" alt="Proveedores">
                         <a href="#">Proveedores</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/empleado.png" class="small-image" alt="Empleados">
-                        <a href="ViewGestionEmp.php">Empleados</a>
+                        <img src="/Soluciones/Static/Img/empleado.png" class="small-image" alt="Empleados">
+                        <a href="/Soluciones/Static/View/Admin/ViewGestionEmp.php">Empleados</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/cliente.png" class="small-image" alt="Clientes">
+                        <img src="/Soluciones/Static/Img/cliente.png" class="small-image" alt="Clientes">
                         <a href="#">Clientes</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/bd.png" class="small-image" alt="Base de datos">
+                        <img src="/Soluciones/Static/Img/bd.png" class="small-image" alt="Base de datos">
                         <a href="#">Base de datos</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="../../Img/logout.png" class="small-image" alt="Cerrar sesión">
+                        <img src="/Soluciones/Static/Img/logout.png" class="small-image" alt="Cerrar sesión">
                         <a href="#" id="logoutButton">Cerrar sesión</a>
                     </div>
                 </li>
@@ -76,6 +76,6 @@
         <button class="alert-button" onclick="closeAlert()">Cancelar</button>
     </div>
 
-    <script src="../../Controller/Js/Logout.js"></script>
+    <script src="/Soluciones/Static/Controller/Js/Logout.js"></script>
 </body>
 </html>
