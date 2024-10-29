@@ -1,7 +1,8 @@
 <?php include "../Controller/Connect/Db.php"?>
- 
+<?php include 'Sesion.php'; ?>
+
 <?php
     session_start();
     session_destroy();
-    header("Location: ../../index.php");
+    header("Location: ../View/Login.php");
 ?>

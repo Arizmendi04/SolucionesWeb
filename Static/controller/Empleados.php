@@ -1,7 +1,7 @@
+<?php include 'Connect/Db.php'; ?>
+<?php include 'Sesion.php'; ?>
+
 <?php
-
-    include 'Connect/Db.php';
-
     function obtenerEmpleados($conn) {
         // Consulta para obtener los empleados
         $sql = "SELECT * FROM empleado";

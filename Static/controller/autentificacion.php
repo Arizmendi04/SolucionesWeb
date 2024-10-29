@@ -1,6 +1,9 @@
 <?php include 'Connect/Db.php';?>
 
 <?php
+
+    session_start();
+
     $user = $_POST["usuario"];
     $password = $_POST["contrasena"];
 

@@ -1,4 +1,5 @@
 <?php include 'HeaderA.php'?>
+<?php include '../../Controller/Sesion.php'; ?>
 
 <div class="main-content">
         <header>
