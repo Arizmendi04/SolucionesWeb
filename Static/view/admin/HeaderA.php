@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soluciones Para Plagas</title>
+    <title>SolucionesWeb Para Plagas</title>
     <link rel="stylesheet" href="../../Css/Dashboard.css">
 </head>
 <body>
@@ -19,49 +19,49 @@
             <ul>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/dash.png" class="small-image" alt="Dashboard">
-                        <a href="/Soluciones/Static/View/Admin/DashboardAdmin.php">Dashboard</a>
+                        <img src="/SolucionesWeb/Static/Img/dash.png" class="small-image" alt="Dashboard">
+                        <a href="/SolucionesWeb/Static/View/Admin/DashboardAdmin.php">Dashboard</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/ventas.png" class="small-image" alt="Ventas">
+                        <img src="/SolucionesWeb/Static/Img/ventas.png" class="small-image" alt="Ventas">
                         <a href="#">Ventas</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/productos.png" class="small-image" alt="Productos">
+                        <img src="/SolucionesWeb/Static/Img/productos.png" class="small-image" alt="Productos">
                         <a href="#">Productos</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/proveedor.png" class="small-image" alt="Proveedores">
+                        <img src="/SolucionesWeb/Static/Img/proveedor.png" class="small-image" alt="Proveedores">
                         <a href="#">Proveedores</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/empleado.png" class="small-image" alt="Empleados">
-                        <a href="/Soluciones/Static/View/Admin/ViewGestionEmp.php">Empleados</a>
+                        <img src="/SolucionesWeb/Static/Img/empleado.png" class="small-image" alt="Empleados">
+                        <a href="/SolucionesWeb/Static/View/Admin/ViewGestionEmp.php">Empleados</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/cliente.png" class="small-image" alt="Clientes">
+                        <img src="/SolucionesWeb/Static/Img/cliente.png" class="small-image" alt="Clientes">
                         <a href="#">Clientes</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/bd.png" class="small-image" alt="Base de datos">
+                        <img src="/SolucionesWeb/Static/Img/bd.png" class="small-image" alt="Base de datos">
                         <a href="#">Base de datos</a>
                     </div>
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/Soluciones/Static/Img/logout.png" class="small-image" alt="Cerrar sesión">
+                        <img src="/SolucionesWeb/Static/Img/logout.png" class="small-image" alt="Cerrar sesión">
                         <a href="#" id="logoutButton">Cerrar sesión</a>
                     </div>
                 </li>
@@ -76,6 +76,6 @@
         <button class="alert-button" onclick="closeAlert()">Cancelar</button>
     </div>
 
-    <script src="/Soluciones/Static/Controller/Js/Logout.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Logout.js"></script>
 </body>
 </html>
