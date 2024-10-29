@@ -93,9 +93,11 @@
                                 <td>{$empleado['telefono']}</td>
                                 <td>{$empleado['direccion']}</td>
                                 <td>
-                                    <a href='../../Controller/Empleados.php?accion=editar&id={$empleado['noEmpleado']}' class='boton editar'>Editar</a>
-                                <br><br>
-                                    <a href='../../Controller/Empleados.php?accion=eliminar&id={$empleado['noEmpleado']}' class='boton eliminar'>Eliminar</a>
+                                    <div class='boton-contenedor'>
+                                        <a href='../../Controller/Empleados.php?accion=editar&id={$empleado['noEmpleado']}' class='boton editar'>Editar</a>
+                                    <br><br>
+                                        <a href='../../Controller/Empleados.php?accion=eliminar&id={$empleado['noEmpleado']}' class='boton eliminar'>Eliminar</a>
+                                    </div>
                                 </td>
                             </tr>";
                         }
