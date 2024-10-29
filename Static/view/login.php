@@ -28,9 +28,9 @@
                     
                     <form method="POST" name="frm1" id="frm1" action="../Controller/Autentificacion.php" onsubmit="return validacionc();">
                         <label for="usuario">Usuario</label>
-                        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
                         <label for="contrasena">Contraseña</label>
-                        <input type="password" id="contrasena" name="contrasena" placeholder="*********">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="*********" required>
                         <button type="submit" class="boton_primario">Acceder</button>
                     </form>
 
