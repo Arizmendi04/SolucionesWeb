@@ -84,13 +84,13 @@ h2 {
 .tabla th {
     background-color: #4caf50;
     color: white;
-    padding: 10px; /* Reducir padding */
+    padding: 12px; /* Reducir padding */
     text-align: center;
     font-size: 10px; /* Reducir tamaño de fuente */
 }
 
 .tabla td {
-    padding: 6px; /* Reducir padding */
+    padding: 5px; /* Reducir padding */
     text-align: center;
     border: 1px solid #ddd;
     font-size: 10px; /* Reducir tamaño de fuente */
@@ -115,13 +115,13 @@ h2 {
 .boton-contenedor {
     display: flex;
     justify-content: center; /* Centra los botones dentro de la celda */
-    gap: 5px; /* Espacio entre los botones */
+    gap: 3px; /* Espacio entre los botones */
 }
 
 /* Estilo de botones uniformes */
 .boton.editar,
 .boton.eliminar {
-    width: 60px; /* Ancho fijo para asegurar que ambos botones tengan el mismo tamaño */
+    width: 45px; /* Ancho fijo para asegurar que ambos botones tengan el mismo tamaño */
     padding: 6px 0; /* Espaciado vertical uniforme */
     text-align: center; /* Centrar texto */
     color: white;
