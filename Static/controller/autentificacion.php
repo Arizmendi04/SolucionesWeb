@@ -1,4 +1,4 @@
-<?php include 'Connect/Db.php';?>
+<?php include '/SolucionesWeb/Static/Controller/Connect/Db.php';?>
 
 <?php
 
@@ -16,14 +16,14 @@
     if(($row["nombreU"] == $user) && ($row["contrasena"] == $password)){
         $_SESSION["usuario"] = $user;
         if ($row["tipoU"] === "Admin") {
-            header("Location: ../View/Admin/DashboardAdmin.php");
+            header("Location: /SolucionesWeb/Static/View/Admin/DashboardAdmin.php");
         } elseif ($row["tipoU"] === "Empleado") {
-            header("Location: ../View/Empleado/DashboardEmp.php");
+            header("Location: /SolucionesWeb/Static/View/Empleado/DashboardEmp.php");
         } else {
-            header("Location: ../View/Login.php");
+            header("Location: /SolucionesWeb/Static/View/Login.php");
         }
     }else{
-        header("Location: ../View/Login.php");
+        header("Location: /SolucionesWeb/Static/View/Login.php");
     }
 
 ?>
