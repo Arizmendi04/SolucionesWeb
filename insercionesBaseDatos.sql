@@ -35,3 +35,4 @@ INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEm
 ('2024-02-01', 500.00, 80.00, 580.00, 'Pendiente', 2, 2);
 
 select *from usuario;
+select *from empleado;

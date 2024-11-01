@@ -63,7 +63,7 @@ body {
 /* Sidebar */
 .sidebar {
     background-color: #2f5d3b;
-    width: 8%;
+    width: 12%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,66 +74,82 @@ body {
 }
 
 /* Media queries */
-@media (max-width: 1200px) {
+
+/* 1300px or less */
+@media (max-width: 1300px) {
     .sidebar {
-        width: 18%;
+        width: 15%;
     }
     .main-content {
-        width: 80%;
+        width: 85%;
     }
     .menu-item img {
-        width: 30px;
-        height: 30px;
+        width: 28px;
+        height: 28px;
     }
     .sidebar .user-image {
-        width: 70px;
+        width: 65px;
     }
 }
 
-@media (max-width: 900px) {
+/* 1000px or less */
+@media (max-width: 1000px) {
     .sidebar {
-        width: 30%;
+        width: 25%;
     }
     .main-content {
-        width: 70%;
+        width: 75%;
     }
     .menu-item img {
-        width: 25px;
-        height: 25px;
+        width: 24px;
+        height: 24px;
     }
     .sidebar .user-image {
-        width: 60px;
+        width: 55px;
     }
     .alert-box {
         width: 250px;
     }
 }
 
-@media (max-width: 600px) {
-    .sidebar {
-        width: 50%;
-    }
+/* 800px or less */
+@media (max-width: 800px) {
     .main-content {
-        width: 50%;
+        flex-direction: column;
+        width: 100%;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
     }
     .menu-item img {
         width: 20px;
         height: 20px;
     }
     .sidebar .user-image {
-        width: 50px;
+        width: 45px;
     }
     .alert-box {
-        width: 200px;
+        width: 220px;
+    }
+    .consultas, .reports {
+        width: 100%;
+        padding: 10px;
+    }
+    .report-grid, .consultas-grid {
+        grid-template-columns: 1fr; /* Cambia a una columna */
     }
 }
 
-@media (max-width: 400px) {
+/* 500px or less */
+@media (max-width: 500px) {
     .sidebar {
         width: 100%;
-        height: auto; /* Permitir que la barra lateral crezca */
+        height: auto;
     }
     .main-content {
+        flex-direction: column;
         width: 100%;
     }
     .menu-item img {
@@ -141,10 +157,20 @@ body {
         height: 18px;
     }
     .sidebar .user-image {
-        width: 40px;
+        width: 35px;
     }
     .alert-box {
-        width: 150px;
+        width: 180px;
+    }
+    .consultas, .reports {
+        width: 100%;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 320px) {
+    .report-grid {
+        grid-template-columns: 1fr; /* Cambia a una columna */
     }
 }
 
@@ -191,6 +217,7 @@ body {
     color: #fff;
     font-weight: bold;
     font-size: 12px;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .menu-item:hover {
@@ -198,12 +225,16 @@ body {
     border-radius: 4rem;
 }
 
+.dashboard-container {
+    padding: 20px;
+}
+
 /* Main content */
 .main-content {
-    width: 80%;
+    display: flex;
     padding: 10px;
     background-color: #f9f9f9;
-    height: 100%;
+    gap: 3px;
 }
 
 /* Header */
@@ -214,14 +245,18 @@ header {
 header h1 {
     margin: 0;
     color: #333;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 header p {
     color: #555;
+    font-family: 'Poppins', 'sans-serif';
+    font-size: 20px;
 }
 
 /* Reports */
 .reports {
+    flex:1;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -229,28 +264,85 @@ header p {
 
 .reports h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #008f18;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .report-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
 }
 
 .report-box {
-    background-color: #cee3f8;
+    background-color: #f8ceee;
     color: #fff;
     text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    font-weight: bold;
+    padding: 10px;
+    border-radius: 12px;
     transition: background-color 0.3s ease;
+    text-decoration: none; 
+    width: 70%;
+    height: 70%;
+    margin:30px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Degradado */
+    font-size: 1em;
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    font-family: 'Viga', 'sans-serif';
 }
 
 .report-box:hover {
-    background-color: #333;
+    background: linear-gradient(135deg, #9e2759, #666); /* Cambia los colores según prefieras */
     color: #fff;
+}
+
+.report-item {
+    width: 45%;
+    height: 18%;
+    margin-left: 180px;
+}
+
+/*Consultas*/
+.consultas {
+    width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.consultas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.consultas h2 {
+    margin-bottom: 20px;
+    color: #008f18;
+    font-family: 'Poppins', 'sans-serif';
+}
+
+.consultas-box {
+    background-color: #f8ceee;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; 
+    width: 50%;
+    height: 10%;
+    margin:30px;
+    margin-left: 100px;
+    margin-top: 50px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Degradado */
+    font-size: 1em;
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    font-family: 'Viga', 'sans-serif';
 }
 
 /* Pequeños ajustes */
@@ -268,7 +360,41 @@ header p {
     margin-right: 8px;
 }
 
+.logo-image{
+    width: 80px;
+    height: 80px;
+    margin-left: 400px;
+}
 .dashboard-item img,
 .dashboard-item span {
     pointer-events: none;
+}
+
+/* Degradados específicos para cada botón */
+#productos-vendidos {
+    background: linear-gradient(135deg, #76b2e3, #031589);
+}
+
+#total-ventas {
+    background: linear-gradient(135deg, #d8ace0, #9c27b0);
+}
+
+#existencias-productos {
+    background: linear-gradient(135deg, #efdfaa, #ffca28);
+}
+
+#clientes-compras {
+    background: linear-gradient(135deg, #dfc091, #ff9800);
+}
+
+#mejores-precios {
+    background: linear-gradient(135deg, #c3cbfe, #3f51b5);
+}
+
+#descargar-clientes {
+    background: linear-gradient(135deg, #64c05c, #04531a);
+}
+
+#descargar-productos {
+    background: linear-gradient(135deg, #638d77, #41ba00);
 }

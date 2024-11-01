@@ -10,12 +10,14 @@ h1 {
     text-align: center;
     color: #1a73e8;
     margin: 10px 0;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 h2 {
     text-align: center;
     color: #1a73e8;
     margin: 10px 0;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 /* Layout */
@@ -23,7 +25,7 @@ h2 {
     display: flex; /* Para alinear el formulario y la tabla en una fila */
     justify-content: space-between; /* Espacio entre el formulario y la tabla */
     margin: 20px;
-    gap:40px;
+    gap:20px;
 }
 
 /* Formulario de registro de empleado */
@@ -32,7 +34,7 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 45%; /* Ajustar el ancho del formulario */
-    padding: 10px;
+    padding: 5px;
 }
 
 .formulario label {
@@ -40,6 +42,7 @@ h2 {
     margin-bottom: 3px; /* Reducir el margen */
     color: #333;
     font-weight: bold;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .formulario input,
@@ -51,6 +54,7 @@ h2 {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 12px; /* Reducir el tamaño de fuente */
+    font-family: 'Poppins', 'sans-serif';
 }
 
 /* Estilo del botón de enviar */
@@ -69,6 +73,64 @@ h2 {
     background-color: #45a049;
 }
 
+
+
+/*Formulario para modificar empleado*/
+.formContainer {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    background-color: #f9f9f9; /* Color de fondo opcional */
+    margin-left: 400px;
+}
+
+
+.formModificar{
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%; /* Ajustar el ancho del formulario */
+    padding: 20px;
+}
+
+.formModificar label {
+    display: block;
+    width: 40%; /* Ajuste del ancho del label */
+    margin-bottom: 3px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px; /* Ajuste del tamaño de la fuente */
+}
+
+.formModificar input,
+.formModificar select {
+    width: calc(100% - 10px);
+    padding: 5px; /* Reducir el padding */
+    margin-bottom: 5px; /* Reducir el margen */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px; /* Reducir el tamaño de fuente */
+    font-family: 'Poppins', 'sans-serif';
+}
+
+/* Estilo del botón de enviar */
+.formModificar button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px; /* Reducir el padding del botón */
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.formModificar button:hover {
+    background-color: #45a049;
+}
+
 /* Tabla para mostrar empleados */
 .tabla {
     width: calc(100% - 10px);
@@ -77,8 +139,8 @@ h2 {
 }
 
 .tabla table {
-    width: 97.5%;
-    margin-left: 10px;
+    width: 100%;
+    margin-left: 2px;
 }
 
 .tabla th {
@@ -86,14 +148,16 @@ h2 {
     color: white;
     padding: 12px; /* Reducir padding */
     text-align: center;
-    font-size: 10px; /* Reducir tamaño de fuente */
+    font-size: 8.7px; /* Reducir tamaño de fuente */
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .tabla td {
     padding: 5px; /* Reducir padding */
     text-align: center;
     border: 1px solid #ddd;
-    font-size: 10px; /* Reducir tamaño de fuente */
+    font-size: 8.7px; /* Reducir tamaño de fuente */
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .tabla tr:nth-child(even) {
@@ -155,7 +219,7 @@ h2 {
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     .formulario {
         padding: 10px; /* Reducir el padding en dispositivos más pequeños */
     }
@@ -165,11 +229,41 @@ h2 {
         font-size: 15px; /* Reducir el tamaño de la fuente */
     }
 
+    .layout {
+        flex-direction: column; /* Cambiar a una columna para mejor visualización en pantallas pequeñas */
+        align-items: center; /* Centrar el contenido */
+        height: auto; /* Asegúrate de que la altura sea automática */
+    }
+
+    .formulario {
+        width: 100%; /* Hacer el formulario ocupar el 100% del ancho */
+        max-width: 400px; /* Limitar el ancho máximo */
+        margin-bottom: 20px; /* Espacio inferior entre el formulario y la tabla */
+    }
+
     .tabla {
-        margin: 20px; /* Aumentar margen en dispositivos más pequeños */
         width: 100%; /* Ajustar la tabla al 100% */
+        overflow-x: auto; /* Habilitar scroll horizontal si es necesario */
+        margin: 0; /* Eliminar márgenes para asegurar que ocupe el 100% */
+    }
+
+    .tabla th, .tabla td {
+        font-size: 10px; /* Ajustar el tamaño de la fuente para caber mejor en pantallas pequeñas */
+        padding: 8px; /* Ajustar padding para dar más espacio */
+    }
+
+    .tabla img {
+        max-width: 20px; /* Reducir tamaño de imagen en pantallas pequeñas */
+        max-height: 20px; /* Reducir altura de imagen */
+    }
+
+    .tabla .boton {
+        font-size: 8px; /* Reducir tamaño de fuente de botones */
+        padding: 3px; /* Reducir padding de botones */
     }
 }
+
+
 
 .modal {
     display: none; /* Ocultar por defecto */
@@ -193,6 +287,7 @@ h2 {
     border-radius: 8px; /* Bordes redondeados */
     width: 300px; /* Ancho del modal */
     text-align: center; /* Centrar texto */
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .modal button {
@@ -206,9 +301,11 @@ h2 {
 .modal .confirm {
     background-color: #4caf50; /* Color verde */
     color: white;
+    font-family: 'Poppins', 'sans-serif';
 }
 
 .modal .cancel {
     background-color: #f44336; /* Color rojo */
     color: white;
+    font-family: 'Poppins', 'sans-serif';
 }

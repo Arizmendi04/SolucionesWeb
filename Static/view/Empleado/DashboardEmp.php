@@ -3,7 +3,7 @@
 <div class="main-content">
         <header>
             <h1>Dashboard</h1>
-            <p>Bienvenido Admin!</p>
+            <p>Bienvenido Empleado!</p>
         </header>
         <section class="reports">
             <h2>Reportes</h2>
