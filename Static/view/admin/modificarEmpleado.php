@@ -1,16 +1,16 @@
 <?php 
 
-    include 'HeaderA.php';
-    include '../../Controller/Empleados.php';
-    include '../../Controller/Connect/Db.php';
-    include '../../Controller/Sesion.php';
+include 'HeaderA.php';
+include '../../Controller/Empleados.php';
+include '../../Controller/Connect/Db.php';
+include '../../Controller/Sesion.php';
 
-    $empleadoId = isset($_GET['id']) ? $_GET['id'] : null;
-    $empleado = null;
+$empleadoId = isset($_GET['id']) ? $_GET['id'] : null;
+$empleado = null;
 
-    if ($empleadoId) {
-        $empleado = obtenerEmpleadoPorId($conn, $empleadoId); 
-    }
+if ($empleadoId) {
+    $empleado = obtenerEmpleadoPorId($conn, $empleadoId); 
+}
 
 ?>
 
@@ -72,7 +72,14 @@
                     <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
 
                     <button type="submit" name="accion" value="actualizar">Actualizar</button>
+
+                    <br><br>
+
                 </form>
+
+                <!-- Botón de Cancelar -->
+                <button type="button" onclick="location.href='/SolucionesWeb/Static/View/Admin/ViewGestionEmp.php'" class="btn-secundario">Cancelar</button>
+                
             <?php else: ?>
                 <p>No se encontró el empleado especificado.</p>
             <?php endif; ?>

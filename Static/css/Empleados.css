@@ -94,6 +94,21 @@ h2 {
     padding: 20px;
 }
 
+.formContainer .btn-secundario{
+    background-color: #fd0404;
+    color: white;
+    border: none;
+    padding: 6px; /* Reducir el padding del botón */
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.formContainer .btn-secundario:hover {
+    background-color: #bd2c2ca3;
+}
+
 .formModificar label {
     display: block;
     width: 40%; /* Ajuste del ancho del label */
