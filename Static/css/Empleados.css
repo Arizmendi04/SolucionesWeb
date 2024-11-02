@@ -309,3 +309,39 @@ h2 {
     color: white;
     font-family: 'Poppins', 'sans-serif';
 }
+
+.busqueda {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.busqueda input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+.busqueda input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.busqueda button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.busqueda button:hover {
+    background-color: #0056b3;
+}
+

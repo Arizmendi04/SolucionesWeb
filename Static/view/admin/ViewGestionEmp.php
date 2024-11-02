@@ -63,7 +63,15 @@
 
             <!-- Tabla para consultar empleados -->
             <div class="tabla">
-                <h2>Lista de Empleados</h2>
+                <!-- Barra de búsqueda de empleados -->
+                <div class="busqueda">
+                        <h2>Lista de Empleados</h2>
+                        <form action="" method="GET">
+                            <input type="text" name="busqueda" placeholder="Buscar por nombre o apellido" value="<?php echo isset($_GET['busqueda']) ? $_GET['busqueda'] : ''; ?>">
+                            <button type="submit">Buscar</button>
+                        </form>
+              </div>
+
                 <table>
                     <thead>
                         <tr>
@@ -82,7 +90,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $empleados = obtenerEmpleados($conn);
+                        $empleados = solicitarEmpleados($conn);
                         foreach ($empleados as $empleado) {
                             echo "<tr>
                                 <td>{$empleado['noEmpleado']}</td>

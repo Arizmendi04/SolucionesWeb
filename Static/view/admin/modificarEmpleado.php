@@ -1,15 +1,16 @@
 <?php 
-include 'HeaderA.php';
-include '../../Controller/Empleados.php';
-include '../../Controller/Connect/Db.php';
-include '../../Controller/Sesion.php';
 
-$empleadoId = isset($_GET['id']) ? $_GET['id'] : null;
-$empleado = null;
+    include 'HeaderA.php';
+    include '../../Controller/Empleados.php';
+    include '../../Controller/Connect/Db.php';
+    include '../../Controller/Sesion.php';
 
-if ($empleadoId) {
-    $empleado = obtenerEmpleadoPorId($conn, $empleadoId); 
-}
+    $empleadoId = isset($_GET['id']) ? $_GET['id'] : null;
+    $empleado = null;
+
+    if ($empleadoId) {
+        $empleado = obtenerEmpleadoPorId($conn, $empleadoId); 
+    }
 
 ?>
 
@@ -70,7 +71,7 @@ if ($empleadoId) {
                     <label for="fotoPerfil">Foto de Perfil:</label>
                     <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
 
-                    <button type="submit">Actualizar</button>
+                    <button type="submit" name="accion" value="actualizar">Actualizar</button>
                 </form>
             <?php else: ?>
                 <p>No se encontró el empleado especificado.</p>

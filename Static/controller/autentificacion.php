@@ -1,4 +1,4 @@
-<?php include '/SolucionesWeb/Static/Controller/Connect/Db.php';?>
+<?php include __DIR__ . '/Connect/Db.php'; ?>
 
 <?php
 
