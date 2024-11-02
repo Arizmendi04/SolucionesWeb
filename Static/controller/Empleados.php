@@ -9,6 +9,12 @@
         return $resultado;
     }
 
+    function filtrarEmpleados($conn, $parametro) {
+        $empleado = new Empleado($conn);
+        $resultado = $empleado->filtrarEmpleado($parametro);
+        return $resultado;
+    }
+
     function obtenerEmpleadoPorID($conn, $idEmpleado) {
         $empleado = new Empleado($conn);
         return $empleado->obtenerEmpleado($idEmpleado);
@@ -121,4 +127,5 @@
             echo "Error al eliminar empleado: " . $conn->error;
         }
     }
+
 ?>

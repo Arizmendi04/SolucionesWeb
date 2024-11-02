@@ -186,7 +186,6 @@ class Empleado {
                     direccion = ?, 
                     urlFotoPerfil = ? 
                   WHERE noEmpleado = ?";
-        
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
             // Obtener los datos del objeto empleado
@@ -201,7 +200,6 @@ class Empleado {
             $direccion = $this->direccion;
             $urlFotoPerfil = $this->fotoPerfil;
             $noEmpleado = $this->noEmpleado;
-    
             // Vincular parámetros
             $stmt->bind_param("ssssdsisssd", 
                 $nombre, 
@@ -216,7 +214,6 @@ class Empleado {
                 $urlFotoPerfil,
                 $noEmpleado
             );
-    
             // Ejecutar la consulta
             if ($stmt->execute()) {
                 return true; // Actualización exitosa
@@ -232,8 +229,30 @@ class Empleado {
     }
 
     public function filtrarEmpleado($parametro) {
-        // Implementa la lógica para filtrar empleados aquí
-    }
+        // Preparar la consulta SQL
+        $sql = "SELECT * FROM empleado WHERE nombre LIKE ? OR apellido LIKE ?";
+        // Preparar la sentencia
+        if ($stmt = $this->conn->prepare($sql)) {
+            // Agregar los caracteres comodín para la búsqueda
+            $parametro = '%' . $parametro . '%'; // Para que busque cualquier coincidencia
+            $stmt->bind_param("ss", $parametro, $parametro);
+            // Ejecutar la consulta
+            $stmt->execute();
+            // Obtener el resultado
+            $resultado = $stmt->get_result();
+            // Crear un array para almacenar los empleados filtrados
+            $empleadosFiltrados = [];
+            // Recorrer el resultado y agregarlo al array
+            while ($fila = $resultado->fetch_assoc()) {
+                $empleadosFiltrados[] = $fila;
+            }
+            // Devolver el array de empleados filtrados
+            return $empleadosFiltrados;
+        } else {
+            echo "Error al preparar la consulta: " . $this->conn->error;
+            return []; // Retornar un array vacío en caso de error
+        }
+    }    
 
 }
 

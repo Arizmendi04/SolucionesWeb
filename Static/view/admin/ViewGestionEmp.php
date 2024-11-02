@@ -65,14 +65,11 @@
             <div class="tabla">
                 <!-- Barra de búsqueda de empleados -->
                 <div class="busqueda">
-                        <h2>Lista de Empleados</h2>
-                        <form action="" method="GET">
-                            <input type="text" name="busqueda" placeholder="Buscar por nombre o apellido" value="<?php echo isset($_GET['busqueda']) ? $_GET['busqueda'] : ''; ?>">
-                            <button type="submit">Buscar</button>
-                        </form>
-              </div>
+                    <h2>Lista de Empleados</h2>
+                    <input type="text" id="busqueda" placeholder="Buscar por nombre o apellido" oninput="filtrarEmpleados(this.value)">
+                </div>
 
-                <table>
+                <table id="tablaEmpleados">
                     <thead>
                         <tr>
                             <th>No. Empleado</th>
@@ -129,5 +126,27 @@
         </div>
     </div>
     <script src="../../Controller/Js/Empleados.js"></script>
+    <script>
+        function filtrarEmpleados(query) {
+            const tabla = document.getElementById("tablaEmpleados");
+            const filas = tabla.getElementsByTagName("tr");
+
+            for (let i = 1; i < filas.length; i++) {
+                const celdas = filas[i].getElementsByTagName("td");
+                let encontrado = false;
+
+                // Solo verificar las celdas de Nombre y Apellido
+                const nombre = celdas[1].innerText.toLowerCase(); // Celda de Nombre
+                const apellido = celdas[2].innerText.toLowerCase(); // Celda de Apellido
+                
+                // Verificar si el query coincide con el nombre o apellido
+                if (nombre.includes(query.toLowerCase()) || apellido.includes(query.toLowerCase())) {
+                    encontrado = true;
+                }
+                
+                filas[i].style.display = encontrado ? "" : "none";
+            }
+        }
+    </script>
 </body>
 </html>
