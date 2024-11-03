@@ -108,14 +108,16 @@
 
     // Eliminar Producto
     if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
-        $folio = $_GET['folio']; 
+        $folio = $_GET['id']; // Cambiado de 'folio' a 'id'
         $producto = new Producto($conn);
-        $resultado = $producto->eliminarProducto($folio); // Llamar al método para eliminar Producto
+        
+        // Intentar eliminar el producto
+        $resultado = $producto->eliminarProducto($folio);
         if ($resultado) {
             header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionProd.php');
-            exit; // Asegurarse de salir después de redirigir
+            exit; // Asegúrate de salir después de redirigir
         } else {
-            echo "Error al eliminar Producto: " . $conn->error;
+            echo "Error al eliminar Producto: " . $conn->error; // Mensaje de error
         }
     }
 

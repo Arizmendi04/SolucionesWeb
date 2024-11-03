@@ -94,11 +94,47 @@ h2 {
     z-index: 1000; /* Asegúrate de que el modal esté por encima de otros elementos */
 }
 
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    text-align: center;
+.modal {
+    display: none; /* Ocultar por defecto */
+    position: fixed; /* Fijar en la pantalla */
+    z-index: 1; /* En la parte superior */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Habilitar scroll si es necesario */
+    background-color: rgba(0,0,0,0.5); /* Fondo oscuro */
+    justify-content: center; /* Centrar contenido */
+    align-items: center; /* Centrar contenido */
 }
 
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto; /* Margen automático */
+    padding: 20px; /* Espaciado */
+    border: 1px solid #888;
+    border-radius: 8px; /* Bordes redondeados */
+    width: 300px; /* Ancho del modal */
+    text-align: center; /* Centrar texto */
+    font-family: 'Poppins', 'sans-serif';
+}
+
+.modal button {
+    margin: 10px; /* Espaciado */
+    padding: 10px; /* Espaciado */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal .confirm {
+    background-color: #4caf50; /* Color verde */
+    color: white;
+    font-family: 'Poppins', 'sans-serif';
+}
+
+.modal .cancel {
+    background-color: #f44336; /* Color rojo */
+    color: white;
+    font-family: 'Poppins', 'sans-serif';
+}

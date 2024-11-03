@@ -38,7 +38,7 @@
                     </select>
 
                     <label for="precio">Precio:</label>
-                    <input type="number" step="0.01" id="precio" name="precio" class="form-control" required>
+                    <input type="number" step="0.1" id="precio" name="precio" class="form-control" required>
 
                     <label for="cantidad">Existencias:</label>
                     <input type="number" id="cantidad" name="cantidad" class="form-control" required>
@@ -81,7 +81,7 @@
 
                                 <a href='ModificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm btn-secondary'>Editar</a>
                                 
-                                <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm btn-danger eliminar'>Eliminar</a>
+                                <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm btn-danger boton eliminar'>Eliminar</a>
 
                             </div>";
                         }
@@ -96,7 +96,7 @@
     <div id="confirmModal" class="modal">
         <div class="modal-content">
             <h2>Confirmar Eliminación</h2>
-            <p>¿Estás seguro de que deseas eliminar este empleado? Esta acción no se puede deshacer.</p>
+            <p>¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</p>
             <button id="confirmDelete" class="confirm">Confirmar</button>
             <button id="cancelDelete" class="cancel">Cancelar</button>
         </div>
