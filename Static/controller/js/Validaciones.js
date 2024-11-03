@@ -14,7 +14,7 @@ function validacion() {
     var errorTelefono = document.getElementById("errorTelefono"); // Mensaje de error para teléfono
 
     // Validación de nombre
-    if (nombre.length < 3 || !/^[a-zA-Z\s]+$/.test(nombre)) {
+    if (nombre.length < 2 || !/^[a-zA-Z\s]+$/.test(nombre)) {
         errorNombre.style.display = "block"; 
         document.getElementById("nombre").focus();
         return false;
@@ -23,7 +23,7 @@ function validacion() {
     }
 
     // Validación de apellido
-    if (apellido.length < 3 || !/^[a-zA-Z\s]+$/.test(apellido)) {
+    if (apellido.length < 2 || !/^[a-zA-Z\s]+$/.test(apellido)) {
         errorApellido.style.display = "block"; 
         document.getElementById("apellido").focus();
         return false;
@@ -31,8 +31,20 @@ function validacion() {
         errorApellido.style.display = "none"; 
     }
 
+    // Función para validar la fecha y el año
+    function validarFecha(fecha) {
+        var partes = fecha.split("-");
+        if (partes.length !== 3) return false; // Debe tener 3 partes (día, mes, año)
+        var año = partes[0];
+        // Validar que el año tenga 4 dígitos y sea un número válido
+        if (!/^\d{4}$/.test(año) || parseInt(año) < 1900 || parseInt(año) > new Date().getFullYear()) {
+            return false;
+        }
+        return true;
+    }
+
     // Validación de fecha de nacimiento
-    if (!fechaNacimiento) {
+    if (!fechaNacimiento || !validarFecha(fechaNacimiento)) {
         errorFechaNac.style.display = "block"; 
         document.getElementById("fechaNac").focus();
         return false;
@@ -41,7 +53,7 @@ function validacion() {
     }
 
     // Validación de fecha de ingreso
-    if (!fechaIngreso) {
+    if (!fechaIngreso || !validarFecha(fechaIngreso)) {
         errorFechaIngreso.style.display = "block"; 
         document.getElementById("fechaIngreso").focus();
         return false;
@@ -50,6 +62,7 @@ function validacion() {
     }
 
     // Validación de sueldo
+    sueldo = parseFloat(sueldo); // Convierte el sueldo a un número
     if (isNaN(sueldo) || sueldo <= 0) {
         errorSueldo.style.display = "block"; 
         document.getElementById("sueldo").focus();
@@ -59,13 +72,14 @@ function validacion() {
     }
 
     // Validación de teléfono
-    if (isNaN(telefono) || telefono.length < 10) { // Suponiendo que el teléfono debe tener al menos 10 dígitos
+    if (!/^\d{10}$/.test(telefono)) { // Verifica que el teléfono contenga exactamente 10 dígitos
         errorTelefono.style.display = "block"; 
         document.getElementById("telefono").focus();
         return false;
     } else {
         errorTelefono.style.display = "none"; 
     }
+
 
     // Si todas las validaciones son correctas, permite el envío del formulario
     return true;
