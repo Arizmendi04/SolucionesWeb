@@ -41,7 +41,7 @@
                 <li>
                     <div class="menu-item">
                         <img src="/SolucionesWeb/Static/Img/proveedor.png" class="small-image" alt="Proveedores">
-                        <a href="#">Proveedores</a>
+                        <a href="/SolucionesWeb/Static/View/Admin/ViewGestionProve.php">Proveedores</a>
                     </div>
                 </li>
                 <li>
