@@ -19,7 +19,7 @@
             <!-- Formulario de registro de productos -->
             <div class="col-md-4 formulario">
                 <h2>Registrar Producto</h2>
-                <form action="register_product.php" method="POST" enctype="multipart/form-data">
+                <form action="/SolucionesWeb/Static/Controller/Productos.php" method="POST" enctype="multipart/form-data">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
 
@@ -53,31 +53,56 @@
                 </form>
             </div>
 
-            <!-- Contenedor de productos deslizante -->
-            <div class="col-md-8 product-grid">
+            <!-- Contenedor de productos deslizante con buscador arriba -->
+            <div class="col-md-8">
                 <div class="busqueda mb-3">
                     <input type="text" id="busqueda" placeholder="Buscar un producto" class="form-control" oninput="filtrarProductos(this.value)">
                 </div>
 
-                <div class="product-list">
-                    <?php
-                    $productos = solicitarProductos($conn);
-                    foreach ($productos as $producto) {
-                        echo "
-                        <div class='product-card'>
-                            <img src='{$producto['urlImagen']}' alt='Producto' class='img-fluid'>
-                            <h5>{$producto['nombreProd']}</h5>
-                            <p>\${$producto['precio']}</p>
-                            <a href='modificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm btn-secondary'>Editar</a>
-                            <a href='delete_product.php?id={$producto['folio']}' class='btn btn-sm btn-danger'>Eliminar</a>
-                        </div>";
-                    }
-                    ?>
+                <div class="product-grid">
+                    <div class="product-list">
+                        <?php
+                        $productos = solicitarProductos($conn);
+                        foreach ($productos as $producto) {
+                            echo "
+                            <div class='product-card'>
+
+                                <img src='{$producto['urlImagen']}' alt='Producto' class='img-fluid'>
+
+                                <h5>{$producto['nombreProd']}</h5>
+
+                                <p>Precio: \${$producto['precio']}</p>
+
+                                <p>Peso: {$producto['peso']} {$producto['unidadM']}</p>
+
+                                <p>Categoría: {$producto['tipo']}</p>
+
+                                <p>Existencias: {$producto['existencia']}</p>
+
+                                <a href='ModificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm btn-secondary'>Editar</a>
+                                
+                                <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm btn-danger eliminar'>Eliminar</a>
+
+                            </div>";
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar este empleado? Esta acción no se puede deshacer.</p>
+            <button id="confirmDelete" class="confirm">Confirmar</button>
+            <button id="cancelDelete" class="cancel">Cancelar</button>
+        </div>
+    </div>
+    
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/ConfirmElim.js"></script>
 </body>
 </html>

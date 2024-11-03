@@ -174,7 +174,7 @@ class Producto {
                     precio = ?, 
                     urlImagen = ?, 
                     idProveedor = ? 
-                  WHERE folio = ?";
+                WHERE folio = ?";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
             // Obtener los datos del objeto producto

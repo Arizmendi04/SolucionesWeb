@@ -1,9 +1,6 @@
-/* CSS para diseño y estilo del formulario y la lista de productos */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    margin: 0;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
 }
 
 h1 {
@@ -20,11 +17,6 @@ h2 {
     font-family: 'Poppins', 'sans-serif';
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -39,17 +31,17 @@ body {
     height: 100%;
 }
 
+.busqueda {
+    margin-bottom: 15px;
+}
+
 .product-grid {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-height: 600px;
+    max-height: 700px; /* Aumenta la altura máxima */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
-}
-
-.busqueda {
-    margin-bottom: 15px;
 }
 
 .product-list {
@@ -88,3 +80,25 @@ body {
     margin-top: 5px;
     font-size: 0.8rem;
 }
+
+#confirmModal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegúrate de que el modal esté por encima de otros elementos */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
