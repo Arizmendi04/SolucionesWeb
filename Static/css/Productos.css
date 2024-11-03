@@ -1,0 +1,90 @@
+/* CSS para diseño y estilo del formulario y la lista de productos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #1a73e8;
+    margin: 10px 0;
+    font-family: 'Poppins', 'sans-serif';
+}
+
+h2 {
+    text-align: center;
+    color: #1a73e8;
+    margin: 10px 0;
+    font-family: 'Poppins', 'sans-serif';
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.formulario {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.product-grid {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 600px;
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+}
+
+.busqueda {
+    margin-bottom: 15px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.product-card {
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    width: calc(50% - 10px); /* Dos productos por fila */
+    box-sizing: border-box;
+}
+
+.product-card img {
+    max-height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.product-card h5 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.product-card p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.product-card .btn {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}

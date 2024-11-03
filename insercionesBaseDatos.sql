@@ -10,9 +10,9 @@ INSERT INTO cliente (clienteRFC, nombreC, razonSocial, email, telefonoC, calle, 
 
 -- Ingresar datos en la tabla producto
 INSERT INTO producto (nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor) VALUES
-('Insecticida A', 'Insecticida', 'litro', 50, 1.5, 'Insecticida eficaz contra plagas.', 200.00, 'url_de_imagen_a.jpg', 1),
-('Herbicida B', 'Herbicida', 'litro', 30, 1.0, 'Herbicida para control de malezas.', 150.00, 'url_de_imagen_b.jpg', 1),
-('Fertilizante C', 'Fertilizante', 'kilogramo', 20, 2.0, 'Fertilizante de liberación lenta.', 300.00, 'url_de_imagen_c.jpg', 2);
+('Insecticida A', 'Insecticida', 'litro', 50, 1.5, 'Insecticida eficaz contra plagas.', 200.00, '/SolucionesWeb/Static/img/productos.png', 1),
+('Herbicida B', 'Herbicida', 'litro', 30, 1.0, 'Herbicida para control de malezas.', 150.00, '/SolucionesWeb/Static/img/productos.png', 1),
+('Fertilizante C', 'Fertilizante', 'kilogramo', 20, 2.0, 'Fertilizante de liberación lenta.', 300.00, '/SolucionesWeb/Static/img/productos.png', 2);
 
 
 -- Ingresar datos en la tabla recepcion
