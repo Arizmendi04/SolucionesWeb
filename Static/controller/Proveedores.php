@@ -1,8 +1,8 @@
-<?php include 'Connect/Db.php'; ?>
-<?php include 'Sesion.php'; ?>
-<?php include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Proveedor.php'); ?>
+<?php 
+    include 'Connect/Db.php'; 
+    include 'Sesion.php'; 
+    include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Proveedor.php'); 
 
-<?php
     function solicitarProveedores($conn) {
         $proveedor = new Proveedor($conn);
         $resultado = $proveedor->obtenerProveedores();
@@ -81,4 +81,23 @@
             echo "Error al eliminar proveedor: " . $conn->error;
         }
     }
+
+    // Buscar proveedores
+    if (isset($_GET['accion']) && $_GET['accion'] == 'filtrar') {
+        $nombreProveedor = isset($_GET['nombre']) ? $_GET['nombre'] : '';
+        // Proteger contra inyecciones SQL
+        $nombreProveedor = $conn->real_escape_string($nombreProveedor);
+        // Llamar a la función de filtrado
+        $resultado = filtrarProveedores($conn, $nombreProveedor);
+        // Generar la respuesta en HTML
+        if ($resultado && count($resultado) > 0) {
+            foreach ($resultado as $proveedor) {
+                // Muestra el proveedor en el formato "nombreComercial -> razónSocial"
+                echo "<div class='proveedor-card' onclick=\"seleccionarProveedor('{$proveedor['nombreComercial']} -> {$proveedor['razonSocial']}')\">{$proveedor['nombreComercial']} -> {$proveedor['razonSocial']}</div>";
+            }
+        } else {
+            echo "<div>No se encontraron proveedores.</div>";
+        }
+    }
+
 ?>

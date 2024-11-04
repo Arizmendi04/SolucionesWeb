@@ -1,6 +1,7 @@
 <?php include 'HeaderA.php'; ?>
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/Productos.php'; ?>
+<?php include '../../Controller/Proveedores.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/SolucionesWeb/Static/Css/Productos.css">
+    <link rel="stylesheet" href="/SolucionesWeb/Static/Css/Productos.css"> <!-- Referencia al CSS externo -->
 </head>
 <body>
     <div class="container">
@@ -43,18 +44,26 @@
                     <label for="cantidad">Existencias:</label>
                     <input type="number" id="cantidad" name="cantidad" class="form-control" required>
 
+                    <label for="Proveedor">Proveedor:</label>
+                    <div class="busqueda mb-3">
+                        <input type="text" id="proveedorNombre" placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
+                        <input type="hidden" id="idProveedor" name="idProveedor"> <!-- Campo oculto para almacenar el ID del proveedor -->
+                    </div>
+                    <div id="listaProveedores" class="list-group" style="display: none;"></div> <!-- Contenedor de la lista de proveedores -->
+
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
 
                     <!-- Contenedor para la imagen de previsualización con la X para eliminar -->
                     <div id="previewContainer">
                         <label>Imagen: </label>
-                        <img id="previewImg" src="/SolucionesWeb/Static/Img/imagengenerica.png">
+                        <img id="previewImg" src="/SolucionesWeb/Static/Img/imagengenerica.png" alt="Previsualización">
                         <div id="removePreview">&times;</div>
                     </div>
 
                     <label for="fotoProducto" class="custom-file-upload btn btn-secondary mt-3">
-                    <img src="/SolucionesWeb/Static/Img/subir.png" alt="Subir" class="upload-icon">Subir foto del producto
+                        <img src="/SolucionesWeb/Static/Img/subir.png" alt="Subir" class="upload-icon">
+                        <p class="letraBlanca"> Subir foto del producto</p>
                     </label>
                     <input type="file" id="fotoProducto" name="fotoProducto" accept=".png, .jpg, .jpeg, .gif, .svg" class="form-control-file" style="display: none;" required>
 

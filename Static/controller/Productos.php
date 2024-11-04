@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'crear') {
     $producto->setTipo($_POST['categoria']); // Agregado para incluir categoría
     $producto->setPeso($_POST['peso']); // Agregado para incluir peso
     $producto->setUnidadM($_POST['unidad']); // Agregado para incluir unidad
+    $producto->setIdProveedor($_POST['idProveedor']);
+
 
     // Manejar la subida de la imagen
     if (isset($_FILES['fotoProducto']) && $_FILES['fotoProducto']['error'] == 0) {
