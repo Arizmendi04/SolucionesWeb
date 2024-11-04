@@ -1,3 +1,4 @@
+/* Global */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
@@ -7,9 +8,10 @@ h1, h2 {
     text-align: center;
     color: #1a73e8;
     margin: 10px 0;
-    font-family: 'Poppins', 'sans-serif';
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -20,25 +22,85 @@ h1, h2 {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 100%;
 }
 
-.formulario label{
+/* Labels */
+.formulario label {
     color: #333;
     font-weight: bold;
-    font-family: 'Poppins', 'sans-serif';
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Search bar */
 .busqueda {
     margin-bottom: 15px;
+    position: relative; /* Permite posicionar la lista de proveedores correctamente */
 }
 
+/* Input de búsqueda */
+#idProveedor {
+    width: 100%; /* Ajusta al contenedor */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#idProveedor:focus {
+    border-color: #1a73e8; /* Cambia el color del borde cuando está enfocado */
+}
+
+/* Lista de proveedores */
+#listaProveedores {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Permite que se superponga al input */
+    z-index: 100; /* Asegura que esté encima de otros elementos */
+    width: 350px; /* Se ajusta al ancho del input */
+    max-height: 300px;
+    overflow-y: auto; /* Permite desplazamiento si hay muchos proveedores */
+    margin-top: 5px; /* Distancia desde el campo de búsqueda */
+}
+
+/* Estilo para cada proveedor en la lista */
+.proveedor-card {
+    width: 100%;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.proveedor-card:hover {
+    background: #f1f1f1; /* Cambia el color de fondo al pasar el ratón */
+}
+
+/* Texto del proveedor */
+.proveedor-card h5 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.proveedor-card p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Product grid */
 .product-grid {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-height: 700px;
     overflow-y: auto;
 }
@@ -49,6 +111,7 @@ h1, h2 {
     gap: 15px;
 }
 
+/* Product card */
 .product-card {
     background: #f1f1f1;
     border: 1px solid #ddd;
@@ -80,6 +143,7 @@ h1, h2 {
     font-size: 0.8rem;
 }
 
+/* Modal */
 #confirmModal, .modal {
     display: none;
     position: fixed;
@@ -101,7 +165,7 @@ h1, h2 {
     border-radius: 8px;
     width: 300px;
     text-align: center;
-    font-family: 'Poppins', 'sans-serif';
+    font-family: 'Poppins', sans-serif;
 }
 
 .modal button {
@@ -115,15 +179,16 @@ h1, h2 {
 .modal .confirm {
     background-color: #4caf50;
     color: white;
-    font-family: 'Poppins', 'sans-serif';
+    font-family: 'Poppins', sans-serif;
 }
 
 .modal .cancel {
     background-color: #f44336;
     color: white;
-    font-family: 'Poppins', 'sans-serif';
+    font-family: 'Poppins', sans-serif;
 }
 
+/* File upload */
 .custom-file-upload {
     display: inline-flex;
     align-items: center;
@@ -147,21 +212,26 @@ h1, h2 {
     margin-right: 8px;
 }
 
-.botonRegistrar{
+/* Centered text */
+.letraBlanca {
+    color: white;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button */
+.botonRegistrar {
     text-align: center;
 }
 
-/* Estilos para la previsualización de la imagen y el botón de eliminación */
+/* Image preview with "X" for removal */
 #previewContainer {
     position: relative;
-    display: flex;
-    align-items: center;
+    display: inline-block; /* Make sure it wraps tightly around the image */
     margin-top: 15px;
-}
-
-#previewContainer label {
-    margin-right: 10px;
-    align-self: center; /* Centra el label verticalmente */
 }
 
 #previewImg {
@@ -172,6 +242,7 @@ h1, h2 {
     border-radius: 8px;
 }
 
+/* Styles for the "X" button */
 #removePreview {
     position: absolute;
     top: 5px;
@@ -182,14 +253,14 @@ h1, h2 {
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    display: none; /* Asegúrate de que esté oculto por defecto */
+    display: none; /* Hidden by default */
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 
-/* Mostrar el botón de eliminación solo cuando hay una imagen cargada */
+/* Show the "X" button only when there's an image */
 #previewContainer.show #removePreview {
-    display: flex; /* Cambia a flex para alinear correctamente */
+    display: flex;
 }
-
