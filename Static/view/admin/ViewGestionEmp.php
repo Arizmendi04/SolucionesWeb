@@ -33,6 +33,9 @@
 
                     <label for="apellido">Apellido:</label>
                     <input type="text" id="apellido" name="apellido" required>
+                    <p class="alert alert-danger" id="errorApellido" style="display:none;">
+                        Ingresa un apellido válido, por favor.
+                    </p>
 
                     <label for="sexo">Sexo:</label>
                     <select id="sexo" name="sexo" required>
@@ -47,9 +50,10 @@
 
                     <label for="fechaIngreso">Fecha de Ingreso:</label>
                     <input type="date" id="fechaIngreso" name="fechaIngreso" required>
+                    <p class="alert alert-danger" id="errorFechaIngreso" style="display:none;">Por favor ingresa una fecha de ingreso válida.</p>
 
                     <label for="sueldo">Sueldo:</label>
-                    <input type="number" step="0.01" id="sueldo" name="sueldo" required>
+                    <input type="number" id="sueldo" name="sueldo" required>
                     <p class="alert alert-danger" id="errorSueldo" style="display:none;">Por favor ingresa un sueldo válido.</p>
 
                     <label for="cargo">Cargo:</label>
@@ -63,7 +67,7 @@
                     <input type="text" id="direccion" name="direccion" required>
 
                     <label for="fotoPerfil">Foto de Perfil:</label>
-                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*" required>
+                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
 
                     <button type="submit" name="accion" value="crear" onclick="return validacion();">Registrar</button>
                 </form>
@@ -136,7 +140,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <script src="../../Controller/Js/Empleados.js"></script>
+    <script src="../../Controller/Js/ConfirmElim.js"></script>
     <script src="../../Controller/Js/Validaciones.js"></script>
 
     <script>
