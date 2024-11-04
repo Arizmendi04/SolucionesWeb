@@ -67,9 +67,9 @@
                     <input type="text" id="direccion" name="direccion" required>
 
                     <label for="fotoPerfil">Foto de Perfil:</label>
-                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
+                    <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*" required>
 
-                    <button type="submit" name="accion" value="crear" onclick="return validacion();">Registrar</button>
+                    <button type="submit" name="accion" value="crear" onclick="return validacionEmpleado();">Registrar</button>
                 </form>
             </div>
 

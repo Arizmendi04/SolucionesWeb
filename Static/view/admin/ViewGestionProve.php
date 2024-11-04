@@ -32,11 +32,13 @@
 
                     <label for="telefono">Teléfono:</label>
                     <input type="number" id="telefono" name="telefono" required>
+                    <p class="alert alert-danger" id="errorTelefono" style="display:none;">El teléfono debe de tener 10 dígitos</p>
 
                     <label for="correo">Correo:</label>
                     <input type="email" id="correo" name="correo" required>
+                    <p class="alert alert-danger" id="errorCorreo" style="display:none;">Por favor, ingresa un correo válido</p>
 
-                    <button type="submit" name="accion" value="crear">Registrar</button>
+                    <button type="submit" name="accion" value="crear" onclick="return validacionProveedor();">Registrar</button>
                 </form>
             </div>
 

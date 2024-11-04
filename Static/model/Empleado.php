@@ -201,7 +201,7 @@ class Empleado {
             $urlFotoPerfil = $this->fotoPerfil;
             $noEmpleado = $this->noEmpleado;
             // Vincular parámetros
-            $stmt->bind_param("ssssdsisssd", 
+            $stmt->bind_param("sssssdssssd", 
                 $nombre, 
                 $apellido, 
                 $sexo, 
