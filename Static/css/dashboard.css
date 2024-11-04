@@ -376,19 +376,19 @@ header p {
 }
 
 #total-ventas {
-    background: linear-gradient(135deg, #d8ace0, #9c27b0);
+    background: linear-gradient(135deg, #7d7b7b, #393939);
 }
 
 #existencias-productos {
-    background: linear-gradient(135deg, #efdfaa, #ffca28);
+    background: linear-gradient(135deg, #3b3b3b, #a9a7a9);
 }
 
 #clientes-compras {
-    background: linear-gradient(135deg, #dfc091, #ff9800);
+    background: linear-gradient(135deg, #0034e1cf, #728ed0fd);
 }
 
 #mejores-precios {
-    background: linear-gradient(135deg, #c3cbfe, #3f51b5);
+    background: linear-gradient(135deg, #010c53, #717380);
 }
 
 #descargar-clientes {
