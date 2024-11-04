@@ -34,6 +34,13 @@
         $empleado->setTelefono($_POST['telefono']);
         $empleado->setDireccion($_POST['direccion']);
 
+        // Verificar si el empleado ya existe
+        if ($empleado->existeEmpleado()) {
+            $_SESSION['error'] = "El empleado ya está registrado. Recarga la página para quitar el mensaje";
+            header('Location: ../View/Admin/ViewGestionEmp.php'); // Redirigir de vuelta a la página
+            exit;
+        }
+
         // Manejar la subida de la imagen de perfil
         if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] == 0) {
             $fotoPerfil = $_FILES['fotoPerfil'];

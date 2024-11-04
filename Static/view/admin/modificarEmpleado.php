@@ -14,8 +14,6 @@ if ($empleadoId) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -76,7 +74,7 @@ if ($empleadoId) {
                     <label for="fotoPerfil">Foto de Perfil:</label>
                     <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
 
-                    <button type="submit" name="accion" value="actualizar" onclick="return validacionEmpleado();">Actualizar</button>
+                    <button type="submit" name="accion" value="actualizar" onclick="return validacionModiEmpleado();">Actualizar</button>
 
                     <br><br>
 

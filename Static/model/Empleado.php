@@ -130,7 +130,19 @@ class Empleado {
             $empleados[] = $fila;
         }
         return $empleados;
-    }  
+    }
+
+    public function existeEmpleado() {
+        $query = "SELECT * FROM empleado WHERE nombre = ? AND apellido = ?
+        AND fechaNac = ? AND telefono = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ssss", $this->nombre, $this->apellido, $this->fechaNac,
+        $this->telefono);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        return $resultado->num_rows > 0; // Retorna verdadero si el empleado existe
+    }
 
     public function insertarEmpleado() {
         // Preparar la consulta de inserción
