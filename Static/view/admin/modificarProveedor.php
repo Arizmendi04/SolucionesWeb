@@ -21,6 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Proveedor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
@@ -44,11 +45,12 @@
 
                     <label for="telefono">Teléfono:</label>
                     <input type="text" id="telefono" name="telefono" value="<?php echo $proveedor['telefono']; ?>" required>
+                    <p class="alert alert-danger" id="errorTelefono" style="display:none;">El teléfono debe de tener 10 dígitos</p>
 
                     <label for="correo">Correo:</label>
                     <input type="email" id="correo" name="correo" value="<?php echo $proveedor['correo']; ?>" required>
 
-                    <button type="submit" name="accion" value="actualizar">Actualizar</button>
+                    <button type="submit" name="accion" value="actualizar" onclick="return validacionProveedor();">Actualizar</button>
 
                     <br><br>
                 </form>
@@ -61,6 +63,8 @@
             <?php endif; ?>
         </div>
     </div>
+
+    <script src="../../Controller/Js/Validaciones.js"></script>
  
 </body>
 </html>
