@@ -1,4 +1,4 @@
-<?php include 'HeaderA.php' ?>
+<?php include 'HeaderA.php'; ?>
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/Productos.php'; ?>
 
@@ -27,7 +27,7 @@
                     <input type="text" id="categoria" name="categoria" class="form-control" required>
 
                     <label for="peso">Peso:</label>
-                    <input type="text" id="peso" name="peso" class="form-control" required>
+                    <input type="number" step="0.1" id="peso" name="peso" class="form-control" required>
 
                     <label for="unidad">Unidad:</label>
                     <select id="unidad" name="unidad" class="form-control" required>
@@ -46,10 +46,22 @@
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
 
-                    <label for="fotoProducto">Foto del Producto:</label>
-                    <input type="file" id="fotoProducto" name="fotoProducto" class="form-control" accept="image/*" required>
+                    <!-- Contenedor para la imagen de previsualización con la X para eliminar -->
+                    <div id="previewContainer">
+                        <label>Imagen: </label>
+                        <img id="previewImg" src="/SolucionesWeb/Static/Img/imagengenerica.png">
+                        <div id="removePreview">&times;</div>
+                    </div>
 
-                    <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear">Registrar</button>
+                    <label for="fotoProducto" class="custom-file-upload btn btn-secondary mt-3">
+                    <img src="/SolucionesWeb/Static/Img/subir.png" alt="Subir" class="upload-icon">Subir foto del producto
+                    </label>
+                    <input type="file" id="fotoProducto" name="fotoProducto" accept=".png, .jpg, .jpeg, .gif, .svg" class="form-control-file" style="display: none;" required>
+
+                    <!-- Contenedor centrado para el botón -->
+                    <div class="botonRegistrar">
+                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear">Registrar</button>
+                    </div>
                 </form>
             </div>
 
@@ -66,23 +78,14 @@
                         foreach ($productos as $producto) {
                             echo "
                             <div class='product-card'>
-
-                                <img src='{$producto['urlImagen']}' alt='Producto' class='img-fluid'>
-
+                                <img src='/SolucionesWeb/Static/Img/Productos/{$producto['urlImagen']}' alt='Producto' class='img-fluid'>
                                 <h5>{$producto['nombreProd']}</h5>
-
                                 <p>Precio: \${$producto['precio']}</p>
-
                                 <p>Peso: {$producto['peso']} {$producto['unidadM']}</p>
-
                                 <p>Categoría: {$producto['tipo']}</p>
-
                                 <p>Existencias: {$producto['existencia']}</p>
-
                                 <a href='ModificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm btn-secondary'>Editar</a>
-                                
                                 <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm btn-danger boton eliminar'>Eliminar</a>
-
                             </div>";
                         }
                         ?>
@@ -101,7 +104,7 @@
             <button id="cancelDelete" class="cancel">Cancelar</button>
         </div>
     </div>
-    
+
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/ConfirmElim.js"></script>
 </body>

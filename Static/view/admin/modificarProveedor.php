@@ -1,18 +1,19 @@
 <?php 
 
-include 'HeaderA.php';
-include '../../Controller/Proveedores.php'; 
-include '../../Controller/Connect/Db.php';
-include '../../Controller/Sesion.php';
+    include 'HeaderA.php';
+    include '../../Controller/Proveedores.php'; 
+    include '../../Controller/Connect/Db.php';
+    include '../../Controller/Sesion.php';
 
-$proveedorId = isset($_GET['id']) ? $_GET['id'] : null;
-$proveedor = null;
+    $proveedorId = isset($_GET['id']) ? $_GET['id'] : null;
+    $proveedor = null;
 
-if ($proveedorId) {
-    $proveedor = obtenerProveedorPorId($conn, $proveedorId); // Función para obtener el proveedor por ID
-}
+    if ($proveedorId) {
+        $proveedor = obtenerProveedorPorId($conn, $proveedorId); // Función para obtener el proveedor por ID
+    }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
