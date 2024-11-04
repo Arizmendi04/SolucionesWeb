@@ -9,24 +9,25 @@ function filtrarProductos(valor) {
     });
 }
 
+// Evento para el input de proveedores
+const inputProveedor = document.getElementById("proveedorNombre"); // Cambié a 'proveedorNombre' para obtener el campo correcto
+inputProveedor.addEventListener("input", function() {
+    buscarProveedor(this.value);
+});
+
+// Evento para mostrar todos los proveedores al hacer clic en el input
+inputProveedor.addEventListener("click", function() {
+    const listaProveedores = document.getElementById("listaProveedores");
+    listaProveedores.style.display = "block"; // Mostrar lista al hacer clic
+    buscarProveedor(''); // Cargar todos los proveedores
+});
+
 // Función para buscar proveedores
 function buscarProveedor(nombreProveedor) {
     const listaProveedores = document.getElementById("listaProveedores");
-    if (nombreProveedor.length === 0) {
-        // Cargar todos los proveedores
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", `/SolucionesWeb/Static/Controller/Proveedores.php?accion=filtrar&nombre=`, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                listaProveedores.innerHTML = xhr.responseText;
-                listaProveedores.style.display = "block"; // Mostrar lista
-            }
-        };
-        xhr.send();
-        return;
-    }
-
     const xhr = new XMLHttpRequest();
+    
+    // Siempre se llama a la API para obtener todos los proveedores si no hay valor
     xhr.open("GET", `/SolucionesWeb/Static/Controller/Proveedores.php?accion=filtrar&nombre=${nombreProveedor}`, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -37,30 +38,18 @@ function buscarProveedor(nombreProveedor) {
     xhr.send();
 }
 
-// Evento para el input de proveedores
-const inputProveedor = document.getElementById("idProveedor");
-inputProveedor.addEventListener("input", function() {
-    buscarProveedor(this.value);
-});
-
-// Evento para mostrar todos los proveedores al hacer clic en el input
-document.getElementById("idProveedor").addEventListener("click", function() {
-    const listaProveedores = document.getElementById("listaProveedores");
-    listaProveedores.style.display = "block"; // Mostrar lista al hacer clic
-    buscarProveedor(''); // Cargar todos los proveedores
-});
-
-// Evento para seleccionar un proveedor de la lista
-function seleccionarProveedor(nombreProveedor) {
-    document.getElementById("idProveedor").value = nombreProveedor; // Asegúrate de que el ID sea el correcto
-    document.getElementById("listaProveedores").innerHTML = "";
+// Función para seleccionar un proveedor de la lista
+function seleccionarProveedor(idProveedor, nombreProveedor) {
+    document.getElementById("proveedorNombre").value = nombreProveedor; // Solo mostrar el nombre
+    document.getElementById("idProveedor").value = idProveedor; // Guardar el ID en un campo oculto
+    document.getElementById("listaProveedores").innerHTML = ""; // Limpiar la lista
     document.getElementById("listaProveedores").style.display = "none"; // Ocultar lista después de seleccionar
 }
 
 // Evento para cerrar la lista de proveedores al hacer clic fuera
 document.addEventListener("click", function(event) {
     const listaProveedores = document.getElementById("listaProveedores");
-    if (!event.target.closest('#idProveedor') && !event.target.closest('#listaProveedores')) {
+    if (!event.target.closest('#proveedorNombre') && !event.target.closest('#listaProveedores')) {
         listaProveedores.style.display = "none"; // Ocultar la lista
     }
 });
@@ -70,7 +59,6 @@ document.getElementById("fotoProducto").addEventListener("change", function(even
     const file = event.target.files[0];
     const preview = document.getElementById("previewImg");
     const removePreview = document.getElementById("removePreview");
-
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {

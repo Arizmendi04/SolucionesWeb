@@ -92,12 +92,12 @@
         // Generar la respuesta en HTML
         if ($resultado && count($resultado) > 0) {
             foreach ($resultado as $proveedor) {
-                // Muestra el proveedor en el formato "nombreComercial -> razónSocial"
-                echo "<div class='proveedor-card' onclick=\"seleccionarProveedor('{$proveedor['nombreComercial']} -> {$proveedor['razonSocial']}')\">{$proveedor['nombreComercial']} -> {$proveedor['razonSocial']}</div>";
+                // Muestra el proveedor en el formato "nombreComercial -> razonSocial"
+                echo "<div class='list-group-item' onclick='seleccionarProveedor(\"{$proveedor['idProveedor']}\", \"{$proveedor['nombreComercial']}\")'>{$proveedor['nombreComercial']} -> {$proveedor['razonSocial']}</div>";
             }
         } else {
             echo "<div>No se encontraron proveedores.</div>";
         }
     }
-
+    
 ?>
