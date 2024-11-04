@@ -47,9 +47,17 @@
                     <label for="Proveedor">Proveedor:</label>
                     <div class="busqueda mb-3">
                         <input type="text" id="proveedorNombre" placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
-                        <input type="hidden" id="idProveedor" name="idProveedor"> <!-- Campo oculto para almacenar el ID del proveedor -->
+                        <input type="hidden" id="idProveedor" name="idProveedor">
                     </div>
-                    <div id="listaProveedores" class="list-group" style="display: none;"></div> <!-- Contenedor de la lista de proveedores -->
+                    <div id="listaProveedores" class="list-group" style="display: none;">
+                        <!-- Ejemplo de cómo podría generarse dinámicamente la lista de proveedores -->
+                        <?php
+                        // Suponiendo que tienes un array de proveedores disponible
+                        foreach ($proveedores as $proveedor) {
+                            echo "<a href='javascript:void(0)' onclick='seleccionarProveedor({$proveedor['id']}, \"{$proveedor['nombre']}\")' class='list-group-item list-group-item-action'>{$proveedor['nombre']}</a>";
+                        }
+                        ?>
+                    </div> <!-- Contenedor de la lista de proveedores -->
 
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
