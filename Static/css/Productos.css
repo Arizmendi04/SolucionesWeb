@@ -24,6 +24,12 @@ h1, h2 {
     height: 100%;
 }
 
+.formulario label{
+    color: #333;
+    font-weight: bold;
+    font-family: 'Poppins', 'sans-serif';
+}
+
 .busqueda {
     margin-bottom: 15px;
 }
