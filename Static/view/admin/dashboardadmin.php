@@ -5,6 +5,7 @@
  
         <section class="reports">
 
+        
             <header>
                 <h1>Dashboard</h1>
                 <p>¡Bienvenido Administrador!</p>

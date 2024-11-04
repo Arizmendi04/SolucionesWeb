@@ -130,8 +130,9 @@ class Producto {
         $stmt = $this->conn->prepare($sql);
         if ($stmt) {
             // Asociar los parámetros de la consulta con los valores del objeto Producto
+            // Cambiamos a "sssidsssi" porque ahora solo hay 9 campos
             $stmt->bind_param(
-                "sssidssssi",
+                "sssidsssi", // Aquí usamos un 'i' para idProveedor como entero
                 $this->nombreProd,
                 $this->tipo,
                 $this->unidadM,
@@ -140,7 +141,7 @@ class Producto {
                 $this->descripcion,
                 $this->precio,
                 $this->urlImagen,
-                $this->idProveedor
+                $this->idProveedor // Asegúrate de que este sea un entero
             );
             // Ejecutar la consulta
             if ($stmt->execute()) {
@@ -153,7 +154,7 @@ class Producto {
         } else {
             echo "Error en la preparación de la consulta: " . $this->conn->error;
         }
-    }
+    }    
 
     public function eliminarProducto($folio) {
         $sql = "DELETE FROM producto WHERE folio = ?";
@@ -174,7 +175,7 @@ class Producto {
                     precio = ?, 
                     urlImagen = ?, 
                     idProveedor = ? 
-                  WHERE folio = ?";
+                WHERE folio = ?";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
             // Obtener los datos del objeto producto

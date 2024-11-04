@@ -15,7 +15,7 @@
 
     <div class="sidebar">
         <div class="user-profile">
-            <img src="user-placeholder.png" alt="Admin" class="user-image">
+            <img src="/SolucionesWeb/Static/Img/cliente.png" alt="Admin" class="user-image">
             <p class="username">Admin</p>
         </div>
         <nav>
@@ -35,7 +35,7 @@
                 <li>
                     <div class="menu-item">
                         <img src="/SolucionesWeb/Static/Img/productos.png" class="small-image" alt="Productos">
-                        <a href="#">Productos</a>
+                        <a href="/SolucionesWeb/Static/View/Admin/ViewGestionProd.php">Productos</a>
                     </div>
                 </li>
                 <li>
@@ -52,8 +52,8 @@
                 </li>
                 <li>
                     <div class="menu-item">
-                        <img src="/SolucionesWeb/Static/Img/cliente.png" class="small-image" alt="Clientes">
-                        <a href="#">Clientes</a>
+                        <img src="/SolucionesWeb/Static/Img/recepcion.png" class="small-image" alt="Clientes">
+                        <a href="/SolucionesWeb/Static/View/Admin/ViewGestionRec.php">Recepciones</a>
                     </div>
                 </li>
                 <li>

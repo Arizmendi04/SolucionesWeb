@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="preload" href="../Css/Login.css" as="style">
     <link rel="stylesheet" href="../Css/Login.css">
 </head>
+
 <body>
     <header class="header">
         <div class="contenedor header-content">
