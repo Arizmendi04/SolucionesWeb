@@ -4,53 +4,114 @@ body {
     background-color: #f8f9fa;
 }
 
-h1, h2 {
+h1{
     text-align: center;
     color: #1a73e8;
     margin: 10px 0;
     font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+}
+
+h2 {
+    text-align: center;
+    color: #1a73e8;
+    margin: 10px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
 }
 
 /* Layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
+    display: flex; /* Habilitar Flexbox para el contenedor */
+    flex-direction: column; /* Para que el título esté encima de los contenedores */
+    align-items: center;
 }
 
+/* Estilos para el título */
+.titulo {
+    text-align: center; /* Centra el texto */
+}
+
+/* Contenedor de la fila con los dos bloques */
+.row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Asegura que los contenedores estén alineados y tengan espacio entre ellos */
+}
+
+.form-control{
+    margin-bottom: 0px;
+    position:relative;
+}
+
+/* Formulario de registro de productos */
 .formulario {
+    width: calc(35% - 10px); /* Calculamos el ancho restante, considerando márgenes */
     background: #fff;
-    padding: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 100%; /* Asegura que el formulario tenga la misma altura que el contenedor de productos */
+}
+
+/* Contenedor de productos */
+.contenedorProductos {
+    width: calc(65% - 10px); /* Calculamos el ancho restante, considerando márgenes */
+    background: #fff;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 100%;
+    max-height: 830px;
+    height: 100%; /* Asegura que el contenedor de productos tenga la misma altura que el formulario */
 }
 
-/* Labels */
+/* Labels y campos de formulario */
 .formulario label {
     color: #333;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
 }
 
-/* Search bar */
-.busqueda {
-    margin-bottom: 15px;
-    position: relative; /* Permite posicionar la lista de proveedores correctamente */
-}
-
-/* Input de búsqueda */
-#idProveedor {
-    width: 100%; /* Ajusta al contenedor */
-    padding: 10px;
+.formulario input,
+.formulario select,
+.formulario textarea,
+.formulario text {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease;
+    font-size: 13px;
 }
 
-#idProveedor:focus {
+.formulario form-control text{
+    font-size: 13px;
+}
+
+.formulario textarea {
+    resize: vertical; /* Permite redimensionar el campo de texto verticalmente */
+}
+
+/* Buscador en el formulario */
+.busqueda {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Input de búsqueda en formulario */
+#proveedorNombre {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 20px;
+    outline: none;
+}
+
+#proveedorNombre:focus {
     border-color: #1a73e8; /* Cambia el color del borde cuando está enfocado */
 }
 
@@ -60,70 +121,39 @@ h1, h2 {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: absolute; /* Permite que se superponga al input */
-    z-index: 100; /* Asegura que esté encima de otros elementos */
-    width: 350px; /* Se ajusta al ancho del input */
+    position: absolute;
+    z-index: 100;
+    width: 320px;
     max-height: 300px;
-    overflow-y: auto; /* Permite desplazamiento si hay muchos proveedores */
-    margin-top: 5px; /* Distancia desde el campo de búsqueda */
+    overflow-y: auto;
+    margin-top: 5px;
     cursor: pointer;
 }
 
-/* Estilo para cada proveedor en la lista */
-.proveedor-card {
-    width: 100%;
-    background: #f9f9f9;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.proveedor-card:hover {
-    background: #f1f1f1; /* Cambia el color de fondo al pasar el ratón */
-    cursor: pointer;
-}
-
-/* Texto del proveedor */
-.proveedor-card h5 {
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-    cursor: pointer;
-}
-
-.proveedor-card p {
-    margin: 5px 0 0;
-    font-size: 0.9rem;
-    color: #666;
-    cursor: pointer;
-}
-
-/* Product grid */
+/* Product Grid */
 .product-grid {
     background: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 700px;
+    max-height: 750px;
     overflow-y: auto;
-    cursor: pointer;
+    height: auto;
 }
 
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
 }
 
-/* Product card */
 .product-card {
     background: #f1f1f1;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
-    width: calc(50% - 10px);
+    width: calc(50% - 10px); /* Se ajusta al 50% menos el margen */
     box-sizing: border-box;
 }
 
@@ -148,7 +178,30 @@ h1, h2 {
     font-size: 0.8rem;
 }
 
-/* Modal */
+/* Custom File Upload Button */
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    background-color: #257443;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #17aa48de;
+}
+
+.upload-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 8px;
+}
+
+/* Modal Styles */
 #confirmModal, .modal {
     display: none;
     position: fixed;
@@ -164,15 +217,15 @@ h1, h2 {
 
 .modal-content {
     background-color: #ffffff;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 10% auto;
+    padding: 10px;
     border: 1px solid #888;
     border-radius: 8px;
     width: 300px;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
 }
 
+/* Button for modal */
 .modal button {
     margin: 10px;
     padding: 10px;
@@ -181,61 +234,24 @@ h1, h2 {
     cursor: pointer;
 }
 
+.titulosLabel{
+    font-size: 15px;
+}
+
 .modal .confirm {
     background-color: #4caf50;
     color: white;
-    font-family: 'Poppins', sans-serif;
 }
 
 .modal .cancel {
     background-color: #f44336;
     color: white;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* File upload */
-.custom-file-upload {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    background-color: #257443;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.custom-file-upload:hover {
-    background-color: #17aa48de;
-}
-
-.upload-icon {
-    width: 50px;
-    height: 50px;
-    margin-right: 8px;
-}
-
-/* Centered text */
-.letraBlanca {
-    color: white;
-    height: 50px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Button */
-.botonRegistrar {
-    text-align: center;
 }
 
 /* Image preview with "X" for removal */
 #previewContainer {
     position: relative;
-    display: inline-block; /* Make sure it wraps tightly around the image */
+    display: inline-block;
     margin-top: 15px;
 }
 
@@ -247,7 +263,6 @@ h1, h2 {
     border-radius: 8px;
 }
 
-/* Styles for the "X" button */
 #removePreview {
     position: absolute;
     top: 5px;
@@ -258,14 +273,67 @@ h1, h2 {
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    display: none; /* Hidden by default */
-    display: flex;
-    align-items: center;
+    display: none;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
-/* Show the "X" button only when there's an image */
 #previewContainer.show #removePreview {
     display: flex;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    /* Ajustes para pantallas pequeñas (tabletas y móviles) */
+    .container {
+        padding: 10px;
+    }
+
+    .row {
+        flex-direction: column; /* Los contenedores se apilan en lugar de estar lado a lado */
+    }
+
+    .titulo {
+        text-align: center; /* Centra el texto */
+        margin-bottom: 20px; /* Añadir un margen debajo del título */
+    }
+
+    .formulario {
+        width: calc(100% - 10px); /* El formulario ocupará el 100% menos el margen */
+        margin-bottom: 20px; /* Espacio debajo del formulario */
+    }
+
+    .contenedorProductos {
+        width: calc(100% - 10px); /* El contenedor de productos ocupará el 100% menos el margen */
+    }
+
+    .product-card {
+        width: calc(100% - 10px); /* Los productos ocuparán el 100% del ancho disponible */
+    }
+
+    .product-grid {
+        max-height: none; /* No limitamos la altura para pantallas pequeñas */
+        padding: 10px;
+    }
+
+    .product-list {
+        flex-direction: column; /* Los productos se organizarán en una sola columna */
+    }
+}
+
+/* Media Query para pantallas más pequeñas (por ejemplo, móviles) */
+@media (max-width: 480px) {
+    .product-card {
+        width: 100%; /* Los productos ocupan todo el ancho */
+    }
+
+    .formulario,
+    .contenedorProductos {
+        padding: 15px;
+    }
+
+    .custom-file-upload {
+        font-size: 14px; /* Reducir el tamaño del botón de carga en pantallas pequeñas */
+    }
 }
