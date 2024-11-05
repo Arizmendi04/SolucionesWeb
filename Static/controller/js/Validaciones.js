@@ -81,6 +81,27 @@ function validacionEmpleado() {
     return true;
 }
 
+function validacionModiEmpleado() {
+    const sueldo = document.getElementById("sueldo").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+
+    if (!validarSueldo(sueldo)) {
+        document.getElementById("errorSueldo").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorSueldo").style.display = "none";
+    }
+
+    if (!validarTelefono(telefono)) {
+        document.getElementById("errorTelefono").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorTelefono").style.display = "none";
+    }
+
+    return true;
+}
+
 function validacionProveedor() {
     const telefono = document.getElementById("telefono").value.trim();
     const correo = document.getElementById("correo").value.trim();
