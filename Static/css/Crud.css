@@ -278,6 +278,50 @@ h2 {
     }
 }
 
+@media (max-width: 360px) {
+    .formulario {
+        padding: 5px; /* Reducir el padding en dispositivos más pequeños */
+    }
+
+    .formulario button {
+        padding: 3px; /* Ajustar el tamaño del botón */
+        font-size: 10px; /* Reducir el tamaño de la fuente */
+    }
+
+    .layout {
+        flex-direction: row; /* Cambiar a una columna para mejor visualización en pantallas pequeñas */
+        align-items: center; /* Centrar el contenido */
+        height: auto; /* Asegúrate de que la altura sea automática */
+    }
+
+    .formulario {
+        width: 100%; /* Hacer el formulario ocupar el 100% del ancho */
+        max-width: 350px; /* Limitar el ancho máximo */
+        margin-bottom: 15px; /* Espacio inferior entre el formulario y la tabla */
+    }
+
+    .tabla {
+        width: 100%; /* Ajustar la tabla al 100% */
+        overflow-x: auto; /* Habilitar scroll horizontal si es necesario */
+        margin: 0; /* Eliminar márgenes para asegurar que ocupe el 100% */
+    }
+
+    .tabla th, .tabla td {
+        font-size: 10px; /* Ajustar el tamaño de la fuente para caber mejor en pantallas pequeñas */
+        padding: 8px; /* Ajustar padding para dar más espacio */
+    }
+
+    .tabla img {
+        max-width: 10px; /* Reducir tamaño de imagen en pantallas pequeñas */
+        max-height: 10px; /* Reducir altura de imagen */
+    }
+
+    .tabla .boton {
+        font-size: 7px; /* Reducir tamaño de fuente de botones */
+        padding: 2px; /* Reducir padding de botones */
+    }
+}
+
 .modal {
     display: none; /* Ocultar por defecto */
     position: fixed; /* Fijar en la pantalla */
