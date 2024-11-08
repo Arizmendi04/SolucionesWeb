@@ -72,8 +72,62 @@ h2 {
 .formulario button:hover {
     background-color: #45a049;
 }
+/* Input de búsqueda en formulario */
+#proveedorNombre {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
 
+#proveedorNombre:focus {
+    border-color: #1a73e8; /* Cambia el color del borde cuando está enfocado */
+}
 
+/* Lista de proveedores */
+#listaProveedores {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 100;
+    width: 45%;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+/* Input de búsqueda de productos en formulario */
+#nombre{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+#nombre:focus {
+    border-color: #1a73e8; /* Cambia el color del borde cuando está enfocado */
+}
+/* Lista de productos */
+#listaProductos {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 100;
+    width: 45%;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
 
 /*Formulario para modificar empleado*/
 .formContainer {

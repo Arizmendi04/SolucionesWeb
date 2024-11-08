@@ -2,6 +2,7 @@
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/Productos.php'; ?>
 <?php include '../../Controller/Proveedores.php'; ?>
+<?php include '../../Controller/Recepciones.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,17 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD de Recepción</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/SolucionesWeb/Static/Css/Productos.css"> <!-- Referencia al CSS externo -->
+    <link rel="stylesheet" href="../../Css/Crud.css">
+    
 </head>
 <body>
     <div class="container">
         <h1>Gestión de Recepción de Productos</h1>
 
-        <div class="row">
+        <div class="layout">
             <!-- Formulario de registro de recepción -->
-            <div class="col-md-4 formulario">
+            <div class="formulario">
                 <h2>Registrar Recepción</h2>
-                <form action="/SolucionesWeb/Static/Controller/Recepcion.php" method="POST">
+                <form action="/SolucionesWeb/Static/Controller/Recepciones.php" method="POST" enctype="multipart/form-data">
                     
                     <label for="cantidadProducto">Cantidad de Producto:</label>
                     <input type="number" id="cantidadProducto" name="cantidadProducto" class="form-control" required>
@@ -31,51 +33,105 @@
                     <label for="comentario">Comentario:</label>
                     <textarea id="comentario" name="comentario" class="form-control"></textarea>
 
-                    <label for="Proveedor">Proveedor:</label>
-                    <div class="busqueda mb-3">
+                    <label for="proveedorNombre">Proveedor:</label>
+                    <div class="busqueda">
                         <input type="text" id="proveedorNombre" placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
                         <input type="hidden" id="idProveedor" name="idProveedor">
                     </div>
                     <div id="listaProveedores" class="list-group" style="display: none;">
                         <!-- Lista de proveedores generada dinámicamente -->
                         <?php
-                        // Suponiendo que tienes un array de proveedores disponible
                         foreach ($proveedores as $proveedor) {
                             echo "<a href='javascript:void(0)' onclick='seleccionarProveedor({$proveedor['idProveedor']}, \"{$proveedor['nombre']}\")' class='list-group-item list-group-item-action'>{$proveedor['nombre']}</a>";
                         }
                         ?>
                     </div> <!-- Contenedor de la lista de proveedores -->
 
-                    <label for="folio">Producto (Nombre):</label>
-                    <select id="folio" name="folio" class="form-control" required>
+                    <label for="nombreProducto">Producto:</label>
+                    <div class="busqueda">
+                        <input type="text" id="nombre" placeholder="Busca un producto" class="form-control" autocomplete="off" oninput="buscarProducto(this.value)">
+                        <input type="hidden" id="idProducto" name="idProducto">
+                    </div>
+                    
+                    <div id="listaProductos" class="list-group" style="display: none;">
+                        <!-- Lista de productos generada dinámicamente -->
                         <?php
-                        // Suponiendo que tienes un array de productos disponible
                         foreach ($productos as $producto) {
-                            echo "<option value='{$producto['folio']}'>{$producto['nombreProd']}</option>";
+                            echo "<a href='javascript:void(0)' onclick='seleccionarProducto({$producto['folio']}, \"{$producto['nombreProd']}\")' class='list-group-item list-group-item-action'>{$producto['nombreProd']}</a>";
                         }
                         ?>
-                    </select>
+                    </div> <!-- Contenedor de la lista de productos -->
 
                     <!-- Botón de envío -->
                     <div class="botonRegistrar">
-                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="registrar">Registrar Recepción</button>
+                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear">Registrar</button>
                     </div>
                 </form>
             </div>
+
+            <!-- Tabla para consultar recepciones -->
+            <div class="tabla">
+                <!-- Barra de búsqueda de recepciones -->
+                <div class="busqueda">
+                    <h2>Lista de Recepciones</h2>
+                    <input type="text" id="busqueda" placeholder="Buscar por folio o proveedor" oninput="filtrarRecepciones(this.value)">
+                </div>
+
+                <table id="tablaRecepciones">
+                    <thead>
+                        <tr>
+                            <th>ID Recepción</th>
+                            <th>Cantidad Producto</th>
+                            <th>Fecha</th>
+                            <th>Comentario</th>
+                            <th>Folio Producto</th>
+                            <th>ID Proveedor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $recepciones = solicitarRecepciones($conn);
+                            foreach ($recepciones as $recepcion) {
+                                // Obtener el nombre del proveedor
+                                $proveedor = obtenerProveedorPorID($conn, $recepcion['idProveedor']); // Asegúrate de que esta función existe
+                                echo "<tr>
+                                    <td>{$recepcion['idRep']}</td>
+                                    <td>{$recepcion['cantidadProducto']}</td>
+                                    <td>{$recepcion['fecha']}</td>
+                                    <td>{$recepcion['comentario']}</td>
+                                    <td>{$recepcion['folio']}</td>
+                                    <td>{$proveedor['razonSocial']}</td> 
+                                    <td>
+                                        <div class='boton-contenedor'>
+                                            <a href='/SolucionesWeb/Static/view/admin/modificarRecepcion.php?accion=editar&id={$recepcion['idRep']}' class='boton editar'>Editar</a>
+                                            <a href='../../Controller/Recepciones.php?accion=eliminar&id={$recepcion['idRep']}' class='boton eliminar'>Eliminar</a>
+                                        </div>
+                                    </td>
+                                </tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+            
         </div>
     </div>
 
-    <script>
-        function seleccionarProveedor(id, nombre) {
-            document.getElementById('idProveedor').value = id;
-            document.getElementById('proveedorNombre').value = nombre;
-            document.getElementById('listaProveedores').style.display = 'none';
-        }
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</p>
+            <button id="confirmDelete" class="confirm">Confirmar</button>
+            <button id="cancelDelete" class="cancel">Cancelar</button>
+        </div>
+    </div>
 
-        function buscarProveedor(query) {
-            // Implementar aquí la lógica para buscar proveedores
-            document.getElementById('listaProveedores').style.display = query ? 'block' : 'none';
-        }
-    </script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Recepciones.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/ConfirmElim.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Validaciones.js"></script>
 </body>
 </html>

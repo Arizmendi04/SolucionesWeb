@@ -35,3 +35,5 @@ INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEm
 
 select *from usuario;
 select *from empleado;
+select *from recepcion;
+select *from producto;

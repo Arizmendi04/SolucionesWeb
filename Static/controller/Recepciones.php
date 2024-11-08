@@ -22,23 +22,33 @@ function obtenerRecepcionPorID($conn, $idRecepcion) {
 }
 
 // Crear una nueva recepción
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'crear') {
-    $Recepcion = new Recepcion($conn);
-    $Recepcion->setCantidadProducto($_POST['cantidadProducto']);
-    $Recepcion->setFecha($_POST['fecha']);
-    $Recepcion->setComentario($_POST['comentario']);
-    $Recepcion->setIdProveedor($_POST['idProveedor']);
-    $Recepcion->setFolio($_POST['folio']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Verifica si la acción es 'crear' y si los campos necesarios están presentes
+    if ($_POST['accion'] == 'crear' && isset($_POST['idProducto'], $_POST['cantidadProducto'], $_POST['fecha'], $_POST['idProveedor'])) {
+        $folio = $_POST['idProducto']; // Obtén el folio del producto seleccionado
+        $cantidadProducto = $_POST['cantidadProducto'];
+        $fecha = $_POST['fecha'];
+        $comentario = isset($_POST['comentario']) ? $_POST['comentario'] : ''; // Comentario opcional
+        $idProveedor = $_POST['idProveedor'];
 
-    try {
-        $Recepcion->insertarRecepcion();
-        header('Location: ../View/Admin/ViewGestionRecep.php');
-        exit;
-    } catch (mysqli_sql_exception $e) {
-        echo "Error al insertar la recepción: " . $e->getMessage();
+        // Crear la instancia de la clase Recepcion y pasar los valores
+        $Recepcion = new Recepcion($conn);
+        $Recepcion->setCantidadProducto($cantidadProducto);
+        $Recepcion->setFecha($fecha);
+        $Recepcion->setComentario($comentario);
+        $Recepcion->setIdProveedor($idProveedor);
+        $Recepcion->setFolio($folio); // Asegúrate de que el folio sea correcto
+
+        try {
+            // Insertar la recepción en la base de datos
+            $Recepcion->insertarRecepcion();
+            header('Location: ../View/Admin/ViewGestionRec.php');
+            exit;
+        } catch (mysqli_sql_exception $e) {
+            echo "Error al insertar la recepción: " . $e->getMessage();
+        }
     }
 }
-
 // Modificar una recepción existente
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
     if (isset($_POST['idRep'])) {
@@ -55,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
             $Recepcion->setFolio($_POST['folio'] ?? $RecepcionData['folio']);
 
             if ($Recepcion->modificarRecepcion()) {
-                header('Location: ../View/Admin/ViewGestionRecep.php');
+                header('Location: ../View/Admin/ViewGestionRec.php');
                 exit;
             } else {
                 echo "Error al actualizar la recepción.";
@@ -74,7 +84,7 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
     $Recepcion = new Recepcion($conn);
 
     if ($Recepcion->eliminarRecepcion($id)) {
-        header('Location: ../View/Admin/ViewGestionRecep.php');
+        header('Location: ../View/Admin/ViewGestionRec.php');
         exit;
     } else {
         echo "Error al eliminar la recepción: " . $conn->error;
