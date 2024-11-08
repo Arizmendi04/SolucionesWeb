@@ -1,163 +1,112 @@
-<?php
+<?php 
 
-class Empleado {
+class Recepcion {
 
-    // Propiedades de la clase
-    private $noEmpleado;
-    private $nombre;
-    private $apellido;
-    private $sexo;
-    private $fechaNac;
-    private $fechaIngreso;
-    private $sueldo;
-    private $cargo;
-    private $telefono;
-    private $direccion;
-    private $fotoPerfil;
+    private $idRep;
+    private $cantidadProducto;
+    private $fecha;
+    private $comentario;
+    private $idProveedor;
+    private $folio;
     private $conn;
 
-    // Constructor: se ejecuta cuando se crea una nueva instancia de la clase
+    // Constructor
     public function __construct($conn) {
         $this->conn = $conn;
     }
 
     // Setters
-    public function setNombre($nombre) {
-        $this->nombre = $nombre;
+    public function setIdRep($id) {
+        $this->$id = $id;
     }
 
-    public function setNoEmpleado($noEmpleado){
-        $this->noEmpleado = $noEmpleado;
+    public function setCantidadProducto($cantidadProducto) {
+        $this->cantidadProducto = $cantidadProducto;
     }
 
-    public function setApellido($apellido) {
-        $this->apellido = $apellido;
+    public function setFecha($fecha) {
+        $this->fecha = $fecha;
     }
 
-    public function setFotoPerfil($fotoPerfil) {
-        $this->fotoPerfil = $fotoPerfil;
+    public function setComentario($comentario) {
+        $this->comentario = $comentario;
     }
 
-    public function setSexo($sexo) {
-        $this->sexo = $sexo;
+    public function setIdProveedor($idProveedor) {
+        $this->idProveedor = $idProveedor;
     }
 
-    public function setFechaNac($fechaNac) {
-        $this->fechaNac = $fechaNac;
-    }
-
-    public function setFechaIngreso($fechaIngreso) {
-        $this->fechaIngreso = $fechaIngreso;
-    }
-
-    public function setSueldo($sueldo) {
-        $this->sueldo = $sueldo;
-    }
-
-    public function setCargo($cargo) {
-        $this->cargo = $cargo;
-    }
-
-    public function setTelefono($telefono) {
-        $this->telefono = $telefono;
-    }
-
-    public function setDireccion($direccion) {
-        $this->direccion = $direccion;
+    public function setFolio($folio) {
+        $this->folio = $folio;
     }
 
     // Getters
-    public function getNombre() {
-        return $this->nombre;
+    public function getIdRep() {
+        return $this->idRep;
     }
 
-    public function getNoEmpleado(){
-        return $this->noEmpleado;
+    public function getCantidadProducto() {
+        return $this->cantidadProducto;
     }
 
-    public function getApellido() {
-        return $this->apellido;
+    public function getFecha() {
+        return $this->fecha;
     }
 
-    public function getSexo() {
-        return $this->sexo;
+    public function getComentario() {
+        return $this->comentario;
     }
 
-    public function getFechaNac() {
-        return $this->fechaNac;
+    public function getIdProveedor() {
+        return $this->idProveedor;
     }
 
-    public function getFechaIngreso() {
-        return $this->fechaIngreso;
+    public function getFolio() {
+        return $this->folio;
     }
 
-    public function getSueldo() {
-        return $this->sueldo;
-    }
-
-    public function getFotoPerfil() {
-        return $this->fotoPerfil;
-    }
-
-    public function getCargo() {
-        return $this->cargo;
-    }
-
-    public function getTelefono() {
-        return $this->telefono;
-    }
-
-    public function getDireccion() {
-        return $this->direccion;
-    }
-
-    // Métodos para manejar empleados
-    public function obtenerEmpleado($idEmpleado) {
-        $sql = "SELECT * FROM empleado WHERE noEmpleado = ?";
+    // Métodos para manejar registros de recepción
+    public function obtenerRecepcion($idRep) {
+        $sql = "SELECT * FROM recepcion WHERE idRep = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $idEmpleado);
+        $stmt->bind_param("i", $idRep);
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
     }
 
-    public function obtenerEmpleados() {
-        // Consulta para obtener los empleados
-        $sql = "SELECT * FROM empleado";
+    public function obtenerRecepciones() {
+        // Consulta para obtener todas las recepciones
+        $sql = "SELECT * FROM recepcion";
         $resultado = mysqli_query($this->conn, $sql);
-        $empleados = [];
+        $recepciones = [];
         while ($fila = $resultado->fetch_assoc()) {
-            $empleados[] = $fila;
+            $recepciones[] = $fila;
         }
-        return $empleados;
-    }  
+        return $recepciones;
+    }
 
-    public function insertarEmpleado() {
+    public function insertarRecepcion() {
         // Preparar la consulta de inserción
-        $sql = "INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion, urlFotoPerfil) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO recepcion (cantidadProducto, fecha, comentario, idProveedor, folio) 
+                VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if ($stmt) {
-            // Asociar los parámetros de la consulta con los valores del objeto Empleado
+            // Asociar los parámetros de la consulta con los valores del objeto Recepcion
             $stmt->bind_param(
-                "sssssdssss",
-                $this->nombre,
-                $this->apellido,
-                $this->sexo,
-                $this->fechaNac,
-                $this->fechaIngreso,
-                $this->sueldo,
-                $this->cargo,
-                $this->telefono,
-                $this->direccion,
-                $this->fotoPerfil
+                "issii",
+                $this->cantidadProducto,
+                $this->fecha,
+                $this->comentario,
+                $this->idProveedor,
+                $this->folio
             );
             // Ejecutar la consulta
             if ($stmt->execute()) {
-                header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionEmp.php');
+                header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionRec.php'); 
                 exit;
             } else {
-                echo "Error al crear empleado: " . $stmt->error;
+                echo "Error al crear registro de recepción: " . $stmt->error;
             }
             $stmt->close();
         } else {
@@ -165,54 +114,33 @@ class Empleado {
         }
     }
 
-    public function eliminarEmpleado($id){
-        $sql = "DELETE FROM empleado WHERE noEmpleado = ?";
+    public function eliminarRecepcion($idRep) {
+        $sql = "DELETE FROM recepcion WHERE idRep = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("i", $idRep);
         return $stmt->execute();
     }
     
-    public function modificarEmpleado() {
-        // Prepare la consulta SQL
-        $query = "UPDATE empleado SET 
-                    nombre = ?, 
-                    apellido = ?, 
-                    sexo = ?, 
-                    fechaNac = ?, 
-                    fechaIngreso = ?, 
-                    sueldo = ?, 
-                    cargo = ?, 
-                    telefono = ?, 
-                    direccion = ?, 
-                    urlFotoPerfil = ? 
-                  WHERE noEmpleado = ?";
+    public function modificarRecepcion() {
+        // Preparar la consulta SQL
+        $query = "UPDATE recepcion SET 
+                    cantidadProducto = ?, 
+                    fecha = ?, 
+                    comentario = ?, 
+                    idProveedor = ?, 
+                    folio = ? 
+                  WHERE idRep = ?";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
-            // Obtener los datos del objeto empleado
-            $nombre = $this->nombre;
-            $apellido = $this->apellido;
-            $sexo = $this->sexo;
-            $fechaNac = $this->fechaNac;
-            $fechaIngreso = $this->fechaIngreso;
-            $sueldo = $this->sueldo;
-            $cargo = $this->cargo;
-            $telefono = $this->telefono;
-            $direccion = $this->direccion;
-            $urlFotoPerfil = $this->fotoPerfil;
-            $noEmpleado = $this->noEmpleado;
-            // Vincular parámetros
-            $stmt->bind_param("ssssdsisssd", 
-                $nombre, 
-                $apellido, 
-                $sexo, 
-                $fechaNac, 
-                $fechaIngreso, 
-                $sueldo, 
-                $cargo, 
-                $telefono, 
-                $direccion, 
-                $urlFotoPerfil,
-                $noEmpleado
+            // Obtener los datos del objeto Recepcion
+            $stmt->bind_param(
+                "issiii",
+                $this->cantidadProducto,
+                $this->fecha,
+                $this->comentario,
+                $this->idProveedor,
+                $this->folio,
+                $this->idRep
             );
             // Ejecutar la consulta
             if ($stmt->execute()) {
@@ -221,33 +149,26 @@ class Empleado {
                 echo "Error en la actualización: " . $stmt->error;
                 return false; // Error en la actualización
             }
-    
         } else {
             echo "Error al preparar la consulta: " . $this->conn->error;
             return false; // Error al preparar la consulta
         }
     }
 
-    public function filtrarEmpleado($parametro) {
-        // Preparar la consulta SQL
-        $sql = "SELECT * FROM empleado WHERE nombre LIKE ? OR apellido LIKE ?";
+    public function filtrarRecepcion($parametro) {
+        // Preparar la consulta SQL para filtrar por comentario
+        $sql = "SELECT * FROM recepcion WHERE folio LIKE ?";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($sql)) {
-            // Agregar los caracteres comodín para la búsqueda
-            $parametro = '%' . $parametro . '%'; // Para que busque cualquier coincidencia
-            $stmt->bind_param("ss", $parametro, $parametro);
-            // Ejecutar la consulta
+            $parametro = '%' . $parametro . '%'; // Búsqueda con comodines
+            $stmt->bind_param("i", $parametro);
             $stmt->execute();
-            // Obtener el resultado
             $resultado = $stmt->get_result();
-            // Crear un array para almacenar los empleados filtrados
-            $empleadosFiltrados = [];
-            // Recorrer el resultado y agregarlo al array
+            $recepcionesFiltradas = [];
             while ($fila = $resultado->fetch_assoc()) {
-                $empleadosFiltrados[] = $fila;
+                $recepcionesFiltradas[] = $fila;
             }
-            // Devolver el array de empleados filtrados
-            return $empleadosFiltrados;
+            return $recepcionesFiltradas;
         } else {
             echo "Error al preparar la consulta: " . $this->conn->error;
             return []; // Retornar un array vacío en caso de error
