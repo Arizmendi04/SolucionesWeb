@@ -72,7 +72,7 @@ include '../../Controller/Sesion.php';
             <form id="importForm" action="/SolucionesWeb/Static/Controller/ControllerRespaldo.php" method="post" enctype="multipart/form-data" onsubmit="return validateFile()">
                 <!-- Botón de selección de archivo -->
                 <label for="file-upload" class="file-upload-label">Seleccionar archivo</label>
-                <input type="file" name="file" id="file-upload" accept=".csv, .xlsx, .xls" required>
+                <input type="file" name="file" id="file-upload" accept=".sql" required>
                 
                 <!-- Botón de carga -->
                 <button type="submit" name="import" class="btn">Cargar Archivo</button>
