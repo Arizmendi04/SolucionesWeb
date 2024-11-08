@@ -13,12 +13,16 @@
     <link rel="stylesheet" href="/SolucionesWeb/Static/Css/Productos.css"> <!-- Referencia al CSS externo -->
 </head>
 <body>
+    
     <div class="container">
-        <h1>Gestión de Productos</h1>
+
+        <div class="titulo">
+            <h1>Gestión de productos</h1>
+        </div>
 
         <div class="row">
             <!-- Formulario de registro de productos -->
-            <div class="col-md-4 formulario">
+            <div class="titulosLabel formulario">
                 <h2>Registrar Producto</h2>
                 <form action="/SolucionesWeb/Static/Controller/Productos.php" method="POST" enctype="multipart/form-data">
                     <label for="nombre">Nombre:</label>
@@ -29,6 +33,9 @@
 
                     <label for="peso">Peso:</label>
                     <input type="number" step="0.1" id="peso" name="peso" class="form-control" required>
+                    <p class="alert alert-danger" id="errorPeso" style="display:none;">
+                        Ingresa un peso válido, por favor.
+                    </p>
 
                     <label for="unidad">Unidad:</label>
                     <select id="unidad" name="unidad" class="form-control" required>
@@ -40,19 +47,23 @@
 
                     <label for="precio">Precio:</label>
                     <input type="number" step="0.1" id="precio" name="precio" class="form-control" required>
+                    <p class="alert alert-danger" id="errorPrecio" style="display:none;">
+                        Ingresa un precio válido, por favor.
+                    </p>
 
                     <label for="cantidad">Existencias:</label>
                     <input type="number" id="cantidad" name="cantidad" class="form-control" required>
+                    <p class="alert alert-danger" id="errorExistencias" style="display:none;">
+                        Ingresa un número válido, por favor.
+                    </p>
 
                     <label for="Proveedor">Proveedor:</label>
-                    <div class="busqueda mb-3">
+                    <div class="busqueda">
                         <input type="text" id="proveedorNombre" placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
                         <input type="hidden" id="idProveedor" name="idProveedor">
                     </div>
                     <div id="listaProveedores" class="list-group" style="display: none;">
-                        <!-- Ejemplo de cómo podría generarse dinámicamente la lista de proveedores -->
                         <?php
-                        // Suponiendo que tienes un array de proveedores disponible
                         foreach ($proveedores as $proveedor) {
                             echo "<a href='javascript:void(0)' onclick='seleccionarProveedor({$proveedor['id']}, \"{$proveedor['nombre']}\")' class='list-group-item list-group-item-action'>{$proveedor['nombre']}</a>";
                         }
@@ -83,7 +94,7 @@
             </div>
 
             <!-- Contenedor de productos deslizante con buscador arriba -->
-            <div class="col-md-8">
+            <div class="contenedorProductos">
                 <div class="busqueda mb-3">
                     <input type="text" id="busqueda" placeholder="Buscar un producto" class="form-control" oninput="filtrarProductos(this.value)">
                 </div>
@@ -124,5 +135,6 @@
 
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/ConfirmElim.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Validaciones.js"></script>
 </body>
 </html>
