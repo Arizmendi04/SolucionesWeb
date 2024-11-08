@@ -1,131 +1,83 @@
-<?php include 'Connect/Db.php'; ?>
-<?php include 'Sesion.php'; ?>
-<?php include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Recepcion.php'); ?>
-
 <?php
-    function solicitarRecepciones($conn) {
-        $Recepcion = new Recepcion($conn);
-        $resultado = $Recepcion->obtenerRecepcions();
-        return $resultado;
+include 'Connect/Db.php';
+include 'Sesion.php';
+include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Recepcion.php');
+
+// Solicitar todas las recepciones
+function solicitarRecepciones($conn) {
+    $Recepcion = new Recepcion($conn);
+    return $Recepcion->obtenerRecepciones();
+}
+
+// Filtrar recepciones según un parámetro
+function filtrarRecepciones($conn, $parametro) {
+    $Recepcion = new Recepcion($conn);
+    return $Recepcion->filtrarRecepcion($parametro);
+}
+
+// Obtener una recepción específica por ID
+function obtenerRecepcionPorID($conn, $idRecepcion) {
+    $Recepcion = new Recepcion($conn);
+    return $Recepcion->obtenerRecepcion($idRecepcion);
+}
+
+// Crear una nueva recepción
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'crear') {
+    $Recepcion = new Recepcion($conn);
+    $Recepcion->setCantidadProducto($_POST['cantidadProducto']);
+    $Recepcion->setFecha($_POST['fecha']);
+    $Recepcion->setComentario($_POST['comentario']);
+    $Recepcion->setIdProveedor($_POST['idProveedor']);
+    $Recepcion->setFolio($_POST['folio']);
+
+    try {
+        $Recepcion->insertarRecepcion();
+        header('Location: ../View/Admin/ViewGestionRecep.php');
+        exit;
+    } catch (mysqli_sql_exception $e) {
+        echo "Error al insertar la recepción: " . $e->getMessage();
     }
+}
 
-    function filtrarRecepciones($conn, $parametro) {
-        $Recepcion = new Recepcion($conn);
-        $resultado = $Recepcion->filtrarRecepcion($parametro);
-        return $resultado;
-    }
+// Modificar una recepción existente
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
+    if (isset($_POST['idRep'])) {
+        $id = $_POST['idRep'];
+        $RecepcionData = obtenerRecepcionPorID($conn, $id);
 
-    function obtenerRecepcionPorID($conn, $idRecepcion) {
-        $Recepcion = new Recepcion($conn);
-        return $Recepcion->obtenerRecepcion($idRecepcion);
-    }
+        if ($RecepcionData) {
+            $Recepcion = new Recepcion($conn);
+            $Recepcion->setIdRep($id);
+            $Recepcion->setCantidadProducto($_POST['cantidadProducto'] ?? $RecepcionData['cantidadProducto']);
+            $Recepcion->setFecha($_POST['fecha'] ?? $RecepcionData['fecha']);
+            $Recepcion->setComentario($_POST['comentario'] ?? $RecepcionData['comentario']);
+            $Recepcion->setIdProveedor($_POST['idProveedor'] ?? $RecepcionData['idProveedor']);
+            $Recepcion->setFolio($_POST['folio'] ?? $RecepcionData['folio']);
 
-    // Crear Recepcion
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'crear') {
-        // Obtener los datos del formulario
-        $Recepcion = new Recepcion($conn);
-        $Recepcion->setNombre($_POST['nombre']);
-        $Recepcion->setApellido($_POST['apellido']);
-        $Recepcion->setSexo($_POST['sexo']);
-        $Recepcion->setFechaNac($_POST['fechaNac']);
-        $Recepcion->setFechaIngreso($_POST['fechaIngreso']);
-        $Recepcion->setSueldo($_POST['sueldo']);
-        $Recepcion->setCargo($_POST['cargo']);
-        $Recepcion->setTelefono($_POST['telefono']);
-        $Recepcion->setDireccion($_POST['direccion']);
-
-        // Manejar la subida de la imagen de perfil
-        if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] == 0) {
-            $fotoPerfil = $_FILES['fotoPerfil'];
-            $nombreArchivo = basename($fotoPerfil['name']);
-            $rutaDestino = '../Img/User/' . $nombreArchivo;
-            $tipoArchivo = strtolower(pathinfo($rutaDestino, PATHINFO_EXTENSION));
-
-            if (in_array($tipoArchivo, ['jpg', 'jpeg', 'png', 'gif'])) {
-                if (move_uploaded_file($fotoPerfil['tmp_name'], $rutaDestino)) {
-                    $Recepcion->setFotoPerfil($rutaDestino); // Establecer la ruta de la foto de perfil
-
-                    // Intentar insertar el Recepcion y manejar excepciones
-                    try {
-                        $Recepcion->insertarRecepcion();
-                        header('Location: ../View/Admin/ViewGestionEmp.php');
-                        exit; // Asegurarse de salir después de redirigir
-                    } catch (mysqli_sql_exception $e) {
-                        // Capturar y manejar la excepción
-                        echo "Error al insertar el Recepcion: " . $e->getMessage();
-                    }
-                } else {
-                    echo "Error al subir la imagen.";
-                }
+            if ($Recepcion->modificarRecepcion()) {
+                header('Location: ../View/Admin/ViewGestionRecep.php');
+                exit;
             } else {
-                echo "Solo se permiten archivos con las siguientes extensiones: JPG, JPEG, PNG, GIF.";
+                echo "Error al actualizar la recepción.";
             }
         } else {
-            echo "Error: Debes subir una foto de perfil.";
+            echo "No se encontró la recepción especificada.";
         }
+    } else {
+        echo "ID de recepción no especificado.";
     }
+}
 
-    // Modificar Recepcion
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-            $RecepcionData = obtenerRecepcionPorID($conn, $id);
+// Eliminar una recepción
+if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
+    $id = $_GET['idRep'];
+    $Recepcion = new Recepcion($conn);
 
-            if ($RecepcionData) {
-                // Crear objeto Recepcion con los datos actuales y nuevos del formulario
-                $Recepcion = new Recepcion($conn);
-                $Recepcion->setNoRecepcion($id);
-                $Recepcion->setNombre($_POST['nombre'] ?? $RecepcionData['nombre']);
-                $Recepcion->setApellido($_POST['apellido'] ?? $RecepcionData['apellido']);
-                $Recepcion->setSexo($_POST['sexo'] ?? $RecepcionData['sexo']);
-                $Recepcion->setFechaNac($_POST['fechaNac'] ?? $RecepcionData['fechaNac']);
-                $Recepcion->setFechaIngreso($_POST['fechaIngreso'] ?? $RecepcionData['fechaIngreso']);
-                $Recepcion->setSueldo($_POST['sueldo'] ?? $RecepcionData['sueldo']);
-                $Recepcion->setCargo($_POST['cargo'] ?? $RecepcionData['cargo']);
-                $Recepcion->setTelefono($_POST['telefono'] ?? $RecepcionData['telefono']);
-                $Recepcion->setDireccion($_POST['direccion'] ?? $RecepcionData['direccion']);
-                $Recepcion->setFotoPerfil($RecepcionData['urlFotoPerfil']); // Mantener imagen actual
-
-                // Manejo de nueva imagen de perfil
-                if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] == 0) {
-                    $fotoPerfil = $_FILES['fotoPerfil'];
-                    $nombreArchivo = basename($fotoPerfil['name']);
-                    $rutaDestino = '../Img/User/' . $nombreArchivo;
-                    $tipoArchivo = strtolower(pathinfo($rutaDestino, PATHINFO_EXTENSION));
-                    
-                    if (in_array($tipoArchivo, ['jpg', 'jpeg', 'png', 'gif']) && move_uploaded_file($fotoPerfil['tmp_name'], $rutaDestino)) {
-                        $Recepcion->setFotoPerfil($rutaDestino); // Actualizar con nueva imagen
-                    } else {
-                        echo "Error al subir la nueva imagen.";
-                        exit;
-                    }
-                }
-
-                // Ejecutar la actualización en base de datos
-                $respuesta = $Recepcion->modificarRecepcion(); // Llamar al método de modificación
-                if ($respuesta) {
-                    header('Location: ../View/Admin/ViewGestionEmp.php');
-                    exit; // Asegurarse de salir después de redirigir
-                }
-            } else {
-                echo "No se encontró el Recepcion especificado.";
-            }
-        } else {
-            echo "ID de Recepcion no especificado.";
-        }
+    if ($Recepcion->eliminarRecepcion($id)) {
+        header('Location: ../View/Admin/ViewGestionRecep.php');
+        exit;
+    } else {
+        echo "Error al eliminar la recepción: " . $conn->error;
     }
-
-    // Eliminar Recepcion
-    if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
-        $id = $_GET['id'];
-        $Recepcion = new Recepcion($conn);
-        $resultado = $Recepcion->eliminarRecepcion($id); // Llamar al método para eliminar Recepcion
-        if ($resultado) {
-            header('Location: ../View/Admin/ViewGestionEmp.php');
-            exit; // Asegurarse de salir después de redirigir
-        } else {
-            echo "Error al eliminar Recepcion: " . $conn->error;
-        }
-    }
-
+}
 ?>
