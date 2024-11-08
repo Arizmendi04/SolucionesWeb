@@ -59,7 +59,7 @@
                 <li>
                     <div class="menu-item">
                         <img src="/SolucionesWeb/Static/Img/bd.png" class="small-image" alt="Base de datos">
-                        <a href="#">Base de datos</a>
+                        <a href="/SolucionesWeb/Static/View/Admin/Respaldo.php">Base de datos</a>
                     </div>
                 </li>
                 <li>
