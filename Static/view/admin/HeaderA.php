@@ -29,7 +29,7 @@
                 <li>
                     <div class="menu-item">
                         <img src="/SolucionesWeb/Static/Img/ventas.png" class="small-image" alt="Ventas">
-                        <a href="#">Ventas</a>
+                        <a href="/SolucionesWeb/Static/View/Admin/ViewGestionTickets.php">Ventas</a>
                     </div>
                 </li>
                 <li>
