@@ -80,12 +80,12 @@
                 <table id="tablaRecepciones">
                     <thead>
                         <tr>
-                            <th>ID Recepción</th>
-                            <th>Cantidad Producto</th>
+                            <th>ID</th>
+                            <th>Cantidad Productos</th>
                             <th>Fecha</th>
                             <th>Comentario</th>
                             <th>Folio Producto</th>
-                            <th>ID Proveedor</th>
+                            <th>Proveedor</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -105,6 +105,7 @@
                                     <td>
                                         <div class='boton-contenedor'>
                                             <a href='/SolucionesWeb/Static/view/admin/modificarRecepcion.php?accion=editar&id={$recepcion['idRep']}' class='boton editar'>Editar</a>
+
                                             <a href='/SolucionesWeb/Static/Controller/Recepciones.php?accion=eliminar&id={$recepcion['idRep']}' class='boton eliminar'>Eliminar</a>
                                         </div>
                                     </td>
