@@ -118,8 +118,15 @@ class Recepcion {
         $sql = "DELETE FROM recepcion WHERE idRep = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $idRep);
-        return $stmt->execute();
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            echo "Error al eliminar la recepción: " . $stmt->error;
+            return false;
+        }
     }
+    
     
     public function modificarRecepcion() {
         // Preparar la consulta SQL

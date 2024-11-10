@@ -74,7 +74,7 @@
                 <!-- Barra de búsqueda de recepciones -->
                 <div class="busqueda">
                     <h2>Lista de Recepciones</h2>
-                    <input type="text" id="busqueda" placeholder="Buscar por folio o proveedor" oninput="filtrarRecepciones(this.value)">
+                    <input type="text" id="busqueda" placeholder="Buscar por fecha" oninput="filtrarRecepciones(this.value)">
                 </div>
 
                 <table id="tablaRecepciones">
@@ -105,7 +105,7 @@
                                     <td>
                                         <div class='boton-contenedor'>
                                             <a href='/SolucionesWeb/Static/view/admin/modificarRecepcion.php?accion=editar&id={$recepcion['idRep']}' class='boton editar'>Editar</a>
-                                            <a href='../../Controller/Recepciones.php?accion=eliminar&id={$recepcion['idRep']}' class='boton eliminar'>Eliminar</a>
+                                            <a href='/SolucionesWeb/Static/Controller/Recepciones.php?accion=eliminar&id={$recepcion['idRep']}' class='boton eliminar'>Eliminar</a>
                                         </div>
                                     </td>
                                 </tr>";
@@ -124,7 +124,7 @@
     <div id="confirmModal" class="modal">
         <div class="modal-content">
             <h2>Confirmar Eliminación</h2>
-            <p>¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</p>
+            <p>¿Estás seguro de que deseas eliminar este recepción? Esta acción no se puede deshacer.</p>
             <button id="confirmDelete" class="confirm">Confirmar</button>
             <button id="cancelDelete" class="cancel">Cancelar</button>
         </div>
@@ -133,5 +133,28 @@
     <script src="/SolucionesWeb/Static/Controller/Js/Recepciones.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/ConfirmElim.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/Validaciones.js"></script>
+
+    <script>
+    function filtrarRecepciones(query) {
+        const tabla = document.getElementById("tablaRecepciones");
+        const filas = tabla.getElementsByTagName("tr");
+
+        // Convertir el query a minúsculas para hacer la búsqueda insensible a mayúsculas
+        const queryLower = query.toLowerCase();
+
+        for (let i = 1; i < filas.length; i++) {
+            const celdas = filas[i].getElementsByTagName("td");
+            const fechaRecepcion = celdas[2].innerText.toLowerCase(); // Celda de Fecha de Recepción (suponiendo que está en la columna 2)
+
+            // Verificar si la fecha completa contiene el query
+            const encontrado = fechaRecepcion.includes(queryLower);
+
+            // Mostrar la fila si se encontró coincidencia, ocultarla si no
+            filas[i].style.display = encontrado ? "" : "none";
+        }
+    }
+</script>
+
+
 </body>
 </html>

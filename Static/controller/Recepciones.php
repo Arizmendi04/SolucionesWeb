@@ -78,16 +78,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
     }
 }
 
-// Eliminar una recepción
-if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
-    $id = $_GET['idRep'];
-    $Recepcion = new Recepcion($conn);
+    // Eliminar una recepción
+    if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
+        $idRep = $_GET['id'];
+        $recepcion = new Recepcion($conn);
 
-    if ($Recepcion->eliminarRecepcion($id)) {
-        header('Location: ../View/Admin/ViewGestionRec.php');
-        exit;
-    } else {
-        echo "Error al eliminar la recepción: " . $conn->error;
+        $resultado = $recepcion->eliminarRecepcion($id);
+        if ($resultado) {
+            header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionRec.php');
+            exit;
+        } else {
+            echo "Error al eliminar la recepción: " . $conn->error;
+        }
     }
-}
 ?>
