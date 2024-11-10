@@ -13,6 +13,19 @@
         return $Producto->filtrarProducto($parametro);
     }
 
+    // Función para filtrar productos
+    function filtrarProdProve($conn, $nombreProducto, $idProveedor = null) {
+        $Producto = new Producto($conn);
+    
+        if ($idProveedor) {
+            return $Producto->obtenerProductosPorProveedor($nombreProducto, $idProveedor);
+        }
+    
+        return $Producto->filtrarProducto($nombreProducto);
+    }
+    
+
+
     function obtenerProductoPorID($conn, $folioProducto) {
         $Producto = new Producto($conn);
         return $Producto->obtenerProducto($folioProducto);
@@ -129,19 +142,21 @@
     // Buscar productos
     if (isset($_GET['accion']) && $_GET['accion'] == 'filtrar') {
         $nombreProducto = isset($_GET['nombre']) ? $_GET['nombre'] : '';
-        // Proteger contra inyecciones SQL
+        $idProveedor = isset($_GET['idProveedor']) ? $_GET['idProveedor'] : null;
+    
         $nombreProducto = $conn->real_escape_string($nombreProducto);
-        // Llamar a la función de filtrado
-        $resultado = filtrarProductos($conn, $nombreProducto);
-        // Generar la respuesta en HTML
+    
+        // Llama a la función correcta con `idProveedor`
+        $resultado = filtrarProdProve($conn, $nombreProducto, $idProveedor);
+    
         if ($resultado && count($resultado) > 0) {
             foreach ($resultado as $producto) {
-                // Muestra el producto en el formato "folio -> nombreProd"
                 echo "<div class='list-group-item' onclick='seleccionarProducto(\"{$producto['folio']}\", \"{$producto['nombreProd']}\")'>{$producto['folio']} -> {$producto['nombreProd']}</div>";
             }
         } else {
             echo "<div>No se encontraron productos.</div>";
         }
     }
+    
 
 ?>

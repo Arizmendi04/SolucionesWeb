@@ -43,6 +43,8 @@ function seleccionarProveedor(idProveedor, nombreProveedor) {
     document.getElementById("idProveedor").value = idProveedor;
     document.getElementById("listaProveedores").innerHTML = "";
     document.getElementById("listaProveedores").style.display = "none";
+
+    buscarProducto('', idProveedor);
 }
 
 // Evento para cerrar la lista de proveedores al hacer clic fuera
@@ -68,11 +70,16 @@ inputProducto.addEventListener("click", function() {
 });
 
 // Función para buscar productos
-function buscarProducto(nombreProducto) {
+function buscarProducto(nombreProducto, idProveedor=null) {
     const listaProductos = document.getElementById("listaProductos");
     const xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `/SolucionesWeb/Static/Controller/Productos.php?accion=filtrar&nombre=${nombreProducto}`, true);
+    let url = `/SolucionesWeb/Static/Controller/Productos.php?accion=filtrar&nombre=${nombreProducto}`;
+    if (idProveedor) {
+        url += `&idProveedor=${idProveedor}`;
+    }
+
+    xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             listaProductos.innerHTML = xhr.responseText;
@@ -81,6 +88,8 @@ function buscarProducto(nombreProducto) {
     };
     xhr.send();
 }
+
+
 
 // Función para seleccionar un producto de la lista
 function seleccionarProducto(folio, nombreProducto) {
