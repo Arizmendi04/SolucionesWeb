@@ -141,6 +141,17 @@ begin
 end //
 
 /*Disparador que disminuye las existencias de los productos después de que se haya
+eliminado una recepcion*/
+drop trigger if exists disminuirExisProdRecep;
+delimiter //
+create trigger disminuirExisProdRecep after delete on recepcion
+for each row
+begin
+  update producto set existencia = existencia - old.cantidadproducto
+  where folio = old.folio;
+end //
+
+/*Disparador que disminuye las existencias de los productos después de que se haya
 registrado una venta*/
 drop trigger if exists disminuirExisProd;
 delimiter //
