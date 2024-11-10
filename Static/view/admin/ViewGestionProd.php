@@ -3,8 +3,6 @@
 <?php include '../../Controller/Productos.php'; ?>
 <?php include '../../Controller/Proveedores.php'; ?>
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
