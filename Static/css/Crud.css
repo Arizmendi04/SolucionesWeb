@@ -111,6 +111,15 @@ h2 {
     outline: none;
 }
 
+#name{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
 #nombre:focus {
     border-color: #1a73e8; /* Cambia el color del borde cuando está enfocado */
 }
@@ -132,7 +141,7 @@ h2 {
 /*Formulario para modificar empleado*/
 .formContainer {
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
+    justify-content: center;
     align-items: center; /* Centra verticalmente */
     height: 100vh; /* Ocupa toda la altura de la ventana */
     background-color: #f9f9f9; /* Color de fondo opcional */
@@ -144,23 +153,39 @@ h2 {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 90%; /* Ajustar el ancho del formulario */
+    max-width: 100%;
     padding: 20px;
+    font-size: 15px;
 }
 
 .formContainer .btn-secundario{
-    background-color: #fd0404;
+    background-color: #9f2323ef;
     color: white;
     border: none;
     padding: 6px; /* Reducir el padding del botón */
-    font-size: 12px; /* Reducir el tamaño de la fuente */
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.formContainer .btn-primario{
+    background-color: #238333f5;
+    color: white;
+    border: none;
+    padding: 6px; /* Reducir el padding del botón */
+    font-size: 18px;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
 }
 
 .formContainer .btn-secundario:hover {
-    background-color: #bd2c2ca3;
+    background-color: #fd0404;
+}
+
+.formContainer .btn-primario:hover {
+    background-color: #25ea0fa3;
 }
 
 .formModificar label {
@@ -169,18 +194,20 @@ h2 {
     margin-bottom: 3px;
     color: #333;
     font-weight: bold;
-    font-size: 14px; /* Ajuste del tamaño de la fuente */
+    font-size: 16px; /* Ajuste del tamaño de la fuente */
 }
 
 .formModificar input,
-.formModificar select {
+.formModificar select,
+.formModificar text,
+.formModificar textarea{
     width: calc(100% - 10px);
     padding: 5px; /* Reducir el padding */
     margin-bottom: 5px; /* Reducir el margen */
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 12px; /* Reducir el tamaño de fuente */
+    font-size: 15px;
     font-family: 'Poppins', 'sans-serif';
 }
 
