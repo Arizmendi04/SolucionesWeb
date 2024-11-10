@@ -112,7 +112,9 @@
                                 <p>Peso: {$producto['peso']} {$producto['unidadM']}</p>
                                 <p>Categoría: {$producto['tipo']}</p>
                                 <p>Existencias: {$producto['existencia']}</p>
+                                
                                 <a href='ModificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm btn-secondary'>Editar</a>
+                                
                                 <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm btn-danger boton eliminar'>Eliminar</a>
                             </div>";
                         }

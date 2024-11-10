@@ -13,6 +13,7 @@ class Producto {
     private $precio;
     private $urlImagen;
     private $idProveedor;
+    private $proveedorNombre;
     private $conn;
 
     // Constructor: se ejecuta cuando se crea una nueva instancia de la clase
@@ -23,6 +24,10 @@ class Producto {
     // Setters
     public function setFolio($folio) {
         $this->folio = $folio;
+    }
+
+    public function setProveedorNombre($proveedorNombre){
+        $this->proveedorNombre = $proveedorNombre;
     }
 
     public function setNombreProd($nombreProd) {
@@ -100,6 +105,10 @@ class Producto {
 
     public function getIdProveedor() {
         return $this->idProveedor;
+    }
+
+    public function getProveedorNombre(){
+        return $this->proveedorNombre;
     }
 
     // Métodos para manejar productos

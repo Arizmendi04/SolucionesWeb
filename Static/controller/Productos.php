@@ -66,28 +66,28 @@
 
     // Modificar Producto
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
-        if (isset($_POST['folio'])) {
-            $folio = $_POST['folio'];
+        if (isset($_POST['id'])) {
+            $folio = $_POST['id'];
             $ProductoData = obtenerProductoPorID($conn, $folio);
 
             if ($ProductoData) {
                 // Crear objeto Producto con los datos actuales y nuevos del formulario
                 $Producto = new Producto($conn);
                 $Producto->setFolio($folio);
-                $Producto->setNombreProd($_POST['nombre'] ?? $ProductoData['nombreProd']);
+                $Producto->setNombreProd($_POST['nombreProd'] ?? $ProductoData['nombreProd']);
                 $Producto->setDescripcion($_POST['descripcion'] ?? $ProductoData['descripcion']);
                 $Producto->setPrecio($_POST['precio'] ?? $ProductoData['precio']);
-                $Producto->setExistencia($_POST['cantidad'] ?? $ProductoData['existencia']);
+                $Producto->setExistencia($_POST['existencia'] ?? $ProductoData['existencia']);
                 $Producto->setTipo($_POST['categoria'] ?? $ProductoData['tipo']); // Agregado para incluir categoría
                 $Producto->setPeso($_POST['peso'] ?? $ProductoData['peso']); // Agregado para incluir peso
-                $Producto->setUnidadM($_POST['unidad'] ?? $ProductoData['unidadM']); // Agregado para incluir unidad
+                $Producto->setUnidadM($_POST['unidadM'] ?? $ProductoData['unidadM']); // Agregado para incluir unidad
                 $Producto->setUrlImagen($ProductoData['urlImagen']); // Mantener imagen actual
 
                 // Manejo de nueva imagen
                 if (isset($_FILES['fotoProducto']) && $_FILES['fotoProducto']['error'] == 0) {
                     $imagen = $_FILES['fotoProducto'];
                     $nombreArchivo = basename($imagen['name']);
-                    $rutaDestino = '../Img/Product/' . $nombreArchivo;
+                    $rutaDestino = '../Img/Productos/' . $nombreArchivo;
                     $tipoArchivo = strtolower(pathinfo($rutaDestino, PATHINFO_EXTENSION));
 
                     if (in_array($tipoArchivo, ['jpg', 'jpeg', 'png', 'gif']) && move_uploaded_file($imagen['tmp_name'], $rutaDestino)) {
