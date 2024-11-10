@@ -121,7 +121,17 @@ class Producto {
             $productos[] = $fila;
         }
         return $productos;
-    }  
+    }
+
+    public function obtenerProductosPorProveedor($nombreProducto, $idProveedor) {
+        $query = "SELECT folio, nombreProd FROM producto WHERE nombreProd LIKE ? AND idProveedor = ?";
+        $stmt = $this->conn->prepare($query);
+        $nombreProducto = "%$nombreProducto%";
+        $stmt->bind_param("si", $nombreProducto, $idProveedor);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
 
     public function insertarProducto() {
         // Preparar la consulta de inserción

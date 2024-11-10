@@ -49,7 +49,8 @@
 
                     <label for="nombreProducto">Producto:</label>
                     <div class="busqueda">
-                        <input type="text" id="nombre" placeholder="Busca un producto" class="form-control" autocomplete="off" oninput="buscarProducto(this.value)">
+                        <input type="text" id="nombre" placeholder="Busca un producto" class="form-control" autocomplete="off" oninput="buscarProducto(this.value, document.getElementById('idProveedor').value)">
+
                         <input type="hidden" id="idProducto" name="idProducto">
                     </div>
                     
