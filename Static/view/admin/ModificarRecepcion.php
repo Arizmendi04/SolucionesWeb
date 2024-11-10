@@ -1,5 +1,4 @@
 <?php 
-
     include 'HeaderA.php';
     include '../../Controller/Recepciones.php';
     include '../../Controller/Connect/Db.php';
@@ -31,37 +30,38 @@
             <h2>Modificar Recepción</h2>
 
             <?php if ($Recepcion): ?>
-                <form action="../../Controller/Recepciones.php?accion=actualizar" method="POST">
-                    <input type="hidden" name="idRep" value="<?php echo htmlspecialchars($Recepcion['idRep'] ?? ''); ?>">
+                <form action="../../Controller/Recepciones.php?accion=editar" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $Recepcion['idRep']; ?>">
 
                     <!-- Campo cantidadProducto bloqueado -->
                     <label for="cantidadProducto">Cantidad de Producto:</label>
-                    <input type="text" id="cantidadProducto" value="<?php echo htmlspecialchars($Recepcion['cantidadProducto'] ?? ''); ?>" disabled>
+                    <input type="text" id="cantidadProducto" value="<?php echo $Recepcion['cantidadProducto']; ?>" disabled>
+
 
                     <!-- Campo folio bloqueado -->
                     <label for="folio">Folio Producto:</label>
-                    <input type="text" id="folio" value="<?php echo htmlspecialchars($Recepcion['folio'] ?? ''); ?>" disabled>
+                    <input type="text" id="folio" value="<?php echo $Recepcion['folio']; ?>" disabled>
 
                     <!-- Campo proveedor bloqueado -->
                     <label for="proveedor">Proveedor:</label>
-                    <input type="text" id="proveedor" value="<?php echo htmlspecialchars($Recepcion['idProveedor'] ?? ''); ?>" disabled>
+                    <input type="text" id="idProveedor" value="<?php echo $Recepcion['idProveedor']; ?>" disabled>
 
                     <!-- Fecha editable -->
                     <label for="fecha">Fecha de Recepción:</label>
-                    <input type="date" id="fecha" name="fecha" value="<?php echo htmlspecialchars($Recepcion['fecha'] ?? ''); ?>" required>
+                    <input type="date" id="fecha" name="fecha" value="<?php echo $Recepcion['fecha']; ?>" required>
 
                     <!-- Comentario editable -->
                     <label for="comentario">Comentario:</label>
-                    <textarea id="comentario" name="comentario" required><?php echo htmlspecialchars($Recepcion['comentario'] ?? ''); ?></textarea>
+                    <textarea id="comentario" name="comentario" required><?php echo $Recepcion['comentario']; ?></textarea>
 
                     <br>
 
-                    <button type="submit" name="accion" class="btn-primario" value="actualizar">Actualizar</button>
+                    <button type="submit" name="accion" class="btn-primario" value="editar">Actualizar</button>
                     <br><br>
 
                 </form>
 
-                <button type="button" onclick="location.href='/SolucionesWeb/Static/View/Admin/ViewGestionRecepciones.php'" class="btn-secundario">Cancelar</button>
+                <button type="button" onclick="location.href='/SolucionesWeb/Static/View/Admin/ViewGestionRec.php'" class="btn-secundario">Cancelar</button>
                 
             <?php else: ?>
                 <p>No se encontró la Recepción especificada.</p>

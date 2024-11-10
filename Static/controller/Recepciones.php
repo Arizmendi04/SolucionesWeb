@@ -49,34 +49,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-// Modificar una recepción existente
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
-    if (isset($_POST['idRep'])) {
-        $id = $_POST['idRep'];
-        $RecepcionData = obtenerRecepcionPorID($conn, $id);
+    // Modificar una recepción existente
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'editar') {
+        if (isset($_POST['id'])) {  // Verificar que el ID de recepción esté presente
+            $idRep = $_POST['id'];  // Obtener el ID de recepción desde el formulario
 
-        if ($RecepcionData) {
-            $Recepcion = new Recepcion($conn);
-            $Recepcion->setIdRep($id);
-            $Recepcion->setCantidadProducto($_POST['cantidadProducto'] ?? $RecepcionData['cantidadProducto']);
-            $Recepcion->setFecha($_POST['fecha'] ?? $RecepcionData['fecha']);
-            $Recepcion->setComentario($_POST['comentario'] ?? $RecepcionData['comentario']);
-            $Recepcion->setIdProveedor($_POST['idProveedor'] ?? $RecepcionData['idProveedor']);
-            $Recepcion->setFolio($_POST['folio'] ?? $RecepcionData['folio']);
-
-            if ($Recepcion->modificarRecepcion()) {
-                header('Location: ../View/Admin/ViewGestionRec.php');
-                exit;
+            // Crear una instancia de Recepcion para obtener los datos actuales
+            $recepcionData = obtenerRecepcionPorID($conn, $idRep);  // Obtener datos actuales de la recepción
+        
+            if ($recepcionData) {
+                $recepcion = new Recepcion($conn);
+                $recepcion->setIdRep($idRep);  // Establecer el ID de la recepción
+                $recepcion->setCantidadProducto($_POST['cantidadProducto'] ?? $recepcionData['cantidadProducto']);
+                $recepcion->setFecha($_POST['fecha'] ?? $recepcionData['fecha']);
+                $recepcion->setComentario($_POST['comentario'] ?? $recepcionData['comentario']);
+                $recepcion->setIdProveedor($_POST['idProveedor'] ?? $recepcionData['idProveedor']);
+                $recepcion->setFolio($_POST['folio'] ?? $recepcionData['folio']);
+        
+                // Ejecutar la actualización en la base de datos
+                $respuesta = $recepcion->modificarRecepcion();  // Llamar al método de modificación
+                if ($respuesta) {
+                    header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionRec.php');
+                    exit;
+                } else {
+                    echo "Error al actualizar la recepción.";
+                }
             } else {
-                echo "Error al actualizar la recepción.";
+                echo "No se encontró la recepción especificada.";
             }
         } else {
-            echo "No se encontró la recepción especificada.";
+            echo "ID de recepción no especificado.";
         }
-    } else {
-        echo "ID de recepción no especificado.";
     }
-}
+
+    
+
 
     // Eliminar una recepción
     if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
