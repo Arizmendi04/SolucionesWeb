@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'actualizar') {
         $idRep = $_GET['id'];
         $recepcion = new Recepcion($conn);
 
-        $resultado = $recepcion->eliminarRecepcion($id);
+        $resultado = $recepcion->eliminarRecepcion($idRep);
         if ($resultado) {
             header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionRec.php');
             exit;
