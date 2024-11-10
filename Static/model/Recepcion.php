@@ -16,8 +16,8 @@ class Recepcion {
     }
 
     // Setters
-    public function setIdRep($id) {
-        $this->$id = $id;
+    public function setIdRep($idRep) {
+        $this->idRep = $idRep;
     }
 
     public function setCantidadProducto($cantidadProducto) {
@@ -127,7 +127,7 @@ class Recepcion {
         }
     }
     
-    
+    //Modificar recepción
     public function modificarRecepcion() {
         // Preparar la consulta SQL
         $query = "UPDATE recepcion SET 
@@ -137,11 +137,12 @@ class Recepcion {
                     idProveedor = ?, 
                     folio = ? 
                   WHERE idRep = ?";
+    
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
             // Obtener los datos del objeto Recepcion
             $stmt->bind_param(
-                "issiii",
+                "issiii",  // Tipo de los parámetros: string, string, string, entero, entero
                 $this->cantidadProducto,
                 $this->fecha,
                 $this->comentario,
@@ -149,6 +150,7 @@ class Recepcion {
                 $this->folio,
                 $this->idRep
             );
+    
             // Ejecutar la consulta
             if ($stmt->execute()) {
                 return true; // Actualización exitosa
@@ -161,6 +163,8 @@ class Recepcion {
             return false; // Error al preparar la consulta
         }
     }
+    
+    
 
     public function filtrarRecepcion($parametro) {
         // Preparar la consulta SQL para filtrar por comentario

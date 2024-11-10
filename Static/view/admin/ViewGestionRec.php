@@ -85,6 +85,7 @@
                             <th>Fecha</th>
                             <th>Comentario</th>
                             <th>Folio Producto</th>
+                            <th style="display:none;">Proveedor (ID)</th>
                             <th>Proveedor</th>
                             <th>Acciones</th>
                         </tr>
@@ -101,15 +102,17 @@
                                     <td>{$recepcion['fecha']}</td>
                                     <td>{$recepcion['comentario']}</td>
                                     <td>{$recepcion['folio']}</td>
-                                    <td>{$proveedor['razonSocial']}</td> 
+                                    <td style='display:none;'>{$proveedor['idProveedor']}</td>
+                                    <td>{$proveedor['razonSocial']}</td>
                                     <td>
                                         <div class='boton-contenedor'>
                                             <a href='/SolucionesWeb/Static/view/admin/modificarRecepcion.php?accion=editar&id={$recepcion['idRep']}' class='boton editar'>Editar</a>
-
+                                            
                                             <a href='/SolucionesWeb/Static/Controller/Recepciones.php?accion=eliminar&id={$recepcion['idRep']}' class='boton eliminar'>Eliminar</a>
                                         </div>
                                     </td>
                                 </tr>";
+
                             }
                         ?>
                     </tbody>
@@ -136,25 +139,49 @@
     <script src="/SolucionesWeb/Static/Controller/Js/Validaciones.js"></script>
 
     <script>
-    function filtrarRecepciones(query) {
-        const tabla = document.getElementById("tablaRecepciones");
-        const filas = tabla.getElementsByTagName("tr");
+        window.onload = function() {
+            ocultarColumnaProveedor();
+        };
 
-        // Convertir el query a minúsculas para hacer la búsqueda insensible a mayúsculas
-        const queryLower = query.toLowerCase();
+        function ocultarColumnaProveedor() {
+            // Obtener todas las celdas de la columna "Proveedor (ID)"
+            const tabla = document.getElementById("tablaRecepciones");
+            const headers = tabla.getElementsByTagName("th");
+            const rows = tabla.getElementsByTagName("tr");
 
-        for (let i = 1; i < filas.length; i++) {
-            const celdas = filas[i].getElementsByTagName("td");
-            const fechaRecepcion = celdas[2].innerText.toLowerCase(); // Celda de Fecha de Recepción (suponiendo que está en la columna 2)
-
-            // Verificar si la fecha completa contiene el query
-            const encontrado = fechaRecepcion.includes(queryLower);
-
-            // Mostrar la fila si se encontró coincidencia, ocultarla si no
-            filas[i].style.display = encontrado ? "" : "none";
+            // Recorre el encabezado y oculta la columna correspondiente
+            for (let i = 0; i < headers.length; i++) {
+                if (headers[i].innerText === 'Proveedor (ID)') {
+                    // Ocultar la columna en el encabezado
+                    headers[i].style.display = 'none';
+                    
+                    // Ocultar la columna en cada fila
+                    for (let row of rows) {
+                        row.getElementsByTagName("td")[i].style.display = 'none';
+                    }
+                    break;
+                }
+            }
         }
-    }
-</script>
+            function filtrarRecepciones(query) {
+                const tabla = document.getElementById("tablaRecepciones");
+                const filas = tabla.getElementsByTagName("tr");
+
+                // Convertir el query a minúsculas para hacer la búsqueda insensible a mayúsculas
+                const queryLower = query.toLowerCase();
+
+                for (let i = 1; i < filas.length; i++) {
+                    const celdas = filas[i].getElementsByTagName("td");
+                    const fechaRecepcion = celdas[2].innerText.toLowerCase(); // Celda de Fecha de Recepción (suponiendo que está en la columna 2)
+
+                    // Verificar si la fecha completa contiene el query
+                    const encontrado = fechaRecepcion.includes(queryLower);
+
+                    // Mostrar la fila si se encontró coincidencia, ocultarla si no
+                    filas[i].style.display = encontrado ? "" : "none";
+                }
+            }
+    </script>
 
 
 </body>
