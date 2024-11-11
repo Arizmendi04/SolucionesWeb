@@ -46,12 +46,13 @@
                     <label for="proveedor">Proveedor:</label>
                     <input type="text" id="idProveedor" value="<?php echo $Recepcion['idProveedor']; ?>" disabled>
 
-                    <!-- Fecha editable -->
-                    <label for="fecha">Fecha de Recepción:</label>
-                    <input type="date" id="fecha" name="fecha" value="<?php echo $Recepcion['fecha']; ?>" required>
-                    
-                    <input type="date" id="fecha" name="fecha" class="form-control" required>
+                    <br><br>
+
+                    <label for="fecha" class="form-label">Fecha de Recepción:</label>
+                    <input type="date" id="fecha" name="fecha" value="<?php echo $Recepcion['fecha']; ?>" required class="form-control custom-date">
                     <p class="alert alert-danger" id="errorFecha" style="display:none;">Por favor ingresa una fecha con el formato dd/mm/aaaa.</p>
+
+                    <br><br>
 
                     <!-- Comentario editable -->
                     <label for="comentario">Comentario:</label>
