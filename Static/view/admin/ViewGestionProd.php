@@ -116,15 +116,24 @@
                             echo "
                             <div class='product-card'>
                                 <img src='/SolucionesWeb/Static/Img/Productos/{$producto['urlImagen']}' alt='Producto' class='img-fluid'>
+
                                 <h5>{$producto['nombreProd']}</h5>
+
                                 <p>Precio: \${$producto['precio']}</p>
+
                                 <p>Peso: {$producto['peso']} {$producto['unidadM']}</p>
+
                                 <p>Categoría: {$producto['tipo']}</p>
+
                                 <p>Existencias: {$producto['existencia']}</p>
                                 
-                                <a href='ModificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm btn-secondary'>Editar</a>
+                                <a href='ModificarProducto.php?accion=editar&id={$producto['folio']}' class='btn btn-sm'>
+                                <img src='/SolucionesWeb/Static/Img/editar.png' alt='Editar' class='icono'></a>
                                 
-                                <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm btn-danger boton eliminar'>Eliminar</a>
+                                <a href='/SolucionesWeb/Static/Controller/Productos.php?accion=eliminar&id={$producto['folio']}' class='btn btn-sm boton eliminar'><img src='/SolucionesWeb/Static/Img/eliminar.png' alt='Eliminar'class='icono'></a>
+
+                                <a href=\"/SolucionesWeb/Static/Controller/AgregarAlCarrito.php?folio=" . $producto['folio'] . "&cantidad=1\"class=\"btn btn-sm\" id=\"agregarCarrito\">
+                                <img src=\"/SolucionesWeb/Static/Img/carrito.png\" alt=\"Carrito\" class=\"icono\"></a>
                             </div>";
                         }
                         ?>
@@ -144,8 +153,14 @@
         </div>
     </div>
 
+    <div id="mensajeExito" class="alert alert-success" style="display: none;">
+    <span id="mensajeTexto"></span>
+    <img src="/SolucionesWeb/Static/Img/palomita.png" alt="Éxito" class="icono">
+    </div>
+
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/ConfirmElim.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/Validaciones.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Carrito.js"></script>
 </body>
 </html>

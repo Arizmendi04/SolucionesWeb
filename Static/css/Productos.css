@@ -157,13 +157,49 @@ h2 {
 }
 
 .product-card {
-    background: #f1f1f1;
+    background: rgb(245, 248, 255); /* Color azul muy suave */
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 10px;
     text-align: center;
-    width: calc(50% - 10px); /* Se ajusta al 50% menos el margen */
+    width: calc(45% - 10px); 
     box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 5px; /* Espacio entre tarjetas */
+}
+
+/* Efecto hover para la tarjeta */
+.product-card:hover {
+    transform: translateY(-5px); /* Eleva la tarjeta en hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+/* Estilo para el precio */
+.product-card .price {
+    font-size: 1.1em;
+    color: #4CAF50; /* Color verde suave */
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+/* Estilo para la descripción */
+.product-card p {
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* Estilo del botón */
+.product-card .btn {
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
 }
 
 .product-card img {
@@ -180,11 +216,6 @@ h2 {
 .product-card p {
     font-size: 0.9rem;
     color: #555;
-}
-
-.product-card .btn {
-    margin-top: 5px;
-    font-size: 0.8rem;
 }
 
 /* Custom File Upload Button */
@@ -239,6 +270,31 @@ h2 {
     height: 50px;
     margin-right: 8px;
     color: white;
+}
+
+/* Estilo para el ícono de carrito */
+.icono {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%;
+    background-color: #e0f7fa; /* Fondo suave para el ícono */
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icono:hover {
+    transform: scale(1.3); /* Aumenta el tamaño al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+    background-color: #b2ebf2; /* Cambia ligeramente el color de fondo en hover */
+}
+
+/* Opcional: bordes redondeados o fondo colorido si el ícono necesita más estilo */
+.icono img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen no se deforme */
+    border-radius: 50%; /* Mantiene la imagen redondeada */
 }
 
 /* Modal Styles */
