@@ -1,34 +1,39 @@
-document.getElementById('agregarCarrito').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevenimos el comportamiento por defecto del enlace (que redirige)
+document.querySelectorAll('#agregarCarrito').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+        const url = this.getAttribute('href');
 
-    var folio = this.getAttribute('href').split('folio=')[1].split('&')[0];
-    var cantidad = this.getAttribute('href').split('cantidad=')[1];
-
-    // Realizamos la solicitud AJAX al archivo PHP
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "agregaralcarrito.php?folio=" + folio + "&cantidad=" + cantidad, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.success) {
-                alert(response.message); // Mostrar mensaje de éxito
-            } else {
-                alert(response.message); // Mostrar mensaje de error
-            }
-        }
-    };
-    xhr.send();
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mostrarMensaje('Producto agregado al carrito con éxito.');
+                } else {
+                    mostrarMensaje(data.message || 'Error al agregar el producto al carrito.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                mostrarMensaje('Hubo un problema con la solicitud.', 'error');
+            });
+    });
 });
 
-function mostrarMensajeExito(mensaje) {
-    const mensajeExito = document.getElementById("mensajeExito");
-    const mensajeTexto = document.getElementById("mensajeTexto");
-    
+function mostrarMensaje(mensaje, tipo = 'success') {
+    const mensajeExito = document.getElementById('mensajeExito');
+    const mensajeTexto = document.getElementById('mensajeTexto');
+
     mensajeTexto.textContent = mensaje;
-    mensajeExito.style.display = "block";
-    
-    // Ocultar el mensaje después de unos segundos
+    if (tipo === 'error') {
+        mensajeExito.classList.remove('alert-success');
+        mensajeExito.classList.add('alert-danger');
+    } else {
+        mensajeExito.classList.remove('alert-danger');
+        mensajeExito.classList.add('alert-success');
+    }
+
+    mensajeExito.style.display = 'block';
     setTimeout(() => {
-        mensajeExito.style.display = "none";
-    }, 3000);
+        mensajeExito.style.display = 'none';
+    }, 3000); // Ocultar el mensaje después de 3 segundos
 }
