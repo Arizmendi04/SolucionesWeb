@@ -5,8 +5,20 @@ INSERT INTO proveedor (razonSocial, nombreComercial, telefono, correo) VALUES
 
 -- Ingresar datos en la tabla cliente
 INSERT INTO cliente (clienteRFC, nombreC, razonSocial, email, telefonoC, calle, colonia, localidad, municipio, estado, clienteCP) VALUES
-('RFC123456789', 'Carlos Mendoza', 'Mendoza S.A. de C.V.', 'carlos@ejemplo.com', '555-3333', 'Calle Ejemplo 789', 'Centro', 'Ejemplo', 'Ejemplo', 'Estado Ejemplo', 12345),
-('RFC987654321', 'Ana López', 'López S.A. de C.V.', 'ana@ejemplo.com', '555-4444', 'Calle Prueba 321', 'Centro', 'Prueba', 'Ejemplo', 'Estado Prueba', 54321);
+('RFC123456789', 'Carlos Mendoza', 'Mendoza S.A. de C.V.', 'carlos@mendoza.com', '555-3333', 'Calle Reforma 789', 'Centro', 'Ciudad de México', 'Cuauhtémoc', 'Ciudad de México', 12345),
+('RFC987654321', 'Ana López', 'López & Asociados', 'ana@lopez.com', '555-4444', 'Calle Insurgentes 321', 'Roma', 'Ciudad de México', 'Cuauhtémoc', 'Ciudad de México', 54321),
+('RFC456789123', 'Luis Hernández', 'Hernández Consultores', 'luis@hernandez.com', '555-5555', 'Avenida Juárez 15', 'Centro', 'Ciudad de México', 'Benito Juárez', 'Ciudad de México', 11223),
+('RFC112233445', 'María Fernández', 'Fernández Distribuciones', 'maria@fernandez.com', '555-6666', 'Calle Universidad 50', 'Centro', 'Guadalajara', 'Guadalajara', 'Jalisco', 22000),
+('RFC998877665', 'Pedro Gómez', 'Gómez Hermanos', 'pedro@gomez.com', '555-7777', 'Calle Vallarta 200', 'Zapopan', 'Zapopan', 'Guadalajara', 'Jalisco', 22500),
+('RFC334455667', 'Sofía Ramírez', 'Ramírez y Compañía', 'sofia@ramirez.com', '555-8888', 'Calle López Mateos 250', 'Centro', 'Guadalajara', 'Guadalajara', 'Jalisco', 23000),
+('RFC556677889', 'Alejandro Castillo', 'Castillo Arquitectos', 'alejandro@castillo.com', '555-9999', 'Avenida Revolución 300', 'Centro', 'Monterrey', 'Monterrey', 'Nuevo León', 33210),
+('RFC667788990', 'Lucía Morales', 'Morales SA de CV', 'lucia@morales.com', '555-0000', 'Calle Constitución 350', 'Centro', 'Monterrey', 'Monterrey', 'Nuevo León', 33220),
+('RFC998877554', 'Ricardo Rivera', 'Rivera Servicios', 'ricardo@rivera.com', '555-1111', 'Calle Hidalgo 25', 'Centro', 'Cancún', 'Benito Juárez', 'Quintana Roo', 77500),
+('RFC887766554', 'Gabriela Flores', 'Flores & Asociados', 'gabriela@flores.com', '555-2222', 'Avenida Tulum 500', 'Zona Hotelera', 'Cancún', 'Benito Juárez', 'Quintana Roo', 77550),
+('RFC776655443', 'José Pérez', 'Pérez Industrial', 'jose@perez.com', '555-3333', 'Calle Corregidora 78', 'Centro', 'Querétaro', 'Querétaro', 'Querétaro', 76000),
+('RFC665544332', 'Raquel Gómez', 'Gómez y Cía.', 'raquel@gomez.com', '555-4444', 'Avenida Zaragoza 90', 'Centro', 'Querétaro', 'Querétaro', 'Querétaro', 76010),
+('RFC554433221', 'Patricia Ortiz', 'Ortiz Transportes', 'patricia@ortiz.com', '555-5555', 'Calle Hidalgo 34', 'San Miguel', 'Querétaro', 'Querétaro', 'Querétaro', 76020);
+
 
 -- Ingresar datos en la tabla producto
 INSERT INTO producto (nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor) VALUES
@@ -37,3 +49,4 @@ select *from usuario;
 select *from empleado;
 select *from recepcion;
 select *from producto;
+select *from cliente;
