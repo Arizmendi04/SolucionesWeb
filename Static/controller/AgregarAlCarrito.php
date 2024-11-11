@@ -1,7 +1,7 @@
 <?php
-include '/SolucionesWeb/Static/Controller/Connect/Db.php';
-include '/SolucionesWeb/Static/Controller/Productos.php';
-include '/SolucionesWeb/Static/Controller/Sesion.php';
+include 'Connect/Db.php';
+include 'Productos.php';
+include 'Sesion.php';
 
 // Verificamos si se ha recibido el folio y la cantidad
 if (isset($_GET['folio']) && isset($_GET['cantidad'])) {
@@ -44,7 +44,7 @@ if (isset($_GET['folio']) && isset($_GET['cantidad'])) {
         $totalProducto = $producto['precio'] * $cantidad; 
 
         $insertStmt = $conn->prepare($insertQuery);
-        $insertStmt->bind_param("dii", $cantidad, $totalProducto, $folio, $idNotaVenta);
+        $insertStmt->bind_param("diii", $cantidad, $totalProducto, $folio, $idNotaVenta);
         
         if ($insertStmt->execute()) {
             // Si la inserción fue exitosa, retornamos un mensaje de éxito

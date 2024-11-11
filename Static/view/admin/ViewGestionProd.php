@@ -36,7 +36,7 @@
                         <option value="Hormiguicida">Hormiguicida</option>
                         <option value="Cucarachicida">Cucarachicida</option>
                         <option value="Trampa">Trampa</option>
-                        <option value="Mosquicida">Trampa</option>
+                        <option value="Mosquicida">Mosquicida</option>
                         <option value="Otro">Otro</option>
                     </select>
 
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <div id="mensajeExito" class="alert alert-success" style="display: none;">
+    <div id="mensajeExito" class="alert alert-success" name="mensajeExito" style="display: none;">
     <span id="mensajeTexto"></span>
     <img src="/SolucionesWeb/Static/Img/palomita.png" alt="Éxito" class="icono">
     </div>
