@@ -26,9 +26,13 @@
                     
                     <label for="cantidadProducto">Cantidad de Producto:</label>
                     <input type="number" id="cantidadProducto" name="cantidadProducto" class="form-control" required>
+                    <p class="alert alert-danger" id="errorCantidad" style="display:none;">
+                        Ingresa una cantidad válida, por favor.
+                    </p>
 
                     <label for="fecha">Fecha de Recepción:</label>
                     <input type="date" id="fecha" name="fecha" class="form-control" required>
+                    <p class="alert alert-danger" id="errorFecha" style="display:none;">Por favor ingresa una fecha con el formato dd/mm/aaaa.</p>
 
                     <label for="comentario">Comentario:</label>
                     <textarea id="comentario" name="comentario" class="form-control"></textarea>
@@ -36,8 +40,12 @@
                     <label for="proveedorNombre">Proveedor:</label>
                     <div class="busqueda">
                         <input type="text" id="proveedorNombre" placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
-                        <input type="hidden" id="idProveedor" name="idProveedor">
+                        <input type="hidden" id="idProveedor" name="idProveedor" required>
                     </div>
+                    <p class="alert alert-danger" id="errorIdProveedor" style="display:none;">
+                        Selecciona a un proveedor, por favor.
+                    </p>
+
                     <div id="listaProveedores" class="list-group" style="display: none;">
                         <!-- Lista de proveedores generada dinámicamente -->
                         <?php
@@ -51,8 +59,11 @@
                     <div class="busqueda">
                         <input type="text" id="nombre" placeholder="Busca un producto" class="form-control" autocomplete="off" oninput="buscarProducto(this.value, document.getElementById('idProveedor').value)">
 
-                        <input type="hidden" id="idProducto" name="idProducto">
+                        <input type="hidden" id="idProducto" name="idProducto" required>
                     </div>
+                    <p class="alert alert-danger" id="errorIdProducto" style="display:none;">
+                        Selecciona un producto, por favor.
+                    </p>
                     
                     <div id="listaProductos" class="list-group" style="display: none;">
                         <!-- Lista de productos generada dinámicamente -->
@@ -65,7 +76,7 @@
 
                     <!-- Botón de envío -->
                     <div class="botonRegistrar">
-                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear">Registrar</button>
+                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear" onclick="return validacionRecepcion();">Registrar</button>
                     </div>
                 </form>
             </div>
