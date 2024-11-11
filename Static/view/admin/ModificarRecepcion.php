@@ -49,14 +49,17 @@
                     <!-- Fecha editable -->
                     <label for="fecha">Fecha de Recepción:</label>
                     <input type="date" id="fecha" name="fecha" value="<?php echo $Recepcion['fecha']; ?>" required>
+                    
+                    <input type="date" id="fecha" name="fecha" class="form-control" required>
+                    <p class="alert alert-danger" id="errorFecha" style="display:none;">Por favor ingresa una fecha con el formato dd/mm/aaaa.</p>
 
                     <!-- Comentario editable -->
                     <label for="comentario">Comentario:</label>
-                    <textarea id="comentario" name="comentario" required><?php echo $Recepcion['comentario']; ?></textarea>
+                    <textarea id="comentario" name="comentario" required class="form-control"><?php echo $Recepcion['comentario']; ?></textarea>
 
                     <br>
 
-                    <button type="submit" name="accion" class="btn-primario" value="editar">Actualizar</button>
+                    <button type="submit" name="accion" class="btn-primario" value="editar" onclick="return validacionModiRecepcion();">Actualizar</button>
                     <br><br>
 
                 </form>

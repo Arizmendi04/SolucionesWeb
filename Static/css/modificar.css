@@ -51,6 +51,7 @@ select:focus {
 
 textarea {
     min-height: 100px;
+    font-family: 'Poppins','Sans-Serif';
 }
 
 .previewImg{
@@ -81,6 +82,7 @@ textarea {
 .form-control-file{
     width: 50px;
     height: 50px;
+    font-family: 'Poppins','Sans-Serif';
 }
 
 .upload-icon {

@@ -163,6 +163,19 @@ function validacionRecepcion() {
     } else {
         document.getElementById("errorIdProducto").style.display = "none";
     }
-    
+
+    return true;
+}
+
+function validacionModiRecepcion() {
+    const fecha = document.getElementById("fecha").value.trim();
+
+    if (!validarFecha(fecha)) {
+        document.getElementById("errorFecha").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorFecha").style.display = "none";
+    }
+
     return true;
 }
