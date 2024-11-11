@@ -49,6 +49,7 @@
 
                     <label for="correo">Correo:</label>
                     <input type="email" id="correo" name="correo" value="<?php echo $proveedor['correo']; ?>" required>
+                    <p class="alert alert-danger" id="errorCorreo" style="display:none;">Por favor, ingresa un correo válido</p>
 
                     <button type="submit" name="accion" value="actualizar" onclick="return validacionProveedor();">Actualizar</button>
 

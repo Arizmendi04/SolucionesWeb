@@ -19,6 +19,11 @@ function validarSueldo(sueldo) {
     return !isNaN(sueldo) && sueldo > 0;
 }
 
+function validarCantidad(cantidad) {
+    cantidad = parseInt(cantidad);
+    return !isNaN(cantidad) && cantidad > 0;
+}
+
 function validarTelefono(telefono) {
     return /^\d{10}$/.test(telefono);
 }
@@ -118,6 +123,58 @@ function validacionProveedor() {
         return false;
     } else {
         document.getElementById("errorCorreo").style.display = "none";
+    }
+
+    return true;
+}
+
+function validacionRecepcion() {
+    const cantidad = document.getElementById("cantidadProducto").value.trim();
+    const fecha = document.getElementById("fecha").value.trim();
+    const idProveedor = document.getElementById("idProveedor").value.trim();
+    const idProducto = document.getElementById("idProducto").value.trim(); 
+
+    if (!validarCantidad(cantidad)) {
+        document.getElementById("errorCantidad").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorCantidad").style.display = "none";
+    }
+
+    if (!validarFecha(fecha)) {
+        document.getElementById("errorFecha").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorFecha").style.display = "none";
+    }
+
+     // Validación de ID de proveedor
+     if (idProveedor === "") {
+        document.getElementById("errorIdProveedor").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorIdProveedor").style.display = "none";
+    }
+
+    // Validación de ID de producto
+    if (idProducto === "") {
+        document.getElementById("errorIdProducto").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorIdProducto").style.display = "none";
+    }
+
+    return true;
+}
+
+function validacionModiRecepcion() {
+    const fecha = document.getElementById("fecha").value.trim();
+
+    if (!validarFecha(fecha)) {
+        document.getElementById("errorFecha").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorFecha").style.display = "none";
     }
 
     return true;
