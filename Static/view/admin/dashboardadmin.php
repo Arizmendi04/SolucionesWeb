@@ -35,6 +35,5 @@
         </section>
     </div>
 
-    <script src="../../Controller/Js/Admin.js"></script>
 </body>
 </html>
