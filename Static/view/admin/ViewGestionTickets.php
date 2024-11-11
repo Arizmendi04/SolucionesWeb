@@ -30,6 +30,7 @@
                             <th>Subtotal</th>
                             <th>IVA</th>
                             <th>Total</th>
+                            <th>Estatus</th>
                             <th>Cliente</th>
                             <th>Empleado</th>
                             <th>Acciones</th>
@@ -37,10 +38,12 @@
                     </thead>
                     <tbody>
                         <?php
-                        $queryVentas = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, c.nombreC AS cliente, e.nombre AS empleado
-                                        FROM notaventa v 
-                                        JOIN cliente c ON v.noCliente = c.noCliente
-                                        JOIN empleado e ON v.noEmpleado = e.noEmpleado";
+                        $queryVentas = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, v.estatus, c.nombreC AS cliente, 
+                        concat(e.nombre, ' ', e.apellido) AS empleado
+                        FROM notaventa v
+                        JOIN cliente c ON v.noCliente = c.noCliente
+                        JOIN empleado e ON v.noEmpleado = e.noEmpleado
+                        ORDER BY v.idNotaVenta ASC";
                         $resultVentas = $conn->query($queryVentas);
 
                         if ($resultVentas && $resultVentas->num_rows > 0) {
@@ -51,6 +54,7 @@
                                     <td>$ {$venta['subtotal']}</td>
                                     <td>$ {$venta['iva']}</td>
                                     <td>$ {$venta['PagoTotal']}</td>
+                                    <td>{$venta['estatus']}</td>
                                     <td>{$venta['cliente']}</td>
                                     <td>{$venta['empleado']}</td>
                                     <td><button class='btn btn-info' onclick='mostrarDetalles({$venta['idNotaVenta']})'>Mostrar</button></td>
@@ -105,9 +109,6 @@
     }
 
     function generarTicket() {
-        // Aquí va el código adicional para generar el ticket, por ejemplo, mostrar un mensaje
-        console.log('Generando ticket...');
-        // Redirigir al usuario a la página de generación de ticket
         window.location.href = '/SolucionesWeb/Static/View/Admin/ViewGestionVent.php';
     }
     </script>

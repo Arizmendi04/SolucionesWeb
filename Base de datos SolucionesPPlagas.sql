@@ -225,6 +225,3 @@ begin
         set message_text = 'el empleado ya está registrado con el mismo nombre, apellido, fecha de nacimiento o teléfono';
     end if;
 end //
-
-
-

@@ -10,7 +10,7 @@
 
     function filtrarTickets($conn, $parametro) {
         $Ticket = new Ticket($conn);
-        /*return $Ticket->filtrarTicket($parametro);*/
+        /*return $Ticket->filtrarTicket($parametro);*/ 
     }
 
     function obtenerTicketPorID($conn, $idTicket) {
@@ -19,7 +19,7 @@
     }
 
     // Crear Ticket
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'crear') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'crear') {
         // Crear instancia de Ticket y establecer propiedades
         $ticket = new Ticket($conn);
         $ticket->setFecha($_POST['fecha']);
@@ -52,20 +52,31 @@
         }
     }
 
-    // Filtrar tickets
-    if (isset($_GET['accion']) && $_GET['accion'] == 'filtrar') {
-        $parametro = isset($_GET['parametro']) ? $_GET['parametro'] : '';
-        $parametro = $conn->real_escape_string($parametro);
+?>
 
-        $resultado = filtrarTickets($conn, $parametro);
+<?php
+    // Si se ha enviado el formulario, se actualiza el estatus del ticket
+    if (isset($_POST['finalizarCompra'])) {
+        // Obtener los valores seleccionados
+        $idCliente = $_POST['noCliente'];
+        $idEmpleado = $_POST['noEmpleado'];
 
-        if ($resultado && count($resultado) > 0) {
-            foreach ($resultado as $ticket) {
-                echo "<div class='list-group-item' onclick='seleccionarTicket(\"{$ticket['idTicket']}\", \"{$ticket['fecha']}\")'>Ticket #{$ticket['idTicket']} - {$ticket['fecha']}</div>";
+        if (!empty($idCliente) && !empty($idEmpleado)) {
+            // Actualizar el estatus de la nota de venta a 'Pagado' o 'Terminado'
+            $queryActualizarEstatus = "UPDATE notaVenta SET estatus = 'Pagado', noCliente = ?, noEmpleado = ? WHERE estatus = 'Pendiente' ORDER BY idNotaVenta DESC LIMIT 1";
+            $stmt = $conn->prepare($queryActualizarEstatus);
+            $stmt->bind_param("ii", $idCliente, $idEmpleado);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                echo "<script>alert('Compra finalizada correctamente.');</script>";
+                header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
+                exit;  // Asegúrate de detener la ejecución después de redirigir
+            } else {
+                echo "<script>alert('Error al finalizar la compra.');</script>";
             }
         } else {
-            echo "<div>No se encontraron tickets.</div>";
+            echo "<script>alert('Por favor, selecciona un cliente y un empleado.');</script>";
         }
     }
-
 ?>
