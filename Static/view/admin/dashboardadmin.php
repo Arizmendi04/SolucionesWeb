@@ -31,7 +31,7 @@
             <h2>Consultas</h2>
                 <a href="/SolucionesWeb/Static/Controller/ConsultaListaClientes.php" class="consultas-box" id="descargar-clientes">Descargar lista de clientes</a>
 
-                <a href="#" class="consultas-box" id="descargar-productos">Descargar lista de productos</a>
+                <a href="/SolucionesWeb/Static/Controller/ConsultaListaProd.php" class="consultas-box" id="descargar-productos">Descargar lista de productos</a>
         </section>
     </div>
 
