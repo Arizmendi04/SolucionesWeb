@@ -65,7 +65,14 @@
                     <p class="alert alert-danger" id="errorSueldo" style="display:none;">Por favor ingresa un sueldo válido.</p>
 
                     <label for="cargo">Cargo:</label>
-                    <input type="text" id="cargo" name="cargo" required>
+                    <select id="cargo" name="cargo" required>
+                        <option value="Vendedor">Vendedor</option>
+                        <option value="SoporteTecnico">Soporte técnico</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Limpieza">Limpieza</option>
+                        <option value="Seguridad">Seguridad</option>
+                        <option value="Otro">Otro</option>
+                    </select>
 
                     <label for="telefono">Teléfono:</label>
                     <input type="number" id="telefono" name="telefono" required>

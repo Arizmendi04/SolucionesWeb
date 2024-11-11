@@ -29,7 +29,16 @@
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
 
                     <label for="categoria">Categoría:</label>
-                    <input type="text" id="categoria" name="categoria" class="form-control" required>
+                    <select id="categoria" name="categoria" required>
+                        <option value="Insecticida">Insecticida</option>
+                        <option value="Herbicida">Herbicida</option>
+                        <option value="Fertilizante">Fertilizante</option>
+                        <option value="Hormiguicida">Hormiguicida</option>
+                        <option value="Cucarachicida">Cucarachicida</option>
+                        <option value="Trampa">Trampa</option>
+                        <option value="Mosquicida">Trampa</option>
+                        <option value="Otro">Otro</option>
+                    </select>
 
                     <label for="peso">Peso:</label>
                     <input type="number" step="0.1" id="peso" name="peso" class="form-control" required>
