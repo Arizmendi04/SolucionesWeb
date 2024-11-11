@@ -31,8 +31,8 @@
             <img src="/SolucionesWeb/Static/img/logosinletras.png" alt="logoempresa" class="logo-image">
             <h2>Consultas</h2>
                 <a href="#" class="consultas-box" id="descargar-clientes">Descargar lista de clientes</a>
-
                 <a href="#" class="consultas-box" id="descargar-productos">Descargar lista de productos</a>
+                <a href="#" class="consultas-box" id="descargar-empleados">Descargar lista de empleados</a>
         </section>
 
         <!-- Formulario de filtro (inicialmente oculto) -->
@@ -91,7 +91,20 @@
                     <option value="Cucarachicida">Cucarachicida</option>
                     <option value="Trampa">Trampa</option>
                     <option value="Mosquicida">Mosquicida</option>
+                </select>
+                <button type="submit">Descargar Excel</button>
+            </form>
+        </div>
 
+        <div id="empleados-container" class="container" style="display:none;">
+            <h3>Descargar Lista de Empleados</h3>
+            <form action="/SolucionesWeb/Static/Controller/ConsultaListaEmp.php" id="descargarEmp" class="formDescargaEmp" method="GET">
+                <label for="categoria">Seleccione el género del empleado:</label>
+                <select id="categoria" name="categoria">
+                    <option value="">Todos</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Otro">Otro</option>
                 </select>
                 <button type="submit">Descargar Excel</button>
             </form>
@@ -105,6 +118,7 @@
         document.getElementById('descargar-clientes').addEventListener('click', function(event) {
             document.getElementById('clientes-container').style.display = 'block';
             document.getElementById('productos-container').style.display = 'none';
+            document.getElementById('empleados-container').style.display = 'none';
             event.stopPropagation(); // Evita que el clic se propague al documento
         });
 
@@ -112,6 +126,15 @@
         document.getElementById('descargar-productos').addEventListener('click', function(event) {
             document.getElementById('productos-container').style.display = 'block';
             document.getElementById('clientes-container').style.display = 'none';
+            document.getElementById('empleados-container').style.display = 'none';
+            event.stopPropagation(); // Evita que el clic se propague al documento
+        });
+
+        // Mostrar formulario de empleados
+        document.getElementById('descargar-empleados').addEventListener('click', function(event) {
+            document.getElementById('empleados-container').style.display = 'block';
+            document.getElementById('clientes-container').style.display = 'none';
+            document.getElementById('productos-container').style.display = 'none';
             event.stopPropagation(); // Evita que el clic se propague al documento
         });
 
@@ -119,14 +142,19 @@
         document.addEventListener('click', function(event) {
             const clientesContainer = document.getElementById('clientes-container');
             const productosContainer = document.getElementById('productos-container');
+            const empleadosContainer = document.getElementById('empleados-container');
 
             // Verifica si el clic ocurrió fuera de los contenedores
-            if (!clientesContainer.contains(event.target) && !productosContainer.contains(event.target)) {
+            if (!clientesContainer.contains(event.target) && 
+                !productosContainer.contains(event.target) && 
+                !empleadosContainer.contains(event.target)) {
                 clientesContainer.style.display = 'none';
                 productosContainer.style.display = 'none';
+                empleadosContainer.style.display = 'none';
             }
         });
     </script>
+
 
 
 </body>
