@@ -1,4 +1,4 @@
-<?php
+<?php 
     require __DIR__ . '/../../vendor/autoload.php';
     require __DIR__ . '/Connect/db.php'; // Ajusta la ruta
     include 'Sesion.php'; 
@@ -6,9 +6,21 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-    // Consulta para obtener los productos
-    $sql = "SELECT folio, nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor FROM producto";
-    $result = $conn->query($sql);
+    // Obtener la categoría seleccionada del formulario
+    $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
+
+    // Consulta para obtener los productos de la categoría seleccionada
+    if ($categoria) {
+        $sql = "SELECT folio, nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor FROM producto WHERE tipo = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $categoria);
+    } else {
+        $sql = "SELECT folio, nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor FROM producto";
+        $stmt = $conn->prepare($sql);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     // Crear el archivo de Excel
     $spreadsheet = new Spreadsheet();

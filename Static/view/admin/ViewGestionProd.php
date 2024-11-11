@@ -105,7 +105,7 @@
             <!-- Contenedor de productos deslizante con buscador arriba -->
             <div class="contenedorProductos">
                 <div class="busqueda mb-3">
-                    <input type="text" id="busqueda" placeholder="Buscar un producto" class="form-control" oninput="filtrarProductos(this.value)">
+                    <input type="text" id="busqueda" placeholder="Buscar un producto por nombre" class="form-control" oninput="filtrarProductos(this.value)">
                 </div>
 
                 <div class="product-grid">

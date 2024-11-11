@@ -1,0 +1,45 @@
+/*FORMULARIO DE FILTRO*/
+/* Contenedor de formularios de filtro */
+.container {
+    background: linear-gradient(135deg, #b7e296, #025d45);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+    font-family: 'Poppins', 'sans-serif';
+    display: none;
+    flex:1;
+    
+}
+
+/* Etiquetas y selectores */
+label {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    display: block;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #298903;
+    font-family: 'Poppins', 'sans-serif';
+    color:#fff;
+}
+
+select{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #a29f9f;
+    font-family: 'Poppins', 'sans-serif';
+}
