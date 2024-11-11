@@ -6,9 +6,26 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-    // Consulta para obtener los clientes
+    // Obtener el valor del filtro de estado, si existe
+    $estadoFiltro = isset($_GET['estado']) ? $_GET['estado'] : '';
+
+    // Ajustar la consulta SQL con el filtro
     $sql = "SELECT noCliente, clienteRFC, nombreC, razonSocial, email, telefonoC, calle, colonia, localidad, municipio, estado, clienteCP FROM cliente";
-    $result = $conn->query($sql);
+
+    // Si se seleccionó un estado, agregar el filtro a la consulta
+    if ($estadoFiltro) {
+        $sql .= " WHERE estado = ?";
+    }
+
+    $stmt = $conn->prepare($sql);
+
+    // Si se agregó un filtro, se debe vincular el parámetro
+    if ($estadoFiltro) {
+        $stmt->bind_param('s', $estadoFiltro);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     // Crear el archivo de Excel
     $spreadsheet = new Spreadsheet();
