@@ -1,0 +1,78 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.busqueda input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.detalle-ticket {
+    display: none; /* Oculto inicialmente */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.detalle-ticket.mostrar {
+    display: block; /* Se muestra cuando se agrega la clase "mostrar" */
+}
+
+.detalle-ticket h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.detalle-ticket p {
+    margin: 5px 0;
+}
+
+.btn-generar-ticket {
+    padding: 10px 20px;
+    font-size: 1em;
+}
