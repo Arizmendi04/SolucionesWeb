@@ -15,65 +15,55 @@
     <div class="container">
         <h1>Gestión de Ventas</h1>
 
-        <div class="layout">
-            <!-- Formulario de registro de venta -->
-            <div class="formulario">
-                <h2 align="center">Registrar Venta</h2>
-                <form action="../../Controller/Ventas.php" method="POST">
-                    <label for="idCliente">Cliente:</label>
-                    <select id="idCliente" name="idCliente" required>
-                        <?php
-                        // Consulta para obtener clientes
-                        $queryClientes = "SELECT noCliente, nombreC FROM cliente";
-                        $resultClientes = $conn->query($queryClientes);
+        <label for="idCliente">Cliente:</label>
+        <select id="idCliente" name="idCliente" required>
+            <?php
+                $queryClientes = "SELECT noCliente, nombreC FROM cliente";
+                $resultClientes = $conn->query($queryClientes);
 
-                        if ($resultClientes && $resultClientes->num_rows > 0) {
-                            while ($cliente = $resultClientes->fetch_assoc()) {
-                                echo "<option value='{$cliente['noCliente']}'>{$cliente['nombreC']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No hay clientes disponibles</option>";
-                        }
-                        ?>
-                    </select>
-                    
-                    <label for="idProducto">Producto:</label>
-                    <select id="idProducto" name="idProducto" required>
-                        <?php
-                        // Consulta para obtener productos
-                        $queryProductos = "SELECT folio, nombreProd, precio FROM producto";
-                        $resultProductos = $conn->query($queryProductos);
+                if ($resultClientes && $resultClientes->num_rows > 0) {
+                    while ($cliente = $resultClientes->fetch_assoc()) {
+                        echo "<option value='{$cliente['noCliente']}'>{$cliente['nombreC']}</option>";
+                    }
+                } else {
+                    echo "<option value=''>No hay clientes disponibles</option>";
+                }
+            ?>
+        </select>
 
-                        if ($resultProductos && $resultProductos->num_rows > 0) {
-                            while ($producto = $resultProductos->fetch_assoc()) {
-                                echo "<option value='{$producto['folio']}'>{$producto['nombreProd']} - $ {$producto['precio']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No hay productos disponibles</option>";
-                        }
-                        ?>
-                    </select>
-                    
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="number" id="cantidad" name="cantidad" required>
+        <label for="idEmpleado">Empleado:</label>
 
-                    <button type="submit" name="accion" value="crearVenta">Registrar Venta</button>
-                </form>
-            </div>
+        <select id="idEmpleado" name="idEmpleado" required>
+            <?php
+                $queryEmpleados = "SELECT noEmpleado, nombre, apellido FROM empleado";
+                $resultEmpleados = $conn->query($queryEmpleados);
+
+                if ($resultEmpleados && $resultEmpleados->num_rows > 0) {
+                    while ($empleado = $resultEmpleados->fetch_assoc()) {
+                        echo "<option value='{$empleado['noEmpleado']}'>{$empleado['nombre']} {$empleado['apellido']}</option>";
+                    }
+                } else {
+                    echo "<option value=''>No hay empleados disponibles</option>";
+                }
+            ?>
+        </select>
+        
+        <br><br>
 
             <!-- Tabla para consultar ventas -->
             <div class="tabla">
                 <div class="busqueda">
                     <h2 align="center">Ticket</h2>
                     <input type="text" id="busqueda" placeholder="Buscar por cliente o producto" oninput="filtrarVentas(this.value)">
+                    <p>Folio: </p>
                 </div>
                 <table id="tablaVentas">
                     <thead>
                         <tr>
-                            <th>ID Venta</th>
-                            <th>Cliente</th>
-                            <th>Producto</th>
+                            <th>ID</th>
                             <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Producto</th>
                             <th>Total</th>
                             <th>Acciones</th>
                         </tr>
