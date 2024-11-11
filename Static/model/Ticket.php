@@ -1,247 +1,189 @@
 <?php
 
-class Producto {
+    class Ticket {
 
-    // Propiedades de la clase
-    private $folio;
-    private $nombreProd;
-    private $tipo;
-    private $unidadM;
-    private $existencia;
-    private $peso;
-    private $descripcion;
-    private $precio;
-    private $urlImagen;
-    private $idProveedor;
-    private $conn;
+        // Propiedades de la clase
+        private $idNotaVenta;
+        private $fecha;
+        private $subtotal;
+        private $iva;
+        private $pagoTotal;
+        private $estatus;
+        private $noCliente;
+        private $noEmpleado;
+        private $conn;
 
-    // Constructor: se ejecuta cuando se crea una nueva instancia de la clase
-    public function __construct($conn) {
-        $this->conn = $conn;
-    }
-
-    // Setters
-    public function setFolio($folio) {
-        $this->folio = $folio;
-    }
-
-    public function setNombreProd($nombreProd) {
-        $this->nombreProd = $nombreProd;
-    }
-
-    public function setTipo($tipo) {
-        $this->tipo = $tipo;
-    }
-
-    public function setUnidadM($unidadM) {
-        $this->unidadM = $unidadM;
-    }
-
-    public function setExistencia($existencia) {
-        $this->existencia = $existencia;
-    }
-
-    public function setPeso($peso) {
-        $this->peso = $peso;
-    }
-
-    public function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
-    }
-
-    public function setPrecio($precio) {
-        $this->precio = $precio;
-    }
-
-    public function setUrlImagen($urlImagen) {
-        $this->urlImagen = $urlImagen;
-    }
-
-    public function setIdProveedor($idProveedor) {
-        $this->idProveedor = $idProveedor;
-    }
-
-    // Getters
-    public function getFolio() {
-        return $this->folio;
-    }
-
-    public function getNombreProd() {
-        return $this->nombreProd;
-    }
-
-    public function getTipo() {
-        return $this->tipo;
-    }
-
-    public function getUnidadM() {
-        return $this->unidadM;
-    }
-
-    public function getExistencia() {
-        return $this->existencia;
-    }
-
-    public function getPeso() {
-        return $this->peso;
-    }
-
-    public function getDescripcion() {
-        return $this->descripcion;
-    }
-
-    public function getPrecio() {
-        return $this->precio;
-    }
-
-    public function getUrlImagen() {
-        return $this->urlImagen;
-    }
-
-    public function getIdProveedor() {
-        return $this->idProveedor;
-    }
-
-    // Métodos para manejar productos
-    public function obtenerProducto($folio) {
-        $sql = "SELECT * FROM producto WHERE folio = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $folio);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        return $resultado->fetch_assoc();
-    }
-
-    public function obtenerProductos() {
-        // Consulta para obtener todos los productos
-        $sql = "SELECT * FROM producto";
-        $resultado = mysqli_query($this->conn, $sql);
-        $productos = [];
-        while ($fila = $resultado->fetch_assoc()) {
-            $productos[] = $fila;
+        // Constructor
+        public function __construct($conn) {
+            $this->conn = $conn;
         }
-        return $productos;
-    }  
 
-    public function insertarProducto() {
-        // Preparar la consulta de inserción
-        $sql = "INSERT INTO producto (nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
-        if ($stmt) {
-            // Asociar los parámetros de la consulta con los valores del objeto Producto
-            // Cambiamos a "sssidsssi" porque ahora solo hay 9 campos
-            $stmt->bind_param(
-                "sssidsssi", // Aquí usamos un 'i' para idProveedor como entero
-                $this->nombreProd,
-                $this->tipo,
-                $this->unidadM,
-                $this->existencia,
-                $this->peso,
-                $this->descripcion,
-                $this->precio,
-                $this->urlImagen,
-                $this->idProveedor // Asegúrate de que este sea un entero
-            );
-            // Ejecutar la consulta
-            if ($stmt->execute()) {
-                header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionProd.php');
-                exit;
-            } else {
-                echo "Error al crear producto: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            echo "Error en la preparación de la consulta: " . $this->conn->error;
+        // Setters
+        public function setIdNotaVenta($idNotaVenta) {
+            $this->idNotaVenta = $idNotaVenta;
         }
-    }    
 
-    public function eliminarProducto($folio) {
-        $sql = "DELETE FROM producto WHERE folio = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $folio);
-        return $stmt->execute();
-    }
-    
-    public function modificarProducto() {
-        // Preparar la consulta SQL
-        $query = "UPDATE producto SET 
-                    nombreProd = ?, 
-                    tipo = ?, 
-                    unidadM = ?, 
-                    existencia = ?, 
-                    peso = ?, 
-                    descripcion = ?, 
-                    precio = ?, 
-                    urlImagen = ?, 
-                    idProveedor = ? 
-                WHERE folio = ?";
-        // Preparar la sentencia
-        if ($stmt = $this->conn->prepare($query)) {
-            // Obtener los datos del objeto producto
-            $nombreProd = $this->nombreProd;
-            $tipo = $this->tipo;
-            $unidadM = $this->unidadM;
-            $existencia = $this->existencia;
-            $peso = $this->peso;
-            $descripcion = $this->descripcion;
-            $precio = $this->precio;
-            $urlImagen = $this->urlImagen;
-            $idProveedor = $this->idProveedor;
-            $folio = $this->folio;
-            // Vincular parámetros
-            $stmt->bind_param("sssidssssi", 
-                $nombreProd, 
-                $tipo, 
-                $unidadM, 
-                $existencia, 
-                $peso, 
-                $descripcion, 
-                $precio, 
-                $urlImagen, 
-                $idProveedor,
-                $folio
-            );
-            // Ejecutar la consulta
-            if ($stmt->execute()) {
-                return true; // Actualización exitosa
-            } else {
-                echo "Error en la actualización: " . $stmt->error;
-                return false; // Error en la actualización
-            }
-    
-        } else {
-            echo "Error al preparar la consulta: " . $this->conn->error;
-            return false; // Error al preparar la consulta
+        public function setFecha($fecha) {
+            $this->fecha = $fecha;
         }
-    }
 
-    public function filtrarProducto($parametro) {
-        // Preparar la consulta SQL
-        $sql = "SELECT * FROM producto WHERE nombreProd LIKE ? OR descripcion LIKE ?";
-        // Preparar la sentencia
-        if ($stmt = $this->conn->prepare($sql)) {
-            // Agregar los caracteres comodín para la búsqueda
-            $parametro = '%' . $parametro . '%'; // Para que busque cualquier coincidencia
-            $stmt->bind_param("ss", $parametro, $parametro);
-            // Ejecutar la consulta
+        public function setSubtotal($subtotal) {
+            $this->subtotal = $subtotal;
+        }
+
+        public function setIva($iva) {
+            $this->iva = $iva;
+        }
+
+        public function setPagoTotal($pagoTotal) {
+            $this->pagoTotal = $pagoTotal;
+        }
+
+        public function setEstatus($estatus) {
+            $this->estatus = $estatus;
+        }
+
+        public function setNoCliente($noCliente) {
+            $this->noCliente = $noCliente;
+        }
+
+        public function setNoEmpleado($noEmpleado) {
+            $this->noEmpleado = $noEmpleado;
+        }
+
+        // Getters
+        public function getIdNotaVenta() {
+            return $this->idNotaVenta;
+        }
+
+        public function getFecha() {
+            return $this->fecha;
+        }
+
+        public function getSubtotal() {
+            return $this->subtotal;
+        }
+
+        public function getIva() {
+            return $this->iva;
+        }
+
+        public function getPagoTotal() {
+            return $this->pagoTotal;
+        }
+
+        public function getEstatus() {
+            return $this->estatus;
+        }
+
+        public function getNoCliente() {
+            return $this->noCliente;
+        }
+
+        public function getNoEmpleado() {
+            return $this->noEmpleado;
+        }
+
+        // Métodos para manejo de ticket
+        public function obtenerTicket($idNotaVenta) {
+            $sql = "SELECT * FROM notaVenta WHERE idNotaVenta = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $idNotaVenta);
             $stmt->execute();
-            // Obtener el resultado
             $resultado = $stmt->get_result();
-            // Crear un array para almacenar los productos filtrados
-            $productosFiltrados = [];
-            // Recorrer el resultado y agregarlo al array
-            while ($fila = $resultado->fetch_assoc()) {
-                $productosFiltrados[] = $fila;
-            }
-            // Devolver el array de productos filtrados
-            return $productosFiltrados;
-        } else {
-            echo "Error al preparar la consulta: " . $this->conn->error;
-            return []; // Retornar un array vacío en caso de error
+            return $resultado->fetch_assoc();
         }
-    }    
 
-}
+        public function obtenerDetallesTicket($ticketId) {
+            $sql = "SELECT p.nombreProd AS producto, p.precio, d.cantidad, d.subtotal, prov.nombre AS proveedor 
+                    FROM detalleventa d
+                    JOIN producto p ON d.idProducto = p.idProducto
+                    JOIN proveedor prov ON p.idProveedor = prov.idProveedor
+                    WHERE d.idNotaVenta = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $ticketId);
+            $stmt->execute();
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        }        
+
+        public function obtenerTickets() {
+            $sql = "SELECT * FROM notaVenta";
+            $resultado = $this->conn->query($sql);
+            $tickets = [];
+            while ($fila = $resultado->fetch_assoc()) {
+                $tickets[] = $fila;
+            }
+            return $tickets;
+        }
+
+        public function insertarTicket() {
+            $sql = "INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEmpleado) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param(
+                    "sdddsii",
+                    $this->fecha,
+                    $this->subtotal,
+                    $this->iva,
+                    $this->pagoTotal,
+                    $this->estatus,
+                    $this->noCliente,
+                    $this->noEmpleado
+                );
+                if ($stmt->execute()) {
+                    return true;
+                } else {
+                    echo "Error al insertar ticket: " . $stmt->error;
+                    return false;
+                }
+                $stmt->close();
+            } else {
+                echo "Error en la preparación de la consulta: " . $this->conn->error;
+                return false;
+            }
+        }
+
+        public function eliminarTicket($idNotaVenta) {
+            $sql = "DELETE FROM notaVenta WHERE idNotaVenta = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $idNotaVenta);
+            return $stmt->execute();
+        }
+
+        public function modificarTicket() {
+            $sql = "UPDATE notaVenta SET 
+                        fecha = ?, 
+                        subtotal = ?, 
+                        iva = ?, 
+                        pagoTotal = ?, 
+                        estatus = ?, 
+                        noCliente = ?, 
+                        noEmpleado = ? 
+                    WHERE idNotaVenta = ?";
+            if ($stmt = $this->conn->prepare($sql)) {
+                $stmt->bind_param(
+                    "sdddsiii",
+                    $this->fecha,
+                    $this->subtotal,
+                    $this->iva,
+                    $this->pagoTotal,
+                    $this->estatus,
+                    $this->noCliente,
+                    $this->noEmpleado,
+                    $this->idNotaVenta
+                );
+                if ($stmt->execute()) {
+                    return true;
+                } else {
+                    echo "Error al actualizar el ticket: " . $stmt->error;
+                    return false;
+                }
+            } else {
+                echo "Error al preparar la consulta: " . $this->conn->error;
+                return false;
+            }
+        }
+    }
 
 ?>

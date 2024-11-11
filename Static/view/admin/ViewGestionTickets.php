@@ -9,115 +9,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Ventas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../Css/ventas.css">
+    <link rel="stylesheet" href="../../Css/tickets.css">
 </head>
 <body>
     <div class="container">
         <h1>Gestión de Ventas</h1>
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-            </div>
-        <?php endif; ?>
 
         <div class="layout">
-            <!-- Formulario de registro de venta -->
-            <div class="formulario">
-                <h2>Registrar Venta</h2>
-                <form action="../../Controller/Ventas.php" method="POST">
-                    <label for="idCliente">Cliente:</label>
-                    <select id="idCliente" name="idCliente" required>
-                        <?php
-                        // Consulta para obtener clientes
-                        $queryClientes = "SELECT noCliente, nombreC FROM cliente";
-                        $resultClientes = $conn->query($queryClientes);
-
-                        if ($resultClientes && $resultClientes->num_rows > 0) {
-                            while ($cliente = $resultClientes->fetch_assoc()) {
-                                echo "<option value='{$cliente['noCliente']}'>{$cliente['nombreC']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No hay clientes disponibles</option>";
-                        }
-                        ?>
-                    </select>
-                    
-                    <label for="idProducto">Producto:</label>
-                    <select id="idProducto" name="idProducto" required>
-                        <?php
-                        // Consulta para obtener productos
-                        $queryProductos = "SELECT folio, nombreProd, precio FROM producto";
-                        $resultProductos = $conn->query($queryProductos);
-
-                        if ($resultProductos && $resultProductos->num_rows > 0) {
-                            while ($producto = $resultProductos->fetch_assoc()) {
-                                echo "<option value='{$producto['folio']}'>{$producto['nombreProd']} - $ {$producto['precio']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No hay productos disponibles</option>";
-                        }
-                        ?>
-                    </select>
-                    
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="number" id="cantidad" name="cantidad" required>
-
-                    <button type="submit" name="accion" value="crearVenta">Registrar Venta</button>
-                </form>
-            </div>
-
             <!-- Tabla para consultar ventas -->
             <div class="tabla">
                 <div class="busqueda">
                     <h2 align="center">Tickets</h2>
                     <input type="text" id="busqueda" placeholder="Buscar por cliente o producto" oninput="filtrarVentas(this.value)">
                 </div>
-                <table id="tablaVentas">
+                <table id="tablaVentas" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID Venta</th>
-                            <th>Cliente</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Subtotal</th>
+                            <th>IVA</th>
                             <th>Total</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Consulta para obtener ventas
-                        $queryVentas = "SELECT v.idNotaVenta, c.nombreC AS clienteNombre, p.nombreProd AS productoNombre, v.pagoTotal, p.precio 
+                        $queryVentas = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, c.nombreC AS cliente, e.nombre AS empleado
                                         FROM notaventa v 
                                         JOIN cliente c ON v.noCliente = c.noCliente
-                                        JOIN producto p";
+                                        JOIN empleado e ON v.noEmpleado = e.noEmpleado";
                         $resultVentas = $conn->query($queryVentas);
 
                         if ($resultVentas && $resultVentas->num_rows > 0) {
                             while ($venta = $resultVentas->fetch_assoc()) {
-                                $total = $venta['precio'] * $venta['cantidad'];
                                 echo "<tr>
-                                    <td>{$venta['idVenta']}</td>
-                                    <td>{$venta['clienteNombre']}</td>
-                                    <td>{$venta['productoNombre']}</td>
-                                    <td>{$venta['cantidad']}</td>
-                                    <td>$ {$total}</td>
-                                    <td>
-                                        <a href='modificarVenta.php?accion=editar&id={$venta['idVenta']}' class='btn btn-primary'>Editar</a>
-                                        <a href='../../Controller/Ventas.php?accion=eliminar&id={$venta['idVenta']}' class='btn btn-danger' onclick='return confirm(\"¿Estás seguro de eliminar esta venta?\")'>Eliminar</a>
-                                    </td>
+                                    <td>{$venta['idNotaVenta']}</td>
+                                    <td>{$venta['fecha']}</td>
+                                    <td>$ {$venta['subtotal']}</td>
+                                    <td>$ {$venta['iva']}</td>
+                                    <td>$ {$venta['PagoTotal']}</td>
+                                    <td>{$venta['cliente']}</td>
+                                    <td>{$venta['empleado']}</td>
+                                    <td><button class='btn btn-info' onclick='mostrarDetalles({$venta['idNotaVenta']})'>Mostrar</button></td>
                                 </tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='6'>No hay ventas registradas</td></tr>";
+                            echo "<tr><td colspan='8'>No hay tickets registrados</td></tr>";
                         }
                         ?>
                     </tbody>
                 </table>
             </div>
+
+            <!-- Botón para generar ticket -->
+            <button class="btn-generar-ticket btn btn-success" onclick="generarTicket()" >Generar Ticket</button>
+
+            <!-- Detalle del ticket -->
+            <div id="detalleTicket" class="detalle-ticket mt-5">
+                <h3>Detalles del Ticket</h3>
+                <ul id="listaProductos" class="list-group"></ul>
+            </div>
         </div>
     </div>
-    
-    <script src="../../Controller/Js/ConfirmElim.js"></script>
-    <script src="../../Controller/Js/Validaciones.js"></script>
+
+    <script>
+    function mostrarDetalles(ticketId) {
+        const detalleTicket = document.getElementById('detalleTicket');
+        detalleTicket.classList.add('mostrar');  // Mostrar el contenedor al hacer clic
+        fetch(`../../Controller/ControladorTickets.php?accion=mostrar&id=${ticketId}`)
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('listaProductos');
+                lista.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const elemento = document.createElement('li');
+                        elemento.classList.add('list-group-item');
+                        elemento.innerHTML = `
+                            <strong>Producto:</strong> ${item.producto} |
+                            <strong>Proveedor:</strong> ${item.proveedor} |
+                            <strong>Precio:</strong> $${item.precio} |
+                            <strong>Cantidad:</strong> ${item.cantidad} |
+                            <strong>Subtotal:</strong> $${item.subtotal}
+                        `;
+                        lista.appendChild(elemento);
+                    });
+                } else {
+                    lista.innerHTML = '<li class="list-group-item">No hay productos en este ticket</li>';
+                }
+            })
+            .catch(error => console.error('Error al obtener los detalles:', error));
+    }
+
+    function generarTicket() {
+        // Aquí va el código adicional para generar el ticket, por ejemplo, mostrar un mensaje
+        console.log('Generando ticket...');
+        // Redirigir al usuario a la página de generación de ticket
+        window.location.href = '/SolucionesWeb/Static/View/Admin/ViewGestionVent.php';
+    }
+    </script>
 </body>
 </html>
