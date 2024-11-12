@@ -1,5 +1,6 @@
 <?php include 'HeaderA.php'?>
 <?php include '../../Controller/Sesion.php'; ?>
+<?php include '../../Controller/Connect/Db.php'; ?>
 
     <link rel="stylesheet" href="../../Css/filtroForm.css">
     <div class="main-content">
@@ -32,12 +33,49 @@
             <h3>Generar Reporte de Productos Más Vendidos</h3>
             <form action="/SolucionesWeb/Static/Controller/ReporteProductosVendidos.php" method="GET">
                 <label for="fechaDesde">Fecha desde:</label>
-                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <input type="date" id="fechaInicio" name="fechaInicio" required class="form-control custom-date">
                 
                 <label for="fechaHasta">Fecha hasta:</label>
-                <input type="date" id="fechaFin" name="fechaFin" required>
+                <input type="date" id="fechaFin" name="fechaFin" required class="form-control custom-date">
                 
                 <button type="submit">Generar PDF</button>
+            </form>
+        </div>
+
+        <!-- Formulario para el reporte de ventas mensuales por empleado -->
+        <div id="ventas-mensuales-container" class="container" style="display:none;">
+            <h3>Generar Reporte de Ventas Mensuales por Empleado</h3>
+            <form action="/SolucionesWeb/Static/Controller/ReporteVentasMensuales.php" id="descargarVen" class="formDescargaVen" method="GET">
+                <!-- Combobox para seleccionar el mes -->
+                <label for="mes">Seleccione el Mes:</label>
+                <select id="mes" name="mes" required>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+
+                <!-- Combobox para seleccionar el empleado -->
+                <label for="empleado">Seleccione el Empleado:</label>
+                <select id="empleado" name="empleado" required>
+                    <?php
+                        // Código PHP para obtener la lista de empleados
+                        include '../../Controller/Empleados.php';
+                        $empleados = solicitarEmpleados($conn);
+                        foreach ($empleados as $empleado) {
+                            echo "<option value='{$empleado['noEmpleado']}'>{$empleado['nombre']} {$empleado['apellido']}</option>";
+                        }
+                    ?>
+                </select>
+                <button type="submit">Generar Excel</button>
             </form>
         </div>
 
@@ -124,68 +162,7 @@
             </form>
         </div>
 
-
     </div>
-
-    <script>
-        // Mostrar formulario de clientes
-        document.getElementById('descargar-clientes').addEventListener('click', function(event) {
-            document.getElementById('clientes-container').style.display = 'block';
-            document.getElementById('productos-container').style.display = 'none';
-            document.getElementById('empleados-container').style.display = 'none';
-            document.getElementById('productos-vendidos-container').style.display = 'none';
-            event.stopPropagation(); // Evita que el clic se propague al documento
-        });
-
-        // Mostrar formulario de productos
-        document.getElementById('descargar-productos').addEventListener('click', function(event) {
-            document.getElementById('productos-container').style.display = 'block';
-            document.getElementById('clientes-container').style.display = 'none';
-            document.getElementById('empleados-container').style.display = 'none';
-            document.getElementById('productos-vendidos-container').style.display = 'none';
-            event.stopPropagation(); // Evita que el clic se propague al documento
-        });
-
-        // Mostrar formulario de empleados
-        document.getElementById('descargar-empleados').addEventListener('click', function(event) {
-            document.getElementById('empleados-container').style.display = 'block';
-            document.getElementById('clientes-container').style.display = 'none';
-            document.getElementById('productos-container').style.display = 'none';
-            document.getElementById('productos-vendidos-container').style.display = 'none';
-            event.stopPropagation(); // Evita que el clic se propague al documento
-        });
-
-        // Mostrar formulario de reporte de productos vendidos
-        document.getElementById('productos-vendidos').addEventListener('click', function(event) {
-            document.getElementById('productos-vendidos-container').style.display = 'block';
-            document.getElementById('clientes-container').style.display = 'none';
-            document.getElementById('productos-container').style.display = 'none';
-            document.getElementById('empleados-container').style.display = 'none';
-            event.stopPropagation(); // Evita que el clic se propague al documento
-        });
-
-
-        // Ocultar formularios al hacer clic fuera de ellos
-        document.addEventListener('click', function(event) {
-            const clientesContainer = document.getElementById('clientes-container');
-            const productosContainer = document.getElementById('productos-container');
-            const empleadosContainer = document.getElementById('empleados-container');
-            const productosVendidosContainer = document.getElementById('productos-vendidos-container');
-
-            // Verifica si el clic ocurrió fuera de los contenedores
-            if (!clientesContainer.contains(event.target) && 
-                !productosContainer.contains(event.target) && 
-                !empleadosContainer.contains(event.target) && 
-                !productosVendidosContainer.contains(event.target)) {
-                clientesContainer.style.display = 'none';
-                productosContainer.style.display = 'none';
-                empleadosContainer.style.display = 'none';
-                productosVendidosContainer.style.display = 'none';
-            }
-        });
-    </script>
-
-
-
+    <script src="../../Controller/Js/ReportesConsultas.js"></script>
 </body>
 </html>
