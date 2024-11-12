@@ -214,21 +214,125 @@ tr:hover {
     margin: 30px auto;
 }
 
-.modal-content {
-    border-radius: 10px;
-}
-
 .modal-header {
     background-color: #f8d7da;
     color: #721c24;
 }
 
-.modal-body {
-    font-size: 16px;
-    padding: 15px;
+/* Modal Styles */
+#confirmModal, .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.modal-footer {
-    display: flex;
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Button for modal */
+.modal button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.titulosLabel{
+    font-size: 15px;
+}
+
+.modal .confirm {
+    background-color: #4caf50;
+    color: white;
+}
+
+.modal .cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Estilos para el modal */
+.modalCustom {
+    display: none; /* Ocultamos el modal por defecto */
+    position: fixed;
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    align-items: center;
     justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Contenido del modal */
+.modalContent {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Título del modal */
+.modalTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Cuerpo del modal */
+.modalBody {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Botón de cerrar */
+.modalButton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modalButton:hover {
+    background-color: #0056b3;
+}
+
+/* Cerrar icono */
+.closeModal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
