@@ -97,14 +97,14 @@
         public function obtenerDetallesTicket($ticketId) {
             $sql = "SELECT p.nombreProd AS producto, p.precio, d.cantidad, d.subtotal, prov.nombre AS proveedor 
                     FROM detalleventa d
-                    JOIN producto p ON d.idProducto = p.idProducto
+                    JOIN producto p ON d.folio = p.folio
                     JOIN proveedor prov ON p.idProveedor = prov.idProveedor
                     WHERE d.idNotaVenta = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("i", $ticketId);
             $stmt->execute();
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        }        
+        }              
 
         public function obtenerTickets() {
             $sql = "SELECT * FROM notaVenta";
@@ -137,7 +137,6 @@
                     echo "Error al insertar ticket: " . $stmt->error;
                     return false;
                 }
-                $stmt->close();
             } else {
                 echo "Error en la preparación de la consulta: " . $this->conn->error;
                 return false;
@@ -184,6 +183,7 @@
                 return false;
             }
         }
+
     }
 
 ?>
