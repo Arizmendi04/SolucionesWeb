@@ -100,7 +100,7 @@ create table usuario(
 
 INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion, urlFotoPerfil) VALUES
 ('Jorge', 'Salazar Lopez', 'Masculino','2000-03-09', '2018-12-12', 45000.00, 'Admin', '7775562703', 'Avenida Teopanzolco 24', 'url_foto_admin'),
-('Juan', 'Perez', 'Masculino', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '555-1111', 'Calle Limon 123', 'url_foto_juan.jpg');
+('Compras', 'App', 'Otro', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '555-1111', 'NA', 'NA');
 
 insert into usuario VALUES
 (0, 'Admin', 'Ad2401@', 'Admin', 1),

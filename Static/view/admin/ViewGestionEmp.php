@@ -21,13 +21,6 @@
     <div class="container">
         <h1>Gestión de Empleados</h1>
 
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['error']; ?>
-                <?php unset($_SESSION['error']); // Eliminar el mensaje después de mostrarlo ?>
-            </div>
-        <?php endif; ?>
-
         <div class="layout">
             <!-- Formulario de registro de empleado -->
             <div class="formulario">

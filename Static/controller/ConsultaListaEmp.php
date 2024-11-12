@@ -8,7 +8,7 @@
 
     $generoFiltro = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
-    $sql = "SELECT noEmpleado, nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion FROM empleado";
+    $sql = "SELECT noEmpleado, nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion FROM empleado where noEmpleado not in(1,2)";
 
     if ($generoFiltro) {
         $sql .= " WHERE sexo = ?";

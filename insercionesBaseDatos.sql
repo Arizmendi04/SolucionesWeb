@@ -52,3 +52,4 @@ select *from empleado;
 select *from recepcion;
 select *from producto;
 select *from cliente;
+

@@ -50,9 +50,7 @@
 
             if (in_array($tipoArchivo, ['jpg', 'jpeg', 'png', 'gif'])) {
                 if (move_uploaded_file($fotoPerfil['tmp_name'], $rutaDestino)) {
-                    $empleado->setFotoPerfil($rutaDestino); // Establecer la ruta de la foto de perfil
-
-                    // Intentar insertar el empleado y manejar excepciones
+                    $empleado->setFotoPerfil($rutaDestino);
                     try {
                         $empleado->insertarEmpleado();
                         header('Location: ../View/Admin/ViewGestionEmp.php');
