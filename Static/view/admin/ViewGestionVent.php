@@ -107,7 +107,8 @@
                                     <td>$ {$venta['precio']}</td>
                                     <td>$ {$venta['total']}</td>
                                     <td>
-                                        <a href='modificarVenta.php?accion=editar&id={$venta['idVenta']}' class='btn btn-primary'>Editar</a>
+                                        <a href='/SolucionesWeb/Static/View/Admin/VentaProducto.php?accion=editar&id={$venta['idVenta']}' class='btn btn-primary'>Editar</a>
+
                                         <a href='../../Controller/Ventas.php?accion=eliminar&id={$venta['idVenta']}' class='btn btn-danger' onclick='return confirm(\"¿Estás seguro de eliminar esta venta?\")'>Eliminar</a>
                                     </td>
                                 </tr>";
