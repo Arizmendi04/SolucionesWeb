@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Cancelar eliminación
     cancelButton.addEventListener('click', function () {
+        console.log('Cancel button clicked'); // Verifica que el evento se esté ejecutando
         modal.style.display = 'none'; // Ocultar el modal
-    });
+    });    
 });
 

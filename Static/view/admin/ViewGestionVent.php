@@ -107,9 +107,11 @@
                                     <td>$ {$venta['precio']}</td>
                                     <td>$ {$venta['total']}</td>
                                     <td>
+
                                         <a href='/SolucionesWeb/Static/View/Admin/VentaProducto.php?accion=editar&id={$venta['idVenta']}' class='btn btn-primary'>Editar</a>
 
-                                        <a href='../../Controller/Ventas.php?accion=eliminar&id={$venta['idVenta']}' class='btn btn-danger' onclick='return confirm(\"¿Estás seguro de eliminar esta venta?\")'>Eliminar</a>
+                                        <a href='/SolucionesWeb/Static/Controller/Ventas.php?accion=eliminar&id={$venta['idVenta']}' class='btn btn-danger boton eliminar'>Eliminar</a>
+
                                     </td>
                                 </tr>";
                             }
@@ -136,15 +138,24 @@
             
             <!-- Finalizar compra con lógica de validación y actualización -->
             <div align="center">
-                <form method="POST" action="../../Controller/Tickets.php" onsubmit="return validateFinalizar();">
-                    <input type="hidden" name="idNotaVenta" value="<?php echo $idNotaVenta; ?>"> <!-- Se pasa el idNotaVenta -->
-                    <input type="hidden" name="noCliente" id="noClienteHidden">
-                    <input type="hidden" name="noEmpleado" id="noEmpleadoHidden">
-                    <button type="submit" class="btn btn-fin" name="finalizarCompra" id="btnFinalizar">Finalizar compra</button>
-                </form>
+            <form method="POST" action="../../Controller/Tickets.php" onclick="return validateFinalizar();">
+    <input type="hidden" name="idNotaVenta" value="<?php echo $idNotaVenta; ?>"> <!-- Se pasa el idNotaVenta -->
+    <input type="hidden" name="noCliente" id="noClienteHidden">
+    <input type="hidden" name="noEmpleado" id="noEmpleadoHidden">
+    <button type="submit" class="btn btn-fin" name="finalizarCompra" id="btnFinalizar">Finalizar compra</button>
+</form>
+
             </div>
         </div>
-        
+    </div>
+
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar este empleado? Esta acción no se puede deshacer.</p>
+            <button id="confirmDelete" class="confirm">Confirmar</button>
+            <button id="cancelDelete" class="cancel">Cancelar</button>
+        </div>
     </div>
 
     <!-- Modal de advertencia -->
@@ -167,50 +178,8 @@
         </div>
     </div>
 
-    <script>
-        // Actualizar los campos ocultos con los valores seleccionados
-        function actualizarCampos() {
-            const cliente = document.getElementById('noCliente').value;
-            const empleado = document.getElementById('noEmpleado').value;
-
-            document.getElementById('noClienteHidden').value = cliente;
-            document.getElementById('noEmpleadoHidden').value = empleado;
-        }
-
-        // Validación para asegurarse de que el cliente y empleado estén seleccionados y haya productos
-        function validateFinalizar() {
-            const cliente = document.getElementById('noClienteHidden').value;
-            const empleado = document.getElementById('noEmpleadoHidden').value;
-            // Comprobar si el cliente y el empleado están seleccionados
-            if (!cliente || !empleado) {
-                const modal = new bootstrap.Modal(document.getElementById('modalAdvertencia'));
-                document.querySelector('#modalAdvertencia .modal-body').innerHTML = "Por favor, selecciona un cliente y un empleado.";
-                modal.show();
-                return false;
-            }
-            // Verificar si hay productos en la venta
-            const rows = document.getElementById('tablaVentas').getElementsByTagName('tbody')[0].rows;
-            let tieneProductos = false;
-            // Iterar solo sobre las filas del cuerpo (excluyendo encabezados)
-            for (let i = 0; i < rows.length; i++) {
-                // Asegurarnos de que la fila contiene productos y no el mensaje de "No hay productos en la venta actual"
-                if (rows[i].cells[1] && rows[i].cells[1].innerText !== "No hay productos en la venta actual") {
-                    tieneProductos = true;
-                    break; // Salir del bucle si encontramos un producto válido
-                }
-            }
-            // Si no hay productos, mostrar el modal y evitar el envío del formulario
-            if (!tieneProductos) {
-                const modal = new bootstrap.Modal(document.getElementById('modalAdvertencia'));
-                modal.show();  // Abrir el modal
-                return false;  // Evitar el envío del formulario
-            }
-            return true; // Permitir la finalización si hay productos
-        }
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../Controller/Js/ConfirmElim.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Eliminacion.js"></script>
     <script src="../../Controller/Js/Validaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
