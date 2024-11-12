@@ -27,6 +27,20 @@
             </div>
         </section>
 
+        <!-- Formulario para generar reporte de productos más vendidos -->
+        <div id="productos-vendidos-container" class="container" style="display:none;">
+            <h3>Generar Reporte de Productos Más Vendidos</h3>
+            <form action="/SolucionesWeb/Static/Controller/ReporteProductosVendidos.php" method="GET">
+                <label for="fechaDesde">Fecha desde:</label>
+                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                
+                <label for="fechaHasta">Fecha hasta:</label>
+                <input type="date" id="fechaFin" name="fechaFin" required>
+                
+                <button type="submit">Generar PDF</button>
+            </form>
+        </div>
+
         <section class="consultas">
             <img src="/SolucionesWeb/Static/img/logosinletras.png" alt="logoempresa" class="logo-image">
             <h2>Consultas</h2>
@@ -119,6 +133,7 @@
             document.getElementById('clientes-container').style.display = 'block';
             document.getElementById('productos-container').style.display = 'none';
             document.getElementById('empleados-container').style.display = 'none';
+            document.getElementById('productos-vendidos-container').style.display = 'none';
             event.stopPropagation(); // Evita que el clic se propague al documento
         });
 
@@ -127,6 +142,7 @@
             document.getElementById('productos-container').style.display = 'block';
             document.getElementById('clientes-container').style.display = 'none';
             document.getElementById('empleados-container').style.display = 'none';
+            document.getElementById('productos-vendidos-container').style.display = 'none';
             event.stopPropagation(); // Evita que el clic se propague al documento
         });
 
@@ -135,22 +151,36 @@
             document.getElementById('empleados-container').style.display = 'block';
             document.getElementById('clientes-container').style.display = 'none';
             document.getElementById('productos-container').style.display = 'none';
+            document.getElementById('productos-vendidos-container').style.display = 'none';
             event.stopPropagation(); // Evita que el clic se propague al documento
         });
+
+        // Mostrar formulario de reporte de productos vendidos
+        document.getElementById('productos-vendidos').addEventListener('click', function(event) {
+            document.getElementById('productos-vendidos-container').style.display = 'block';
+            document.getElementById('clientes-container').style.display = 'none';
+            document.getElementById('productos-container').style.display = 'none';
+            document.getElementById('empleados-container').style.display = 'none';
+            event.stopPropagation(); // Evita que el clic se propague al documento
+        });
+
 
         // Ocultar formularios al hacer clic fuera de ellos
         document.addEventListener('click', function(event) {
             const clientesContainer = document.getElementById('clientes-container');
             const productosContainer = document.getElementById('productos-container');
             const empleadosContainer = document.getElementById('empleados-container');
+            const productosVendidosContainer = document.getElementById('productos-vendidos-container');
 
             // Verifica si el clic ocurrió fuera de los contenedores
             if (!clientesContainer.contains(event.target) && 
                 !productosContainer.contains(event.target) && 
-                !empleadosContainer.contains(event.target)) {
+                !empleadosContainer.contains(event.target) && 
+                !productosVendidosContainer.contains(event.target)) {
                 clientesContainer.style.display = 'none';
                 productosContainer.style.display = 'none';
                 empleadosContainer.style.display = 'none';
+                productosVendidosContainer.style.display = 'none';
             }
         });
     </script>
