@@ -79,6 +79,39 @@
             </form>
         </div>
 
+        <!-- Formulario para el reporte de productos disponibles (existencia) por tipo y proveedor-->
+        <div id="productos-disponibles-container" class="container" style="display:none;">
+            <h3>Generar Reporte de Productos Disponibles por tipo y proveedor</h3>
+            <form action="/SolucionesWeb/Static/Controller/ReporteExistenciasProd.php" id="descargarProdExis" class="formDescargaProdExis" method="GET">
+                <!-- Combobox para seleccionar la categoría-->
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="Insecticida">Insecticida</option>
+                    <option value="Herbicida">Herbicida</option>
+                    <option value="Fertilizante">Fertilizante</option>
+                    <option value="Hormiguicida">Hormiguicida</option>
+                    <option value="Cucarachicida">Cucarachicida</option>
+                    <option value="Trampa">Trampa</option>
+                    <option value="Mosquicida">Mosquicida</option>
+                    <option value="Otro">Otro</option>
+                </select>
+
+                <!-- Combobox para seleccionar el proveedor -->
+                <label for="proveedor">Seleccione el Proveedor:</label>
+                <select id="proveedor" name="proveedor" required>
+                    <?php
+                        // Código PHP para obtener la lista de proveedores
+                        include '../../Controller/Proveedores.php';
+                        $proveedores = solicitarProveedores($conn);
+                        foreach ($proveedores as $proveedor) {
+                            echo "<option value='{$proveedor['idProveedor']}'>{$proveedor['razonSocial']}</option>";
+                        }
+                    ?>
+                </select>
+                <button type="submit">Generar Excel</button>
+            </form>
+        </div>
+
         <section class="consultas">
             <img src="/SolucionesWeb/Static/img/logosinletras.png" alt="logoempresa" class="logo-image">
             <h2>Consultas</h2>

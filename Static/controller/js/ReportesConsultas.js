@@ -5,6 +5,7 @@ document.getElementById('descargar-clientes').addEventListener('click', function
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -15,6 +16,7 @@ document.getElementById('descargar-productos').addEventListener('click', functio
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -25,6 +27,7 @@ document.getElementById('descargar-empleados').addEventListener('click', functio
     document.getElementById('productos-container').style.display = 'none';
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -35,6 +38,7 @@ document.getElementById('productos-vendidos').addEventListener('click', function
     document.getElementById('productos-container').style.display = 'none';
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -45,6 +49,18 @@ document.getElementById('total-ventas').addEventListener('click', function(event
     document.getElementById('productos-container').style.display = 'none';
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('productos-vendidos-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
+    event.stopPropagation(); // Evita que el clic se propague al documento
+});
+
+//Mostrar formulario de reporte de existencias de productos
+document.getElementById('existencias-productos').addEventListener('click', function(event) {
+    document.getElementById('productos-disponibles-container').style.display = 'block';
+    document.getElementById('clientes-container').style.display = 'none';
+    document.getElementById('productos-container').style.display = 'none';
+    document.getElementById('empleados-container').style.display = 'none';
+    document.getElementById('productos-vendidos-container').style.display = 'none';
+    document.getElementById('ventas-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -55,18 +71,21 @@ document.addEventListener('click', function(event) {
     const empleadosContainer = document.getElementById('empleados-container');
     const productosVendidosContainer = document.getElementById('productos-vendidos-container');
     const ventasMensualesContainer = document.getElementById('ventas-mensuales-container');
+    const existenciasProductosContainer = document.getElementById('productos-disponibles-container');
 
     // Verifica si el clic ocurrió fuera de los contenedores
     if (!clientesContainer.contains(event.target) && 
         !productosContainer.contains(event.target) && 
         !empleadosContainer.contains(event.target) && 
         !productosVendidosContainer.contains(event.target)&& 
-        !ventasMensualesContainer.contains(event.target)) {
+        !ventasMensualesContainer.contains(event.target)&& 
+        !existenciasProductosContainer.contains(event.target)) {
         clientesContainer.style.display = 'none';
         productosContainer.style.display = 'none';
         empleadosContainer.style.display = 'none';
         productosVendidosContainer.style.display = 'none';
         ventasMensualesContainer.style.display = 'none';
+        existenciasProductosContainer.style.display = 'none';
     }
 });
 
