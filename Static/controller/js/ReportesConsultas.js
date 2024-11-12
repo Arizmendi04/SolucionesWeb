@@ -6,6 +6,7 @@ document.getElementById('descargar-clientes').addEventListener('click', function
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -17,6 +18,7 @@ document.getElementById('descargar-productos').addEventListener('click', functio
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -28,6 +30,7 @@ document.getElementById('descargar-empleados').addEventListener('click', functio
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -39,6 +42,7 @@ document.getElementById('productos-vendidos').addEventListener('click', function
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -50,6 +54,7 @@ document.getElementById('total-ventas').addEventListener('click', function(event
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -61,8 +66,23 @@ document.getElementById('existencias-productos').addEventListener('click', funct
     document.getElementById('empleados-container').style.display = 'none';
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
+
+//Mostrar formulario de compras por cliente
+document.getElementById('clientes-compras').addEventListener('click', function(event) {
+    document.getElementById('clientes-mensuales-container').style.display = 'block';
+    document.getElementById('clientes-container').style.display = 'none';
+    document.getElementById('productos-container').style.display = 'none';
+    document.getElementById('empleados-container').style.display = 'none';
+    document.getElementById('productos-vendidos-container').style.display = 'none';
+    document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
+    event.stopPropagation(); // Evita que el clic se propague al documento
+});
+
+
 
 // Ocultar formularios al hacer clic fuera de ellos
 document.addEventListener('click', function(event) {
