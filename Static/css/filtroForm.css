@@ -43,3 +43,21 @@ select{
     background-color: #a29f9f;
     font-family: 'Poppins', 'sans-serif';
 }
+
+/* Estilo general para el campo de fecha */
+.custom-date {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    width: 95%;
+    font-size: 14px;
+    font-family: 'Poppins','Sans-Serif';
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-date:focus {
+    border-color: #007bff;
+    font-family: 'Poppins','Sans-Serif';
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
