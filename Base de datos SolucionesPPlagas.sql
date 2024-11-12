@@ -225,3 +225,57 @@ begin
         set message_text = 'el empleado ya está registrado con el mismo nombre, apellido, fecha de nacimiento o teléfono';
     end if;
 end //
+
+drop trigger if exists actualizarSubtotalVentaInsert;
+delimiter //
+create trigger actualizarSubtotalVentaInsert
+after insert on venta
+for each row
+begin
+    -- Actualizar el subtotal de la notaVenta asociada
+    update notaVenta 
+    set subtotal = (select sum(total) from venta where idNotaVenta = new.idNotaVenta)
+    where idNotaVenta = new.idNotaVenta;
+
+    -- Calcular el IVA y el total
+    update notaVenta
+    set iva = subtotal * 0.16,
+        pagoTotal = subtotal + iva
+    where idNotaVenta = new.idNotaVenta;
+end //
+
+drop trigger if exists actualizarSubtotalVentaUpdate;
+delimiter //
+create trigger actualizarSubtotalVentaUpdate
+after update on venta
+for each row
+begin
+    -- Actualizar el subtotal de la notaVenta asociada
+    update notaVenta 
+    set subtotal = (select sum(total) from venta where idNotaVenta = new.idNotaVenta)
+    where idNotaVenta = new.idNotaVenta;
+
+    -- Calcular el IVA y el total
+    update notaVenta
+    set iva = subtotal * 0.16,
+        pagoTotal = subtotal + iva
+    where idNotaVenta = new.idNotaVenta;
+end //
+
+drop trigger if exists actualizarSubtotalVentaDelete;
+delimiter //
+create trigger actualizarSubtotalVentaDelete
+after delete on venta
+for each row
+begin
+    -- Actualizar el subtotal de la notaVenta asociada
+    update notaVenta 
+    set subtotal = (select sum(total) from venta where idNotaVenta = old.idNotaVenta)
+    where idNotaVenta = old.idNotaVenta;
+
+    -- Calcular el IVA y el total
+    update notaVenta
+    set iva = subtotal * 0.16,
+        pagoTotal = subtotal + iva
+    where idNotaVenta = old.idNotaVenta;
+end //
