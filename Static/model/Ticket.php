@@ -137,7 +137,6 @@
                     echo "Error al insertar ticket: " . $stmt->error;
                     return false;
                 }
-                $stmt->close();
             } else {
                 echo "Error en la preparación de la consulta: " . $this->conn->error;
                 return false;

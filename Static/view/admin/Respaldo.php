@@ -8,10 +8,9 @@ include '../../Controller/Sesion.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Respaldo y Subida de Base de Datos</title>
+    <title>Respaldo y recuperación de Base de Datos</title>
     <link rel="stylesheet" href="../../css/bd.css">
     <script>
-        // Función para validar si se ha seleccionado un archivo antes de enviar el formulario
         function validateFile() {
             var fileInput = document.getElementById('file-upload');
             var errorMessage = document.getElementById('error-message');
