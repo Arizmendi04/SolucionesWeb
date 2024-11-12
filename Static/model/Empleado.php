@@ -113,7 +113,7 @@ class Empleado {
 
     // Métodos para manejar empleados
     public function obtenerEmpleado($idEmpleado) {
-        $sql = "SELECT * FROM empleado WHERE noEmpleado = ?";
+        $sql = "SELECT * FROM empleado WHERE noEmpleado = ? and noEmpleado NOT IN (1, 2);";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $idEmpleado);
         $stmt->execute();
@@ -123,7 +123,7 @@ class Empleado {
 
     public function obtenerEmpleados() {
         // Consulta para obtener los empleados
-        $sql = "SELECT * FROM empleado";
+        $sql = "SELECT * FROM empleado where noEmpleado NOT IN (1, 2)";
         $resultado = mysqli_query($this->conn, $sql);
         $empleados = [];
         while ($fila = $resultado->fetch_assoc()) {
@@ -242,7 +242,8 @@ class Empleado {
 
     public function filtrarEmpleado($parametro) {
         // Preparar la consulta SQL
-        $sql = "SELECT * FROM empleado WHERE nombre LIKE ? OR apellido LIKE ?";
+        $sql = "SELECT * FROM empleado 
+                WHERE noEmpleado NOT IN (1, 2) and (nombre LIKE ? OR apellido LIKE ?);";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($sql)) {
             // Agregar los caracteres comodín para la búsqueda

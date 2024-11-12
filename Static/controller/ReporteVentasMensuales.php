@@ -25,7 +25,7 @@
             empleado e ON nv.noEmpleado = e.noEmpleado
         WHERE 
             MONTH(nv.fecha) = ?
-            AND e.noEmpleado = ?
+            AND e.noEmpleado = ? and e.noEmpleado not in(1,2)
         GROUP BY 
             e.noEmpleado
         ORDER BY 
