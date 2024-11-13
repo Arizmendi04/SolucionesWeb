@@ -92,20 +92,23 @@ document.addEventListener('click', function(event) {
     const productosVendidosContainer = document.getElementById('productos-vendidos-container');
     const ventasMensualesContainer = document.getElementById('ventas-mensuales-container');
     const existenciasProductosContainer = document.getElementById('productos-disponibles-container');
+    const clientesMensualesContainer = document.getElementById('clientes-mensuales-container');
 
     // Verifica si el clic ocurrió fuera de los contenedores
     if (!clientesContainer.contains(event.target) && 
         !productosContainer.contains(event.target) && 
         !empleadosContainer.contains(event.target) && 
         !productosVendidosContainer.contains(event.target)&& 
-        !ventasMensualesContainer.contains(event.target)&& 
-        !existenciasProductosContainer.contains(event.target)) {
+        !ventasMensualesContainer.contains(event.target) && 
+        !existenciasProductosContainer.contains(event.target) && 
+        !clientesMensualesContainer.contains(event.target)) {
         clientesContainer.style.display = 'none';
         productosContainer.style.display = 'none';
         empleadosContainer.style.display = 'none';
         productosVendidosContainer.style.display = 'none';
         ventasMensualesContainer.style.display = 'none';
         existenciasProductosContainer.style.display = 'none';
+        clientesMensualesContainer.style.display = 'none';
     }
 });
 

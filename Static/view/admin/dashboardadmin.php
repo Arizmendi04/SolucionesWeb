@@ -6,8 +6,6 @@
     <div class="main-content">
  
         <section class="reports">
-
-        
             <header>
                 <h1>Dashboard</h1>
                 <p>¡Bienvenido Administrador!</p>
@@ -23,6 +21,7 @@
                 
                 <a href="#" class="report-box" id="clientes-compras">Clientes con más compras</a>
             </div>
+
             <div class="report-item">
                 <a href="#" class="report-box" id="mejores-precios">Proveedores con mejores precios</a>
             </div>
