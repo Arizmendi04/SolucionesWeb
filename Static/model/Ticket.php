@@ -86,28 +86,16 @@
 
         // Métodos para manejo de ticket
         public function obtenerTicket($idNotaVenta) {
-            $sql = "SELECT * FROM notaVenta WHERE idNotaVenta = ?";
+            $sql = "SELECT * FROM notaVenta WHERE idNotaVenta = ? and noEmpleado not in(1,2)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("i", $idNotaVenta);
             $stmt->execute();
             $resultado = $stmt->get_result();
             return $resultado->fetch_assoc();
-        }
-
-        public function obtenerDetallesTicket($ticketId) {
-            $sql = "SELECT p.nombreProd AS producto, p.precio, d.cantidad, d.subtotal, prov.nombre AS proveedor 
-                    FROM detalleventa d
-                    JOIN producto p ON d.folio = p.folio
-                    JOIN proveedor prov ON p.idProveedor = prov.idProveedor
-                    WHERE d.idNotaVenta = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("i", $ticketId);
-            $stmt->execute();
-            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        }              
+        }            
 
         public function obtenerTickets() {
-            $sql = "SELECT * FROM notaVenta";
+            $sql = "SELECT * FROM notaVenta where noEmpleado not in (1,2)";
             $resultado = $this->conn->query($sql);
             $tickets = [];
             while ($fila = $resultado->fetch_assoc()) {
@@ -131,14 +119,9 @@
                     $this->noCliente,
                     $this->noEmpleado
                 );
-                if ($stmt->execute()) {
-                    return true;
-                } else {
-                    echo "Error al insertar ticket: " . $stmt->error;
-                    return false;
-                }
+                return $stmt->execute();
             } else {
-                echo "Error en la preparación de la consulta: " . $this->conn->error;
+                echo "Error al preparar la consulta de inserción: " . $this->conn->error;
                 return false;
             }
         }
@@ -160,7 +143,8 @@
                         noCliente = ?, 
                         noEmpleado = ? 
                     WHERE idNotaVenta = ?";
-            if ($stmt = $this->conn->prepare($sql)) {
+            $stmt = $this->conn->prepare($sql);
+            if ($stmt) {
                 $stmt->bind_param(
                     "sdddsiii",
                     $this->fecha,
@@ -172,18 +156,11 @@
                     $this->noEmpleado,
                     $this->idNotaVenta
                 );
-                if ($stmt->execute()) {
-                    return true;
-                } else {
-                    echo "Error al actualizar el ticket: " . $stmt->error;
-                    return false;
-                }
+                return $stmt->execute();
             } else {
-                echo "Error al preparar la consulta: " . $this->conn->error;
+                echo "Error al preparar la consulta de actualización: " . $this->conn->error;
                 return false;
             }
         }
-
     }
-
 ?>

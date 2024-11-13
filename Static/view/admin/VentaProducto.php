@@ -2,6 +2,7 @@
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/Productos.php'; ?>
 <?php include '../../Controller/Proveedores.php'; ?>
+<?php include '../../Controller/Sesion.php'; ?>
 
 <!-- Recibir el id de la venta a editar-->
 <?php
@@ -9,7 +10,6 @@
         $idVenta = isset($_GET['id']) ? $_GET['id'] : null;
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -46,19 +46,17 @@
                             <p>Peso: {$producto['peso']} {$producto['unidadM']}</p>
                             <p>Categoría: {$producto['tipo']}</p>
                             <p>Existencias: {$producto['existencia']}</p>
-                            
-                            
 
-                            <!-- Mensaje de error debajo del producto -->
+                            <!-- Mensaje de error -->
                             <div id='error-{$producto['folio']}' class='alert alert-danger' style='display: none;'>Por favor, ingresa una cantidad válida.</div>
 
-                            <form method='get' action='/SolucionesWeb/Static/Controller/Ventas.php'>
+                            <form method='get' action='/SolucionesWeb/Static/Controller/Ventas.php' onsubmit='return validarCantidad(\"{$producto['folio']}\")'>
                                 <input type='hidden' name='idVenta' value='{$idVenta}'>
                                 <input type='hidden' name='folioProducto' value='{$producto['folio']}'>
                                 
                                 <div style='display: flex; align-items: center;'>
                                     <label for='cantidad' style='margin-right: 8px;'>Cantidad:</label>
-                                    <input type='tel' id='canti' name='cantidad' class='form-control canti'>
+                                    <input type='tel' id='cantidad-{$producto['folio']}' name='cantidad' class='form-control canti'>
                                 </div>
 
                                 <input type='hidden' name='precio' value='{$producto['precio']}'>
@@ -67,8 +65,6 @@
                                     <img src='/SolucionesWeb/Static/Img/carrito.png' class='icono'>
                                 </button>
                             </form>
-
-
                         </div>";
                     }
                     ?>
@@ -76,6 +72,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Función para validar la cantidad
+        function validarCantidad(folio) {
+            const cantidadInput = document.getElementById('cantidad-' + folio);
+            const errorDiv = document.getElementById('error-' + folio);
+            const cantidad = cantidadInput.value;
+
+            // Verifica si es un número válido y mayor a 0
+            if (isNaN(cantidad) || cantidad <= 0) {
+                errorDiv.style.display = 'block';
+                return false;
+            } else {
+                errorDiv.style.display = 'none';
+                return true;
+            }
+        }
+    </script>
 
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
     <script src="/SolucionesWeb/Static/Controller/Js/Carrito.js"></script>

@@ -92,7 +92,6 @@ h2 {
     }
 }
 
-/* Individual Product Card */
 .product-card {
     background: rgb(245, 248, 255);
     border: 1px solid #ddd;
@@ -100,13 +99,16 @@ h2 {
     padding: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     margin: 10px;
 }
 
+/* Efecto cuando el mouse pasa sobre la tarjeta */
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); /* Hace que la tarjeta se agrande ligeramente */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+    background-color: #e0f7fa; /* Cambia el color de fondo para que resalte */
+    border-color: #1a73e8; /* Cambia el color del borde */
 }
 
 .product-card .price {
@@ -295,3 +297,22 @@ h2 {
         padding: 15px;
     }
 }
+
+/* Estilo para el botón submit */
+button[type='submit'] {
+    border: none; /* Quita el borde del botón */
+    outline: none; /* Elimina el contorno */
+    font-size: 1rem; /* Tamaño del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer;
+    background-color: transparent; /* Fondo transparente */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el movimiento */
+}
+
+/* Efecto cuando el mouse pasa sobre el botón */
+button[type='submit']:hover {
+    transform: scale(1.3); 
+
+}
+

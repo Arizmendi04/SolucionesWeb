@@ -1,84 +1,134 @@
 <?php
-include 'Connect/Db.php';
-include 'Sesion.php';
-include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Ticket.php');
 
-// Obtener lista de tickets
-function solicitarTickets($conn) {
-    $Ticket = new Ticket($conn);
-    return $Ticket->obtenerTickets();
-}
+    include 'Connect/Db.php';
+    include 'Sesion.php';
+    include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Ticket.php');
 
-// Obtener detalles de un ticket específico
-function obtenerDetallesDeTicket($conn, $idNotaVenta) {
-    $Ticket = new Ticket($conn);
-    return $Ticket->obtenerDetallesTicket($idNotaVenta);
-}
+?>
 
-// Crear Ticket
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'crear') {
-    $ticket = new Ticket($conn);
-    $ticket->setFecha($_POST['fecha']);
-    $ticket->setSubtotal($_POST['subtotal']);
-    $ticket->setIva($_POST['iva']);
-    $ticket->setPagoTotal($_POST['total']);
-    $ticket->setNoCliente($_POST['idCliente']);
-    $ticket->setNoEmpleado($_POST['idEmpleado']);
+<?php
 
-    try {
-        $ticket->insertarTicket();
-        header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
-        exit;
-    } catch (mysqli_sql_exception $e) {
-        echo "Error al insertar el ticket: " . $e->getMessage();
+    // Obtener lista de tickets
+    function solicitarTickets($conn) {
+        $Ticket = new Ticket($conn);
+        return $Ticket->obtenerTickets();
     }
-}
 
-// Eliminar Ticket
-if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
-    $idTicket = $_GET['id'];
-    $ticket = new Ticket($conn);
-    
-    $resultado = $ticket->eliminarTicket($idTicket);
-    if ($resultado) {
-        header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
-        exit;
-    } else {
-        echo "Error al eliminar el ticket: " . $conn->error;
+    // Crear Ticket
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'crear') {
+        $ticket = new Ticket($conn);
+        $ticket->setFecha($_POST['fecha']);
+        $ticket->setSubtotal($_POST['subtotal']);
+        $ticket->setIva($_POST['iva']);
+        $ticket->setPagoTotal($_POST['total']);
+        $ticket->setNoCliente($_POST['idCliente']);
+        $ticket->setNoEmpleado($_POST['idEmpleado']);
+
+        try {
+            $ticket->insertarTicket();
+            header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
+            exit;
+        } catch (mysqli_sql_exception $e) {
+            echo "Error al insertar el ticket: " . htmlspecialchars($e->getMessage());
+        }
     }
-}
 
-// Actualizar estatus del ticket
-if (isset($_POST['finalizarCompra'])) {
-    $idCliente = $_POST['noCliente'];
-    $idEmpleado = $_POST['noEmpleado'];
+    // Eliminar Ticket
+    if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
+        $idTicket = $_GET['id'];
+        $ticket = new Ticket($conn);
 
-    if (!empty($idCliente) && !empty($idEmpleado)) {
-        $queryActualizarEstatus = "UPDATE notaVenta SET estatus = 'Pagado', noCliente = ?, noEmpleado = ? WHERE estatus = 'Pendiente' ORDER BY idNotaVenta DESC LIMIT 1";
-        $stmt = $conn->prepare($queryActualizarEstatus);
-        $stmt->bind_param("ii", $idCliente, $idEmpleado);
-
-        if ($stmt->execute()) {
-            echo "<script>alert('Compra finalizada correctamente.');</script>";
+        $resultado = $ticket->eliminarTicket($idTicket);
+        if ($resultado) {
             header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
             exit;
         } else {
-            echo "<script>alert('Error al finalizar la compra.');</script>";
+            echo "Error al eliminar el ticket: " . htmlspecialchars($conn->error);
         }
-    } else {
-        echo "<script>alert('Por favor, selecciona un cliente y un empleado.');</script>";
     }
-}
 
-// Mostrar detalles del ticket en formato JSON
-if (isset($_GET['accion']) && $_GET['accion'] == 'mostrar' && isset($_GET['id'])) {
-    $idNotaVenta = $_GET['id'];
-    $ticket = new Ticket($conn);
-    $detalles = $ticket->obtenerDetallesTicket($idNotaVenta);
+    // Actualizar estatus del ticket
+    if (isset($_POST['finalizarCompra'])) {
+        $idCliente = $_POST['noCliente'];
+        $idEmpleado = $_POST['noEmpleado'];
 
-    // Enviar la respuesta en formato JSON
-    header('Content-Type: application/json');
-    echo json_encode($detalles);
-    exit;
-}
+        if (!empty($idCliente) && !empty($idEmpleado)) {
+            $queryActualizarEstatus = "UPDATE notaVenta SET estatus = 'Pagado', noCliente = ?, noEmpleado = ? WHERE estatus = 'Pendiente' ORDER BY idNotaVenta DESC LIMIT 1";
+            $stmt = $conn->prepare($queryActualizarEstatus);
+            $stmt->bind_param("ii", $idCliente, $idEmpleado);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('Compra finalizada correctamente.');</script>";
+                header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
+                exit;
+            } else {
+                echo "<script>alert('Error al finalizar la compra.');</script>";
+            }
+        } else {
+            echo "<script>alert('Por favor, selecciona un cliente y un empleado.');</script>";
+        }
+    }
+
+    // Filtrar tickets por fecha (AJAX)
+    if (isset($_GET['accion']) && $_GET['accion'] == 'filtrar') {
+        $fecha = $_GET['fecha'] ?? ''; // Verifica si la fecha fue pasada
+        $Ticket = new Ticket($conn);
+
+        // Realizar la consulta de filtrado por fecha
+        if ($fecha) {
+            $query = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, v.estatus, c.nombreC AS cliente, CONCAT(e.nombre, ' ', e.apellido) AS empleado
+                    FROM notaVenta v
+                    JOIN cliente c ON v.noCliente = c.noCliente
+                    JOIN empleado e ON v.noEmpleado = e.noEmpleado
+                    WHERE v.fecha LIKE ? and v.noEmpleado not in(1,2)
+                    ORDER BY v.idNotaVenta ASC";
+            $stmt = $conn->prepare($query);
+            $likeFecha = "$fecha%"; // Solo se filtra por fechas que comienzan con el valor ingresado
+            $stmt->bind_param("s", $likeFecha);
+        } else {
+            // Si no se proporciona fecha, obtiene todos los registros
+            $query = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, v.estatus, 
+                            c.nombreC AS cliente, CONCAT(e.nombre, ' ', e.apellido) AS empleado
+                    FROM notaVenta v
+                    JOIN cliente c ON v.noCliente = c.noCliente
+                    JOIN empleado e ON v.noEmpleado = e.noEmpleado
+                    WHERE v.noEmpleado not in(1,2)
+                    ORDER BY v.idNotaVenta ASC";
+            $stmt = $conn->prepare($query);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $resultados = [];
+        if ($result->num_rows > 0) {
+            while ($venta = $result->fetch_assoc()) {
+                $resultados[] = $venta;
+            }
+        }
+        $stmt->close();
+
+        // Construcción segura de HTML
+        $html = "";
+        if (!empty($resultados)) {
+            foreach ($resultados as $venta) {
+                $html .= "<tr>
+                            <td>" . htmlspecialchars($venta['idNotaVenta']) . "</td>
+                            <td>" . htmlspecialchars($venta['fecha']) . "</td>
+                            <td>$ " . htmlspecialchars($venta['subtotal']) . "</td>
+                            <td>$ " . htmlspecialchars($venta['iva']) . "</td>
+                            <td>$ " . htmlspecialchars($venta['PagoTotal']) . "</td>
+                            <td>" . htmlspecialchars($venta['estatus']) . "</td>
+                            <td>" . htmlspecialchars($venta['cliente']) . "</td>
+                            <td>" . htmlspecialchars($venta['empleado']) . "</td>
+                        </tr>";
+            }
+        } else {
+            $html .= "<tr><td colspan='8'>No hay tickets que coincidan con la búsqueda</td></tr>";
+        }
+        
+        echo $html;
+        exit;
+    }
+
 ?>

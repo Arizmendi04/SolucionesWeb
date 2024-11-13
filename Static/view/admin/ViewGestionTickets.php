@@ -1,4 +1,4 @@
-<?php include 'HeaderA.php'; ?>
+<?php include 'HeaderA.php'?> 
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/Sesion.php'; ?>
 
@@ -33,86 +33,42 @@
                             <th>Estatus</th>
                             <th>Cliente</th>
                             <th>Empleado</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        $queryVentas = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, v.estatus, c.nombreC AS cliente, 
-                        concat(e.nombre, ' ', e.apellido) AS empleado
-                        FROM notaventa v
-                        JOIN cliente c ON v.noCliente = c.noCliente
-                        JOIN empleado e ON v.noEmpleado = e.noEmpleado
-                        ORDER BY v.idNotaVenta ASC";
-                        $resultVentas = $conn->query($queryVentas);
-
-                        if ($resultVentas && $resultVentas->num_rows > 0) {
-                            while ($venta = $resultVentas->fetch_assoc()) {
-                                echo "<tr>
-                                    <td>{$venta['idNotaVenta']}</td>
-                                    <td>{$venta['fecha']}</td>
-                                    <td>$ {$venta['subtotal']}</td>
-                                    <td>$ {$venta['iva']}</td>
-                                    <td>$ {$venta['PagoTotal']}</td>
-                                    <td>{$venta['estatus']}</td>
-                                    <td>{$venta['cliente']}</td>
-                                    <td>{$venta['empleado']}</td>
-                                    <td><button class='btn btn-info' onclick='mostrarDetalles({$venta['idNotaVenta']})'>Mostrar</button></td>
-                                </tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='8'>No hay tickets registrados</td></tr>";
-                        }
-                        ?>
+                    <tbody id="resultadosVentas">
+                        <?php include '../../Controller/Tickets.php'; ?>
                     </tbody>
                 </table>
             </div>
 
             <!-- Botón para generar ticket -->
             <button class="btn-generar-ticket btn btn-success" onclick="generarTicket()">Generar Ticket</button>
-
-            <!-- Detalle del ticket -->
-            <div id="detalleTicket" class="detalle-ticket mt-5">
-                <h3>Detalles del Ticket</h3>
-                <ul id="listaProductos" class="list-group"></ul>
-            </div>
         </div>
     </div>
 
     <script>
-        function mostrarDetalles(ticketId) {
-            const detalleTicket = document.getElementById('detalleTicket');
-            detalleTicket.classList.add('mostrar');  // Muestra el contenedor de detalles
+        function filtrarVentas(fecha) {
+            const xhr = new XMLHttpRequest();
+            // Si el campo está vacío, obtiene todos los registros
+            const url = fecha ? `/SolucionesWeb/Static/Controller/Tickets.php?accion=filtrar&fecha=${fecha}` : `/SolucionesWeb/Static/Controller/Tickets.php?accion=filtrar`;
 
-            fetch(`/SolucionesWeb/Static/Controller/Tickets.php?accion=mostrar&id=${ticketId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const lista = document.getElementById('listaProductos');
-                    lista.innerHTML = '';  // Limpiar lista
-
-                    if (data.length > 0) {
-                        data.forEach(item => {
-                            const elemento = document.createElement('li');
-                            elemento.classList.add('list-group-item');
-                            elemento.innerHTML = `
-                                <strong>Producto:</strong> ${item.producto} |
-                                <strong>Proveedor:</strong> ${item.proveedor} |
-                                <strong>Precio:</strong> $${item.precio} |
-                                <strong>Cantidad:</strong> ${item.cantidad} |
-                                <strong>Subtotal:</strong> $${item.subtotal}
-                            `;
-                            lista.appendChild(elemento);
-                        });
-                    } else {
-                        lista.innerHTML = '<li class="list-group-item">No hay productos en este ticket</li>';
-                    }
-                })
-                .catch(error => console.error('Error al obtener los detalles:', error));
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("resultadosVentas").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
         }
 
         function generarTicket() {
             window.location.href = '/SolucionesWeb/Static/View/Admin/ViewGestionVent.php';
         }
+
+        // Cargar todos los registros al cargar la página
+        document.addEventListener("DOMContentLoaded", function() {
+            filtrarVentas('');
+        });
     </script>
 </body>
 </html>

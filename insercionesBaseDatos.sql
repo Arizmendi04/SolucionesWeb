@@ -47,7 +47,7 @@ INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, ca
 -- Ingresar datos en la tabla notaVenta
 INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEmpleado) VALUES
 ('2024-01-01', 1000.00, 160.00, 1160.00, 'Pagado', 1, 1),
-('2024-02-01', 500.00, 80.00, 580.00, 'Pendiente', 2, 2);
+('2024-02-01', 500.00, 80.00, 580.00, 'Pagado', 2, 2);
 
 select *from usuario;
 select *from empleado;
