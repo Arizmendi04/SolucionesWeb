@@ -21,6 +21,18 @@ label {
     display: block;
 }
 
+input{
+    width: calc(100% - 10px);
+    padding: 5px; /* Reducir el padding */
+    margin-bottom: 5px; /* Reducir el margen */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px; /* Reducir el tamaño de fuente */
+    font-family: 'Poppins', 'sans-serif';
+    background-color: #a29f9f;
+}
+
 button[type="submit"] {
     width: 100%;
     padding: 10px;

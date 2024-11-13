@@ -1,6 +1,7 @@
 <?php include 'HeaderA.php'?>
 <?php include '../../Controller/Sesion.php'; ?>
 <?php include '../../Controller/Connect/Db.php'; ?>
+<?php include '../../Controller/Proveedores.php'; ?>
 
     <link rel="stylesheet" href="../../Css/filtroForm.css">
     <div class="main-content">
@@ -100,7 +101,6 @@
                 <select id="proveedor" name="proveedor" required>
                     <?php
                         // Código PHP para obtener la lista de proveedores
-                        include '../../Controller/Proveedores.php';
                         $proveedores = solicitarProveedores($conn);
                         foreach ($proveedores as $proveedor) {
                             echo "<option value='{$proveedor['idProveedor']}'>{$proveedor['razonSocial']}</option>";
@@ -170,6 +170,39 @@
                 <button type="submit">Generar Excel</button>
             </form>
         </div>
+        
+        <!-- Formulario para el reporte de proveedores con mejores precios-->
+        <div id="mejores-precios-container" class="container" style="display:none;">
+            <h3>Generar Reporte de Proveedores con Mejores Precios</h3>
+            <form action="/SolucionesWeb/Static/Controller/ReporteMejoresPrecios.php" id="descargarProdExis" class="formDescargaProdExis" method="GET">
+                <!-- Combobox para seleccionar la categoría-->
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="Insecticida">Insecticida</option>
+                    <option value="Herbicida">Herbicida</option>
+                    <option value="Fertilizante">Fertilizante</option>
+                    <option value="Hormiguicida">Hormiguicida</option>
+                    <option value="Cucarachicida">Cucarachicida</option>
+                    <option value="Trampa">Trampa</option>
+                    <option value="Mosquicida">Mosquicida</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                
+                <label for="peso">Peso:</label>
+                <input type="number" id="peso" name="peso" min="0.1" step="0.1" required>
+
+                <!-- Filtro por Unidad de Medida -->
+                <label for="unidad">Unidad de Medida:</label>
+                <select id="unidad" name="unidad" required>
+                    <option value="kilogramos">Kilogramos</option>
+                    <option value="litros">Litros</option>
+                    <option value="gramos">Gramos</option>
+                    <option value="mililitros">Mililitros</option>
+                </select>
+
+                <button type="submit">Generar Excel</button>
+            </form>
+        </div>
 
         <section class="consultas">
             <img src="/SolucionesWeb/Static/img/logosinletras.png" alt="logoempresa" class="logo-image">
@@ -177,6 +210,7 @@
                 <a href="#" class="consultas-box" id="descargar-clientes">Descargar lista de clientes</a>
                 <a href="#" class="consultas-box" id="descargar-productos">Descargar lista de productos</a>
                 <a href="#" class="consultas-box" id="descargar-empleados">Descargar lista de empleados</a>
+                <a href="#" class="consultas-box" id="descargar-empleados">Descargar lista de recepciones</a>
         </section>
 
         <!-- Formulario de filtro (inicialmente oculto) -->

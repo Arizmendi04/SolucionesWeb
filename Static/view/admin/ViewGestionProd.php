@@ -48,10 +48,10 @@
 
                     <label for="unidad">Unidad:</label>
                     <select id="unidad" name="unidad" class="form-control" required>
-                        <option value="kg">Kilogramos</option>
-                        <option value="lt">Litros</option>
-                        <option value="g">Gramos</option>
-                        <option value="ml">Mililitros</option>
+                        <option value="kilogramos">Kilogramos</option>
+                        <option value="litros">Litros</option>
+                        <option value="gramos">Gramos</option>
+                        <option value="mililitros">Mililitros</option>
                     </select>
 
                     <label for="precio">Precio:</label>
