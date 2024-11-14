@@ -22,11 +22,13 @@ INSERT INTO cliente (clienteRFC, nombreC, razonSocial, email, telefonoC, calle, 
 
 -- Ingresar datos en la tabla producto
 INSERT INTO producto (nombreProd, tipo, unidadM, existencia, peso, descripcion, precio, urlImagen, idProveedor) VALUES
-('Insecticida A', 'Insecticida', 'litro', 50, 1.5, 'Insecticida eficaz contra plagas.', 200.00, 'productos.png', 1),
-('Herbicida B', 'Herbicida', 'litro', 30, 1.0, 'Herbicida para control de malezas.', 150.00, 'productos.png', 1),
-('Fertilizante C', 'Fertilizante', 'kilogramo', 20, 2.0, 'Fertilizante de liberación lenta.', 300.00, 'productos.png', 2),
-('Insecticida D', 'Insecticida', 'litro', 60, 1.2, 'Insecticida orgánico para cultivos.', 180.00, 'productos.png', 2),
-('Insecticida E', 'Insecticida', 'kilogramo', 40, 0.8, 'Insecticida granulado para uso agrícola.', 220.00, 'productos.png', 1);
+('Insecticida A', 'Insecticida', 'litros', 50, 1.5, 'Insecticida eficaz contra plagas.', 200.00, 'productos.png', 1),
+('Herbicida B', 'Herbicida', 'litros', 30, 1.0, 'Herbicida para control de malezas.', 150.00, 'productos.png', 1),
+('Fertilizante C', 'Fertilizante', 'kilogramos', 20, 2.0, 'Fertilizante de liberación lenta.', 300.00, 'productos.png', 2),
+('Insecticida D', 'Insecticida', 'litros', 60, 1.2, 'Insecticida orgánico para cultivos.', 180.00, 'productos.png', 2),
+('Insecticida E', 'Insecticida', 'kilogramos', 40, 0.8, 'Insecticida granulado para uso agrícola.', 220.00, 'productos.png', 1),
+('Insecticida F', 'Insecticida', 'kilogramos', 40, 0.8, 'Insecticida granulado ', 100.00, 'productos.png', 1),
+('Insecticida G', 'Insecticida', 'kilogramos', 10, 0.8, 'Insecticida complwto ', 320.00, 'productos.png', 2);
 
 -- Ingresar datos en la tabla recepcion
 INSERT INTO recepcion (cantidadProducto, fecha, comentario, idProveedor, folio) VALUES

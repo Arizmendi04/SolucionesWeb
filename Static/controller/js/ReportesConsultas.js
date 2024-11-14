@@ -7,6 +7,7 @@ document.getElementById('descargar-clientes').addEventListener('click', function
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
     document.getElementById('clientes-mensuales-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -19,6 +20,7 @@ document.getElementById('descargar-productos').addEventListener('click', functio
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
     document.getElementById('clientes-mensuales-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -31,6 +33,7 @@ document.getElementById('descargar-empleados').addEventListener('click', functio
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
     document.getElementById('clientes-mensuales-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -43,6 +46,7 @@ document.getElementById('productos-vendidos').addEventListener('click', function
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
     document.getElementById('clientes-mensuales-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -55,6 +59,7 @@ document.getElementById('total-ventas').addEventListener('click', function(event
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
     document.getElementById('clientes-mensuales-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -67,6 +72,7 @@ document.getElementById('existencias-productos').addEventListener('click', funct
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('clientes-mensuales-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -79,6 +85,20 @@ document.getElementById('clientes-compras').addEventListener('click', function(e
     document.getElementById('productos-vendidos-container').style.display = 'none';
     document.getElementById('ventas-mensuales-container').style.display = 'none';
     document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('mejores-precios-container').style.display = 'none';
+    event.stopPropagation(); // Evita que el clic se propague al documento
+});
+
+//Mostrar formulario de mejores precios por proveedor
+document.getElementById('mejores-precios').addEventListener('click', function(event) {
+    document.getElementById('mejores-precios-container').style.display = 'block';
+    document.getElementById('clientes-container').style.display = 'none';
+    document.getElementById('productos-container').style.display = 'none';
+    document.getElementById('empleados-container').style.display = 'none';
+    document.getElementById('productos-vendidos-container').style.display = 'none';
+    document.getElementById('ventas-mensuales-container').style.display = 'none';
+    document.getElementById('productos-disponibles-container').style.display = 'none';
+    document.getElementById('clientes-mensuales-container').style.display = 'none';
     event.stopPropagation(); // Evita que el clic se propague al documento
 });
 
@@ -93,6 +113,7 @@ document.addEventListener('click', function(event) {
     const ventasMensualesContainer = document.getElementById('ventas-mensuales-container');
     const existenciasProductosContainer = document.getElementById('productos-disponibles-container');
     const clientesMensualesContainer = document.getElementById('clientes-mensuales-container');
+    const mejoresPreciosContainer = document.getElementById('mejores-precios-container');
 
     // Verifica si el clic ocurrió fuera de los contenedores
     if (!clientesContainer.contains(event.target) && 
@@ -101,7 +122,8 @@ document.addEventListener('click', function(event) {
         !productosVendidosContainer.contains(event.target)&& 
         !ventasMensualesContainer.contains(event.target) && 
         !existenciasProductosContainer.contains(event.target) && 
-        !clientesMensualesContainer.contains(event.target)) {
+        !clientesMensualesContainer.contains(event.target)&& 
+        !mejoresPreciosContainer.contains(event.target)) {
         clientesContainer.style.display = 'none';
         productosContainer.style.display = 'none';
         empleadosContainer.style.display = 'none';
@@ -109,6 +131,7 @@ document.addEventListener('click', function(event) {
         ventasMensualesContainer.style.display = 'none';
         existenciasProductosContainer.style.display = 'none';
         clientesMensualesContainer.style.display = 'none';
+        mejoresPreciosContainer.style.display = 'none';
     }
 });
 
