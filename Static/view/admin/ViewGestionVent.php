@@ -104,7 +104,7 @@
                                     <td>{$venta['idVenta']}</td>
                                     <td>{$venta['folioProd']} -> {$venta['productoNombre']} -> {$venta['Razon']}</td>
                                     <td>
-                                        <input type='tel' class='entradaC' value='{$venta['cantidad']}' 
+                                        <input type='tel' class='entradaC boton advertencia' value='{$venta['cantidad']}' 
                                         onkeypress=\"if (event.key === 'Enter') { 
                                         enviarDatos(event, this, {$venta['folioProd']}, this.value, {$venta['precio']}); 
                                         }\">
@@ -137,34 +137,30 @@
                     <button class="btn btn-fin">Consultar tickets</button>
                 </a>
             </div>
-
-        <div align="center">
-            <form method="POST" action="../../Controller/Tickets.php" onsubmit="return validateFinalizar(event);">
-                <input type="hidden" name="idNotaVenta" value="<?php echo $idNotaVenta; ?>"> <!-- Se pasa el idNotaVenta -->
-                <input type="hidden" name="noCliente" id="noClienteHidden">
-                <input type="hidden" name="noEmpleado" id="noEmpleadoHidden">
-                <button type="submit" class="btn btn-fin" name="finalizarCompra" id="btnFinalizar">Finalizar compra</button>
-            </form>
-        </div>
-
-        <br><br><br>
+            <div align="center">
+                <form method="POST" onsubmit="return validateFinalizar(event);">
+                    <input type="hidden" name="idNotaVenta" value="<?php echo $idNotaVenta; ?>"> <!-- Se pasa el idNotaVenta -->
+                    <input type="hidden" name="noCliente" id="noClienteHidden">
+                    <input type="hidden" name="noEmpleado" id="noEmpleadoHidden">
+                    <button type="submit" class="btn btn-fin boton advertencia" id="btnFinalizar" onclick="mostrarModalFinalizar()">Finalizar compra</button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Modal de advertencia -->
-    <div class="modal fade" id="modalAdvertencia" tabindex="-1" aria-labelledby="modalAdvertenciaLabel" aria-hidden="true">
+    <div class="modal" tabindex="-1" id="modalAdvertencia">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdvertenciaLabel">¡Advertencia!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Mensaje dinámico -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title">Advertencia</h5>
+                <button type="button" class="btn-close" id="cerrarAdvertencia" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Mensaje de advertencia se actualizará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmarFinalizar">Confirmar</button>
+            </div>
             </div>
         </div>
     </div>
@@ -179,32 +175,6 @@
     </div>
 
     <script>
-        function enviarDatos(event, inputElement, folioProd, cantidad, precio) {
-            event.preventDefault();
-            if (cantidad.trim() === '' || isNaN(cantidad)) {
-                alert('Por favor ingrese una cantidad válida.');
-                return;
-            }
-            const fila = inputElement.closest('tr');
-            const idVenta = fila.cells[0].innerText;
-            // Redirige a la URL con los parámetros adecuados usando `idVenta` de la fila
-            window.location.href = `../../Controller/Ventas.php?idVenta=${idVenta}&folioProducto=${folioProd}&cantidad=${cantidad}&precio=${precio}`;
-        }
-
-        function validateFinalizar(event) {
-            var noCliente = document.getElementById("noCliente").value;
-            var noEmpleado = document.getElementById("noEmpleado").value;
-            
-            if (!noCliente || !noEmpleado) {
-                event.preventDefault(); // Evitar el envío si faltan datos
-                alert('Por favor, seleccione un cliente y un empleado antes de finalizar.');
-            }
-        }
-
-        function actualizarCampos() {
-            document.getElementById("noClienteHidden").value = document.getElementById("noCliente").value;
-            document.getElementById("noEmpleadoHidden").value = document.getElementById("noEmpleado").value;
-        }
 
         function filtrarVentas(query) {
             var rows = document.querySelectorAll("#tablaVentas tbody tr");
@@ -217,10 +187,62 @@
                 }
             });
         }
+
+        function actualizarCampos() {
+            document.getElementById("noClienteHidden").value = document.getElementById("noCliente").value;
+            document.getElementById("noEmpleadoHidden").value = document.getElementById("noEmpleado").value;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('modalAdvertencia');
+            const confirmButton = document.getElementById('confirmarFinalizar');
+            const closeButton = document.getElementById('cerrarAdvertencia');
+            
+            confirmButton.addEventListener('click', function () {
+                document.querySelector("form").submit();
+            });
+
+            closeButton.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+        });
+
+        function mostrarModalFinalizar() {
+            // Al confirmar, proceder con la redirección
+            document.getElementById('confirmarFinalizar').addEventListener('click', function () {
+                // Actualizar los valores de los campos ocultos
+                document.getElementById("noClienteHidden").value = document.getElementById("noCliente").value;
+                document.getElementById("noEmpleadoHidden").value = document.getElementById("noEmpleado").value;
+
+                // Crear la URL con los datos del formulario
+                const idNotaVenta = document.querySelector('[name="idNotaVenta"]').value;
+                const noCliente = document.getElementById("noClienteHidden").value;
+                const noEmpleado = document.getElementById("noEmpleadoHidden").value;
+
+                window.location.href = `/SolucionesWeb/Static/Controller/Tickets.php?idNotaVenta=${idNotaVenta}&noCliente=${noCliente}&noEmpleado=${noEmpleado}`;
+            });
+        }
+
+        function validateFinalizar(event) {
+            const modal = document.getElementById('modalAdvertencia');
+            modal.style.display = 'block';
+            // Validación de campos
+            if (document.getElementById("noCliente").value === "") {
+                document.querySelector('.modal-body').textContent = "Por favor, selecciona un cliente.";
+                return false;
+            }
+            if (document.getElementById("noEmpleado").value === "") {
+                document.querySelector('.modal-body').textContent = "Por favor, selecciona un empleado.";
+                return false;
+            }
+            return true;
+        }
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-qp1y2r6cXjl5G7pMwFZB93D9HzfgDWONhSmuED7B5buNxptDGa9wWLm3dhBB4dPY" crossorigin="anonymous"></script>
     <script src="../../Controller/Js/Eliminacion.js"></script>
     <script src="../../Controller/Js/Validaciones.js"></script>
+
 </body>
 </html>
