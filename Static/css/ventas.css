@@ -21,6 +21,23 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+.entradaC {
+    width: 70%; /* Asegura que el input ocupe todo el espacio disponible */
+    padding: 10px; /* Agrega espacio interno para que no quede apretado */
+    border: 2px solid #007BFF; /* Border de color azul para un diseño limpio */
+    border-radius: 5px; /* Bordes redondeados para un aspecto más suave */
+    font-size: 1rem; /* Tamaño de fuente legible */
+    transition: all 0.3s ease; /* Suaviza la transición de cambios en el enfoque */
+}
+
+.entradaC:valid {
+    border-color: #28a745; /* Borde verde si el valor ingresado es válido */
+}
+
+.entradaC:invalid {
+    border-color: #dc3545; /* Borde rojo si el valor ingresado no es válido */
+}
+
 h1 {
     text-align: center;
     color: #333;
@@ -120,7 +137,13 @@ tr:hover {
     border-radius: 5px;
     font-weight: 600;
     font-size: 0.85em;
+    
+}
+
+.btn:hover{
     transition: background-color 0.3s ease, transform 0.2s;
+    transform: scale(1.3); /* Aumenta el tamaño al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
 }
 
 .btn-primary {
@@ -356,3 +379,5 @@ label {
 .btn:active {
     transform: scale(0.98); /* Ligeramente más pequeño al hacer clic */
 }
+
+

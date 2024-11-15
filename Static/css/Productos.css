@@ -465,3 +465,29 @@ h2 {
         font-size: 14px; /* Reducir el tamaño del botón de carga en pantallas pequeñas */
     }
 }
+
+.pal{
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%;
+    background-color: #e0f7fa; /* Fondo suave para el ícono */
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#mensajeExito img.pal {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.pal:hover {
+    transform: scale(1.4); /* Aumenta el tamaño al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+    background-color: #b2ebf2; /* Cambia ligeramente el color de fondo en hover */
+}

@@ -13,7 +13,6 @@ class Empleado {
     private $cargo;
     private $telefono;
     private $direccion;
-    private $fotoPerfil;
     private $conn;
 
     // Constructor: se ejecuta cuando se crea una nueva instancia de la clase
@@ -32,10 +31,6 @@ class Empleado {
 
     public function setApellido($apellido) {
         $this->apellido = $apellido;
-    }
-
-    public function setFotoPerfil($fotoPerfil) {
-        $this->fotoPerfil = $fotoPerfil;
     }
 
     public function setSexo($sexo) {
@@ -95,10 +90,6 @@ class Empleado {
         return $this->sueldo;
     }
 
-    public function getFotoPerfil() {
-        return $this->fotoPerfil;
-    }
-
     public function getCargo() {
         return $this->cargo;
     }
@@ -123,7 +114,7 @@ class Empleado {
 
     public function obtenerEmpleados() {
         // Consulta para obtener los empleados
-        $sql = "SELECT * FROM empleado where noEmpleado NOT IN (1, 2)";
+        $sql = "SELECT * FROM empleado where noEmpleado not in (1,2)";
         $resultado = mysqli_query($this->conn, $sql);
         $empleados = [];
         while ($fila = $resultado->fetch_assoc()) {
@@ -146,13 +137,13 @@ class Empleado {
 
     public function insertarEmpleado() {
         // Preparar la consulta de inserción
-        $sql = "INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion, urlFotoPerfil) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if ($stmt) {
             // Asociar los parámetros de la consulta con los valores del objeto Empleado
             $stmt->bind_param(
-                "sssssdssss",
+                "sssssdsss",
                 $this->nombre,
                 $this->apellido,
                 $this->sexo,
@@ -161,8 +152,7 @@ class Empleado {
                 $this->sueldo,
                 $this->cargo,
                 $this->telefono,
-                $this->direccion,
-                $this->fotoPerfil
+                $this->direccion            
             );
             // Ejecutar la consulta
             if ($stmt->execute()) {
@@ -196,7 +186,6 @@ class Empleado {
                     cargo = ?, 
                     telefono = ?, 
                     direccion = ?, 
-                    urlFotoPerfil = ? 
                   WHERE noEmpleado = ?";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
@@ -210,10 +199,9 @@ class Empleado {
             $cargo = $this->cargo;
             $telefono = $this->telefono;
             $direccion = $this->direccion;
-            $urlFotoPerfil = $this->fotoPerfil;
             $noEmpleado = $this->noEmpleado;
             // Vincular parámetros
-            $stmt->bind_param("sssssdssssd", 
+            $stmt->bind_param("sssssdsssd", 
                 $nombre, 
                 $apellido, 
                 $sexo, 
@@ -223,7 +211,6 @@ class Empleado {
                 $cargo, 
                 $telefono, 
                 $direccion, 
-                $urlFotoPerfil,
                 $noEmpleado
             );
             // Ejecutar la consulta
