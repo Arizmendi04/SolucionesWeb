@@ -179,3 +179,40 @@ function validacionModiRecepcion() {
 
     return true;
 }
+
+/*Validaciones para productos*/
+function validacionProducto() {
+    const peso = document.getElementById("peso").value.trim();
+    const precio = document.getElementById("precio").value.trim();
+    const existencias = document.getElementById("existencia").value.trim();
+    const idProveedor = document.getElementById("idProveedor").value.trim();
+
+    if (!validarCantidad(peso)) {
+        document.getElementById("errorPeso").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorPeso").style.display = "none";
+    }
+
+    if (!validarCantidad(precio)) {
+        document.getElementById("errorPrecio").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorPrecio").style.display = "none";
+    }
+
+    if (!validarCantidad(existencias)) {
+        document.getElementById("errorExistencias").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorExistencias").style.display = "none";
+    }
+
+     // Validación de ID de proveedor
+     if (idProveedor === "") {
+        document.getElementById("errorIdProveedor").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorIdProveedor").style.display = "none";
+    }
+}

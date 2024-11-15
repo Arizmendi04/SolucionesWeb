@@ -21,6 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Viga&display=swap" rel="stylesheet">
@@ -44,6 +45,10 @@
 
                     <label for="peso">Peso:</label>
                     <input type="number" step="0.01" id="peso" name="peso" value="<?php echo htmlspecialchars($Producto['peso'] ?? ''); ?>" required>
+                    <p class="alert alert-danger" id="errorPeso" style="display:none;">
+                        Ingresa un peso válido, por favor.
+                    </p>
+
 
                     <label for="unidadM">Unidad:</label>
                     <select id="unidadM" name="unidadM" class="form-control" value="<?php echo htmlspecialchars($Producto['unidadM'] ?? ''); ?> required>
@@ -55,8 +60,16 @@
 
                     <label for="precio">Precio:</label>
                     <input type="number" step="0.01" id="precio" name="precio" value="<?php echo htmlspecialchars($Producto['precio'] ?? ''); ?>" required>
+                    <p class="alert alert-danger" id="errorPrecio" style="display:none;">
+                        Ingresa un precio válido, por favor.
+                    </p>
 
                     <input type="number" id="existencia" name="existencia" style="display:none" value="<?php echo htmlspecialchars($Producto['existencia'] ?? ''); ?>" required>
+
+                    <p class="alert alert-danger" id="errorExistencias" style="display:none;">
+                        Ingresa un número válido, por favor.
+                    </p>
+
                     <label for="proveedor">Proveedor:</label>
                     <div class="busqueda mb-3">
                     <?php
@@ -67,6 +80,10 @@
                     <input type="text" id="proveedorNombre" value="<?php echo htmlspecialchars($nombreProveedor); ?>" required placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
                     <input type="hidden" id="idProveedor" name="idProveedor" value="<?php echo htmlspecialchars($Producto['idProveedor'] ?? ''); ?>">
                 </div>
+
+                    <p class="alert alert-danger" id="errorIdProveedor" style="display:none;">
+                        Selecciona a un proveedor, por favor.
+                    </p>
 
                     <div id="listaProveedores" class="list-group" style="display: none;">
                         <?php
@@ -101,7 +118,7 @@
 
                     <br>
 
-                    <button type="submit" name="accion" class="btn-primario" value="actualizar">Actualizar</button>
+                    <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionProducto();">Actualizar</button>
                     <br>
 
                 </form>
@@ -117,6 +134,7 @@
     </div>
                 
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
+    <script src="/SolucionesWeb/Static/Controller/Js/Validaciones.js"></script>
 
 </body>
 </html>

@@ -71,6 +71,11 @@
                         <input type="text" id="proveedorNombre" placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
                         <input type="hidden" id="idProveedor" name="idProveedor">
                     </div>
+
+                    <p class="alert alert-danger" id="errorIdProveedor" style="display:none;">
+                        Selecciona a un proveedor, por favor.
+                    </p>
+
                     <div id="listaProveedores" class="list-group" style="display: none;">
                         <?php
                         foreach ($proveedores as $proveedor) {
@@ -97,7 +102,7 @@
 
                     <!-- Contenedor centrado para el botón -->
                     <div class="botonRegistrar">
-                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear">Registrar</button>
+                        <button type="submit" class="btn btn-primary mt-3" name="accion" value="crear" onclick="return validacionProducto();">Registrar</button>
                     </div>
                 </form>
             </div>
