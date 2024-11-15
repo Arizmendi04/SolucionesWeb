@@ -37,37 +37,20 @@
         // Verificar si el empleado ya existe
         if ($empleado->existeEmpleado()) {
             $_SESSION['error'] = "El empleado ya está registrado. Recarga la página para quitar el mensaje";
-            header('Location: ../View/Admin/ViewGestionEmp.php'); // Redirigir de vuelta a la página
+            header('Location: ../View/Admin/ViewGestionEmp.php'); 
             exit;
         }
 
-        // Manejar la subida de la imagen de perfil
-        if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] == 0) {
-            $fotoPerfil = $_FILES['fotoPerfil'];
-            $nombreArchivo = basename($fotoPerfil['name']);
-            $rutaDestino = '../Img/User/' . $nombreArchivo;
-            $tipoArchivo = strtolower(pathinfo($rutaDestino, PATHINFO_EXTENSION));
-
-            if (in_array($tipoArchivo, ['jpg', 'jpeg', 'png', 'gif'])) {
-                if (move_uploaded_file($fotoPerfil['tmp_name'], $rutaDestino)) {
-                    $empleado->setFotoPerfil($rutaDestino);
-                    try {
-                        $empleado->insertarEmpleado();
-                        header('Location: ../View/Admin/ViewGestionEmp.php');
-                        exit; // Asegurarse de salir después de redirigir
-                    } catch (mysqli_sql_exception $e) {
-                        // Capturar y manejar la excepción
-                        echo "Error al insertar el empleado: " . $e->getMessage();
-                    }
-                } else {
-                    echo "Error al subir la imagen.";
-                }
-            } else {
-                echo "Solo se permiten archivos con las siguientes extensiones: JPG, JPEG, PNG, GIF.";
-            }
-        } else {
-            echo "Error: Debes subir una foto de perfil.";
+        // Insertamos el empleado a nuestro modelo
+        try {
+            $empleado->insertarEmpleado();
+            header('Location: ../View/Admin/ViewGestionEmp.php');
+            exit; // Asegurarse de salir después de redirigir
+        } catch (mysqli_sql_exception $e) {
+            // Capturar y manejar la excepción
+            echo "Error al insertar el empleado: " . $e->getMessage();
         }
+
     }
 
     // Modificar empleado
@@ -89,28 +72,12 @@
                 $empleado->setCargo($_POST['cargo'] ?? $empleadoData['cargo']);
                 $empleado->setTelefono($_POST['telefono'] ?? $empleadoData['telefono']);
                 $empleado->setDireccion($_POST['direccion'] ?? $empleadoData['direccion']);
-                $empleado->setFotoPerfil($empleadoData['urlFotoPerfil']); // Mantener imagen actual
-
-                // Manejo de nueva imagen de perfil
-                if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] == 0) {
-                    $fotoPerfil = $_FILES['fotoPerfil'];
-                    $nombreArchivo = basename($fotoPerfil['name']);
-                    $rutaDestino = '../Img/User/' . $nombreArchivo;
-                    $tipoArchivo = strtolower(pathinfo($rutaDestino, PATHINFO_EXTENSION));
-                    
-                    if (in_array($tipoArchivo, ['jpg', 'jpeg', 'png', 'gif']) && move_uploaded_file($fotoPerfil['tmp_name'], $rutaDestino)) {
-                        $empleado->setFotoPerfil($rutaDestino); // Actualizar con nueva imagen
-                    } else {
-                        echo "Error al subir la nueva imagen.";
-                        exit;
-                    }
-                }
 
                 // Ejecutar la actualización en base de datos
-                $respuesta = $empleado->modificarEmpleado(); // Llamar al método de modificación
+                $respuesta = $empleado->modificarEmpleado();
                 if ($respuesta) {
                     header('Location: ../View/Admin/ViewGestionEmp.php');
-                    exit; // Asegurarse de salir después de redirigir
+                    exit;
                 }
             } else {
                 echo "No se encontró el empleado especificado.";

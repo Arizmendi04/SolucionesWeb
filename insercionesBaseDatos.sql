@@ -40,9 +40,9 @@ INSERT INTO venta (cantidad, total, folio, idNotaVenta) VALUES
 (3, 450.00, 2, 2);
 
 -- Ingresar datos en la tabla empleado
-INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion, urlFotoPerfil) VALUES
-('María', 'González', 'Femenino', '1985-06-20', '2018-03-15', 14000.00, 'Gerente', '555-2222', 'Avenida Cuauhtemoc 456', 'url_foto_maria.jpg'),
-('Yatziry', 'Serrano', 'Femenino', '2004-01-24', '2024-04-10', 32000.00, 'Limpieza', '7774931305', 'Calle Privada Chilpancingo #20', 'url_foto_yatziry.jpg');
+INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion) VALUES
+('María', 'González', 'Femenino', '1985-06-20', '2018-03-15', 14000.00, 'Gerente', '555-2222', 'Avenida Cuauhtemoc 456'),
+('Yatziry', 'Serrano', 'Femenino', '2004-01-24', '2024-04-10', 32000.00, 'Limpieza', '7774931305', 'Calle Privada Chilpancingo #20');
 
 -- Ingresar datos en la tabla notaVenta
 INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEmpleado) VALUES

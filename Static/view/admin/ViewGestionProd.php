@@ -82,7 +82,7 @@
                             echo "<a href='javascript:void(0)' onclick='seleccionarProveedor({$proveedor['id']}, \"{$proveedor['nombre']}\")' class='list-group-item list-group-item-action'>{$proveedor['nombre']}</a>";
                         }
                         ?>
-                    </div> <!-- Contenedor de la lista de proveedores -->
+                    </div> 
 
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
@@ -159,8 +159,10 @@
     </div>
 
     <div id="mensajeExito" class="alert alert-success" name="mensajeExito" style="display: none;">
-    <span id="mensajeTexto"></span>
-    <img src="/SolucionesWeb/Static/Img/palomita.png" alt="Éxito" class="icono">
+        <a href="/SolucionesWeb/Static/View/Admin/ViewGestionVent.php">
+            <span id="mensajeTexto"></span>
+            <img src="/SolucionesWeb/Static/Img/palomita.png" alt="Éxito" class="pal">
+        </a>
     </div>
 
     <script src="/SolucionesWeb/Static/Controller/Js/Productos.js"></script>
