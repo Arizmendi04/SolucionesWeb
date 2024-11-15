@@ -3,8 +3,6 @@
     include 'Sesion.php'; 
 ?>
 
-
-
 <?php
     // Eliminar venta
     if (isset($_GET['accion']) && $_GET['accion'] == 'eliminar') {
