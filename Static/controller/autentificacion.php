@@ -15,6 +15,7 @@
 
     if(($row["nombreU"] == $user) && ($row["contrasena"] == $password)){
         $_SESSION["usuario"] = $user;
+        $_SESSION["noEmpleado"] = $row["noEmpleado"]; // Guardar el noEmpleado en la sesión
         if ($row["tipoU"] === "Admin") {
             header("Location: /SolucionesWeb/Static/View/Admin/DashboardAdmin.php");
         } elseif ($row["tipoU"] === "Empleado") {
