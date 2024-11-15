@@ -54,7 +54,7 @@
             ?>
         </select>
 
-        <br><br>
+        <br>
 
         <div class="tabla">
             <div class="busqueda">

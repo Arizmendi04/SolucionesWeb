@@ -21,31 +21,6 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Media queries */
-@media (min-width: 992px) {
-    .container {
-        margin: 40px auto;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .container {
-        margin: 20px auto;
-        padding: 18px;
-    }
-}
-
-@media (max-width: 767px) {
-    .container {
-        margin: 15px auto;
-        padding: 12px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-}
-
 h1 {
     text-align: center;
     color: #333;
@@ -70,17 +45,36 @@ h1 {
 
 .tabla .busqueda input {
     width: 100%;
-    padding: 10px;
+    padding: 12px 20px;
     margin-bottom: 18px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    transition: border 0.3s ease;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease, background-color 0.3s ease;
 }
 
 .tabla .busqueda input:focus {
     border: 1px solid #007bff;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.select-cliente {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.select-cliente:focus {
+    border: 1px solid #007bff;
+    background-color: #ffffff;
     outline: none;
 }
 
@@ -92,47 +86,32 @@ table {
     overflow: hidden;
 }
 
-/* Aseguramos que todas las celdas tengan borde */
 table, th, td {
     border: 1px solid #ddd;
     text-align: center;
 }
 
-/* Ancho específico para la columna de Producto */
-th:nth-child(2), td:nth-child(2) {
-    width: 40%; /* Más espacio para la columna de Producto */
-}
-
-/* Ancho específico para la columna de Cantidad (menos espacio) */
-th:nth-child(3), td:nth-child(3) {
-    width: 15%; /* Menos espacio para la columna de Cantidad */
-}
-
-/* Ajustes en la apariencia de las celdas */
 th, td {
     padding: 12px;
     font-size: 0.9em;
 }
 
-/* Fondo para los títulos de columna */
 th {
     background-color: #007bff;
     color: #ffffff;
     font-weight: 600;
 }
 
-/* Filas alternas en la tabla */
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* Efecto hover para las filas */
 tr:hover {
     background-color: #f1f1f1;
     transition: background-color 0.2s ease;
 }
 
-
+/* Estilos generales para los botones */
 .btn {
     padding: 6px 12px;
     margin: 4px;
@@ -166,8 +145,8 @@ tr:hover {
 
 .botones-container {
     display: flex;
-    justify-content: center; 
-    gap: 40px;  /* Espacio entre los botones */
+    justify-content: center;
+    gap: 40px;
 }
 
 .btn-danger {
@@ -186,43 +165,6 @@ tr:hover {
 
 .btn-fin:active {
     transform: translateY(1px);
-}
-
-/* Estilos personalizados para el modal de advertencia */
-#modalAdvertencia .modal-content {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-#modalAdvertencia .modal-header {
-    background-color: #f5c6cb;
-    color: #721c24;
-    border-bottom: 2px solid #f1b0b7;
-}
-
-#modalAdvertencia .modal-body {
-    font-size: 18px;
-    color: #721c24;
-    text-align: center;
-    padding: 15px;
-}
-
-#modalAdvertencia .modal-footer {
-    border-top: 2px solid #f1b0b7;
-    text-align: center;
-}
-
-#modalAdvertencia .btn-secondary {
-    background-color: #721c24;
-    border: 1px solid #f5c6cb;
-    color: #fff;
-}
-
-#modalAdvertencia .btn-secondary:hover {
-    background-color: #f1b0b7;
-    border-color: #f1b0b7;
 }
 
 /* Estilos generales para el modal */
@@ -259,7 +201,7 @@ tr:hover {
     cursor: pointer;
 }
 
-.titulosLabel{
+.titulosLabel {
     font-size: 15px;
 }
 
@@ -296,28 +238,121 @@ tr:hover {
     text-align: center;
 }
 
-/* Estilo general para el input */
-.entradaC {
-    width: 70%; /* Asegura que el input ocupe todo el espacio disponible */
-    padding: 10px; /* Agrega espacio interno para que no quede apretado */
-    border: 2px solid #007BFF; /* Border de color azul para un diseño limpio */
-    border-radius: 5px; /* Bordes redondeados para un aspecto más suave */
-    font-size: 1rem; /* Tamaño de fuente legible */
-    transition: all 0.3s ease; /* Suaviza la transición de cambios en el enfoque */
+form button {
+    border: none;
+    outline: none;
+    background-color: #1d791a;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
-/* Estilo cuando el input está en foco (cuando el usuario hace clic o empieza a escribir) */
-.entradaC:focus {
-    border-color: #0056b3; /* Cambia el borde a un azul más oscuro cuando está enfocado */
-    outline: none; /* Elimina el borde por defecto del navegador */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Agrega una sombra sutil alrededor del input */
+form button:hover {
+    background-color: #24e816;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilo de validación (si es necesario, cuando se usa el input con validación) */
-.entradaC:invalid {
-    border-color: #dc3545; /* Borde rojo si el valor ingresado no es válido */
+form button:active {
+    background-color: #159b16;
+    transform: scale(0.98);
 }
 
-.entradaC:valid {
-    border-color: #28a745; /* Borde verde si el valor ingresado es válido */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Estilo general para el select */
+select {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 12px 16px; /* Espaciado interno */
+    border: 2px solid #007bff; /* Borde azul */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-family: 'Poppins', sans-serif; /* Tipografía limpia */
+    color: #333; /* Color del texto */
+    background-color: #f9f9f9; /* Fondo claro */
+    transition: all 0.3s ease; /* Suaviza la transición de cambios */
+    outline: none; /* Elimina el contorno por defecto */
+}
+
+/* Estilo para cuando el select está en foco (cuando el usuario hace clic) */
+select:focus {
+    border-color: #0056b3; /* Borde azul más oscuro */
+    background-color: #fff; /* Fondo blanco cuando está en foco */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Sombra azul clara */
+}
+
+/* Estilo para las opciones dentro del select */
+select option {
+    padding: 10px; /* Espaciado interno de las opciones */
+    font-size: 16px; /* Tamaño de la fuente */
+    background-color: #fff; /* Fondo blanco */
+    color: #333; /* Color del texto */
+}
+
+/* Estilo para cuando el usuario pasa el ratón sobre una opción */
+select option:hover {
+    background-color: #007bff; /* Fondo azul al pasar el ratón */
+    color: #fff; /* Texto blanco */
+}
+
+/* Estilo para el label */
+label {
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: 600; /* Negrita */
+    margin-bottom: 8px; /* Espacio debajo del label */
+    display: block; /* Hace que el label ocupe todo el ancho */
+    color: #333; /* Color del texto */
+}
+
+/* General styling for buttons */
+.btn {
+    border: none; /* Elimina el borde */
+    outline: none; /* Elimina el recuadro negro */
+    padding: 10px 20px; /* Espaciado interno */
+    margin: 5px; /* Espaciado externo */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Grosor de la fuente */
+    cursor: pointer; /* Cambio de cursor */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Transición suave */
+    color: #fff; /* Color del texto */
+}
+
+/* Estilo específico para el botón "Consultar tickets" */
+.btn-consultar {
+    background-color: #007bff; /* Color azul */
+}
+
+.btn-consultar:hover {
+    background-color: #0056b3; /* Color al pasar el cursor */
+    transform: scale(1.05); /* Efecto de escala */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra suave */
+}
+
+/* Estilo específico para el botón "Finalizar compra" */
+.btn-fin {
+    background-color: #1d791a; /* Color verde */
+}
+
+.btn-fin:hover {
+    background-color: #24e816; /* Color al pasar el cursor */
+    transform: scale(1.05); /* Efecto de escala */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra suave */
+}
+
+/* Active state for both buttons */
+.btn:active {
+    transform: scale(0.98); /* Ligeramente más pequeño al hacer clic */
 }
