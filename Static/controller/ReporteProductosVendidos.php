@@ -44,10 +44,13 @@
 
     // Título
     $pdf->SetFont('helvetica', 'B', 14);
-    $pdf->Cell(0, 10, 'Productos Más Vendidos', 0, 1, 'C');
+    $pdf->Cell(0, 25, 'Productos Más Vendidos', 0, 1, 'C');
+    // Agregar la imagen del logo en la parte superior derecha con tamaño ajustado
+    $logoPath = __DIR__ . '/../img/logosinletras.png'; // Ruta de la imagen del logo
+    $pdf->Image($logoPath, 170, 10, 25, 25, '', '', '', false, 200, '', false, false, 0, false, false, false);
 
     // Espacio para separación
-    $pdf->Ln(5);
+    $pdf->Ln(7);
 
     // Tabla de productos vendidos con estilos
     $pdf->SetFont('helvetica', 'B', 8);
@@ -78,10 +81,10 @@
     }
 
     // Mostrar el total de los ingresos generados con color azul
-    $pdf->Ln(5); // Salto de línea
+
     $pdf->SetFont('helvetica', 'B', 8);
     $pdf->SetTextColor(0, 0, 255); // Color azul para el total
-    $pdf->Cell(220, 7, 'Total Ingresos: $' . number_format($totalIngresos, 2), 1, 1, 'C');
+    $pdf->Cell(190, 7, 'Total Ingresos: $' . number_format($totalIngresos, 2), 1, 1, 'C');
 
     // Descargar el archivo PDF
     $pdf->Output('reporteProductosMasVendidos.pdf', 'I');

@@ -5,6 +5,10 @@
 
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+    use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+    use PhpOffice\PhpSpreadsheet\Style\Fill;
+    use PhpOffice\PhpSpreadsheet\Style\Border;
+    use PhpOffice\PhpSpreadsheet\Style\Color;
 
     // Obtener los valores del formulario
     $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
@@ -38,6 +42,14 @@
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle('Reporte Comparativo de Precios');
 
+    // Insertar el logo de la empresa en la esquina derecha (celda F1)
+    $logo = new Drawing();
+    $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
+    $logo->setCoordinates('F1');
+    $logo->setOffsetX(10);
+    $logo->setHeight(80);
+    $logo->setWorksheet($sheet);
+
     // Título del reporte
     $sheet->setCellValue('A1', 'Reporte Comparativo de Precios');
     $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
@@ -62,7 +74,7 @@
     $sheet->getStyle('A5:F5')->getFont()->setBold(true);
     $sheet->getStyle('A5:F5')->getFill()
         ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-        ->getStartColor()->setARGB('FF00FF00'); // Color verde
+        ->getStartColor()->setARGB('04531a'); // Color verde
 
     // Variables para las filas
     $rowIndex = 6;
