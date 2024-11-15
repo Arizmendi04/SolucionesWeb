@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Ventas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Css/ventas.css">
 </head>
 <body>
@@ -39,6 +39,7 @@
         <!-- Select Cliente -->
         <label for="noCliente">Cliente:</label>
         <select id="noCliente" name="noCliente" required onchange="actualizarCampos();">
+            <option value="">Selecciona un cliente</option>
             <?php
                 $queryClientes = "SELECT noCliente, nombreC FROM cliente";
                 $resultClientes = $conn->query($queryClientes);
@@ -53,23 +54,6 @@
             ?>
         </select>
 
-        <!-- Select Empleado -->
-        <label for="noEmpleado">Empleado:</label>
-        <select id="noEmpleado" name="noEmpleado" required onchange="actualizarCampos();">
-            <?php
-                $queryEmpleados = "SELECT noEmpleado, nombre, apellido FROM empleado";
-                $resultEmpleados = $conn->query($queryEmpleados);
-
-                if ($resultEmpleados && $resultEmpleados->num_rows > 0) {
-                    while ($empleado = $resultEmpleados->fetch_assoc()) {
-                        echo "<option value='{$empleado['noEmpleado']}'>{$empleado['nombre']} {$empleado['apellido']}</option>";
-                    }
-                } else {
-                    echo "<option value=''>No hay empleados disponibles</option>";
-                }
-            ?>
-        </select>
-        
         <br><br>
 
         <div class="tabla">
@@ -104,7 +88,7 @@
                                     <td>{$venta['idVenta']}</td>
                                     <td>{$venta['folioProd']} -> {$venta['productoNombre']} -> {$venta['Razon']}</td>
                                     <td>
-                                        <input type='tel' class='entradaC boton advertencia' value='{$venta['cantidad']}' 
+                                        <input type='tel' class='entradaC' value='{$venta['cantidad']}' 
                                         onkeypress=\"if (event.key === 'Enter') { 
                                         enviarDatos(event, this, {$venta['folioProd']}, this.value, {$venta['precio']}); 
                                         }\">
@@ -138,29 +122,15 @@
                 </a>
             </div>
             <div align="center">
-                <form method="POST" onsubmit="return validateFinalizar(event);">
-                    <input type="hidden" name="idNotaVenta" value="<?php echo $idNotaVenta; ?>"> <!-- Se pasa el idNotaVenta -->
-                    <input type="hidden" name="noCliente" id="noClienteHidden">
-                    <input type="hidden" name="noEmpleado" id="noEmpleadoHidden">
-                    <button type="submit" class="btn btn-fin boton advertencia" id="btnFinalizar" onclick="mostrarModalFinalizar()">Finalizar compra</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" id="modalAdvertencia">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Advertencia</h5>
-                <button type="button" class="btn-close" id="cerrarAdvertencia" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Mensaje de advertencia se actualizará aquí -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirmarFinalizar">Confirmar</button>
-            </div>
+            <form method="POST" action="/SolucionesWeb/Static/Controller/Tickets.php">
+                <input type="hidden" name="idNotaVenta" value="<?php echo $idNotaVenta; ?>"> <!-- Se pasa el idNotaVenta -->
+                
+                <input type="hidden" name="noCliente" id="noClienteHidden">
+                <input type="hidden" name="noEmpleado" id="noEmpleadoHidden" value="<?php echo $_SESSION['noEmpleado']; ?>">
+                
+                <button type="button" class="btn btn-fin" id="btnFinalizar" onclick="validarFormulario()">Finalizar compra</button>
+                <input type="hidden" name="finalizarCompra" value="1"> <!-- Campo oculto para identificar la acción -->
+            </form>
             </div>
         </div>
     </div>
@@ -176,6 +146,41 @@
 
     <script>
 
+        function validarFormulario() {
+            // Prevenir el envío del formulario por defecto
+            event.preventDefault();
+
+            // Obtener los valores de cliente y empleado
+            const noCliente = document.getElementById("noCliente").value;
+            const noEmpleado = document.getElementById("noEmpleadoHidden").value;
+            
+            // Verificar si hay filas válidas en la tabla de ventas
+            const tablaVentas = document.getElementById("tablaVentas").querySelectorAll("tbody tr");
+            let hayVentasValidas = false;
+            tablaVentas.forEach(row => {
+                if (row.style.display !== 'none' && row.querySelector('td').innerText.trim() !== 'No hay productos en la venta actual') {
+                    hayVentasValidas = true;
+                }
+            });
+
+            // Validaciones
+            if (!noCliente || noCliente.trim() === "") {
+                alert("Por favor, seleccione un cliente.");
+                return;
+            }
+            if (!hayVentasValidas) {
+                alert("Debe haber al menos una venta válida en la tabla.");
+                return;
+            }
+            
+            // Si todo es válido, enviar el formulario
+            document.querySelector('form').submit();
+        }
+
+        function actualizarCampos() {
+            document.getElementById("noClienteHidden").value = document.getElementById("noCliente").value;
+        }
+
         function filtrarVentas(query) {
             var rows = document.querySelectorAll("#tablaVentas tbody tr");
             rows.forEach(function(row) {
@@ -188,61 +193,31 @@
             });
         }
 
-        function actualizarCampos() {
-            document.getElementById("noClienteHidden").value = document.getElementById("noCliente").value;
-            document.getElementById("noEmpleadoHidden").value = document.getElementById("noEmpleado").value;
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const modal = document.getElementById('modalAdvertencia');
-            const confirmButton = document.getElementById('confirmarFinalizar');
-            const closeButton = document.getElementById('cerrarAdvertencia');
-            
-            confirmButton.addEventListener('click', function () {
-                document.querySelector("form").submit();
-            });
-
-            closeButton.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
-        });
-
-        function mostrarModalFinalizar() {
-            // Al confirmar, proceder con la redirección
-            document.getElementById('confirmarFinalizar').addEventListener('click', function () {
-                // Actualizar los valores de los campos ocultos
-                document.getElementById("noClienteHidden").value = document.getElementById("noCliente").value;
-                document.getElementById("noEmpleadoHidden").value = document.getElementById("noEmpleado").value;
-
-                // Crear la URL con los datos del formulario
-                const idNotaVenta = document.querySelector('[name="idNotaVenta"]').value;
-                const noCliente = document.getElementById("noClienteHidden").value;
-                const noEmpleado = document.getElementById("noEmpleadoHidden").value;
-
-                window.location.href = `/SolucionesWeb/Static/Controller/Tickets.php?idNotaVenta=${idNotaVenta}&noCliente=${noCliente}&noEmpleado=${noEmpleado}`;
-            });
-        }
-
-        function validateFinalizar(event) {
-            const modal = document.getElementById('modalAdvertencia');
-            modal.style.display = 'block';
-            // Validación de campos
-            if (document.getElementById("noCliente").value === "") {
-                document.querySelector('.modal-body').textContent = "Por favor, selecciona un cliente.";
-                return false;
+        function enviarDatos(event, inputElement, folioProd, cantidad, precio) {
+            event.preventDefault();
+            if (cantidad.trim() === '' || isNaN(cantidad) || parseFloat(cantidad) <= 0) {
+                alert('Por favor ingrese una cantidad válida.');
+                return;
             }
-            if (document.getElementById("noEmpleado").value === "") {
-                document.querySelector('.modal-body').textContent = "Por favor, selecciona un empleado.";
-                return false;
-            }
-            return true;
-        }
+            const fila = inputElement.closest('tr');
+            const idVenta = fila.cells[0].innerText
+            .trim();
+            const total = parseFloat(cantidad) * parseFloat(precio);
 
+            // Actualizar la celda de total
+            fila.cells[4].innerText = '$ ' + total.toFixed(2);
+
+            // Enviar datos al servidor por AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/SolucionesWeb/Static/Controller/Ventas.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Respuesta del servidor:', xhr.responseText);
+                }
+            };
+            xhr.send('accion=actualizar&idVenta=' + encodeURIComponent(idVenta) + '&cantidad=' + encodeURIComponent(cantidad));
+        }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-qp1y2r6cXjl5G7pMwFZB93D9HzfgDWONhSmuED7B5buNxptDGa9wWLm3dhBB4dPY" crossorigin="anonymous"></script>
-    <script src="../../Controller/Js/Eliminacion.js"></script>
-    <script src="../../Controller/Js/Validaciones.js"></script>
-
 </body>
 </html>

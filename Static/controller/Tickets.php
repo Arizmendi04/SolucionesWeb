@@ -58,14 +58,13 @@
             $stmt->bind_param("ii", $idCliente, $idEmpleado);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Compra finalizada correctamente.');</script>";
-                header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionTickets.php');
-                exit;
+                echo "<script>alert('Compra finalizada correctamente.');
+                window.location.href = '/SolucionesWeb/Static/View/Admin/ViewGestionTickets.php';</script>";
             } else {
-                echo "<script>alert('Error al finalizar la compra.');</script>";
+                echo "<script>alert('Error al finalizar la compra.');
+                window.location.href = '/SolucionesWeb/Static/View/Admin/ViewGestionVent.php';
+                </script>";
             }
-        } else {
-            echo "<script>alert('Por favor, selecciona un cliente y un empleado.');</script>";
         }
     }
 
@@ -80,7 +79,7 @@
                     FROM notaVenta v
                     JOIN cliente c ON v.noCliente = c.noCliente
                     JOIN empleado e ON v.noEmpleado = e.noEmpleado
-                    WHERE v.fecha LIKE ? and v.noEmpleado not in(1,2)
+                    WHERE v.fecha LIKE ? and v.noEmpleado != 2
                     ORDER BY v.idNotaVenta ASC";
             $stmt = $conn->prepare($query);
             $likeFecha = "$fecha%"; // Solo se filtra por fechas que comienzan con el valor ingresado
@@ -92,7 +91,7 @@
                     FROM notaVenta v
                     JOIN cliente c ON v.noCliente = c.noCliente
                     JOIN empleado e ON v.noEmpleado = e.noEmpleado
-                    WHERE v.noEmpleado not in(1,2)
+                    WHERE v.noEmpleado != 2
                     ORDER BY v.idNotaVenta ASC";
             $stmt = $conn->prepare($query);
         }
