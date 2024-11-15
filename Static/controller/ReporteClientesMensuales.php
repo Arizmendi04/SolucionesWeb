@@ -1,10 +1,14 @@
 <?php
-    require __DIR__ . '/../../vendor/autoload.php'; // Ajusta la ruta
-    require __DIR__ . '/Connect/db.php'; // Ajusta la ruta de conexión
+    require __DIR__ . '/../../vendor/autoload.php';
+    require __DIR__ . '/Connect/db.php';
     include 'Sesion.php';
 
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+    use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+    use PhpOffice\PhpSpreadsheet\Style\Fill;
+    use PhpOffice\PhpSpreadsheet\Style\Border;
+    use PhpOffice\PhpSpreadsheet\Style\Color;
 
     // Obtener el mes y el estado desde los parámetros GET
     $mes = isset($_GET['mes']) ? $_GET['mes'] : '';
@@ -38,29 +42,37 @@
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle('Reporte de Compras por Cliente');
 
+    // Insertar el logo de la empresa en la esquina derecha (celda F1)
+    $logo = new Drawing();
+    $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
+    $logo->setCoordinates('F1');
+    $logo->setOffsetX(10);
+    $logo->setHeight(80);
+    $logo->setWorksheet($sheet);
+
     // Agregar un título al reporte en la primera fila
     $sheet->setCellValue('A1', 'Reporte de Compras por Cliente');
-    $sheet->mergeCells('A1:D1'); // Combina las celdas A1 a D1 para centrar el título
-    $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14); // Establecer el tamaño de fuente y negrita
-    $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); // Centrar título
+    $sheet->mergeCells('A1:D1');
+    $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
+    $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
     // Agregar un subtítulo con el mes y el estado seleccionados
     $sheet->setCellValue('A2', "Mes: $mes, Estado: $estado");
-    $sheet->mergeCells('A2:D2'); // Combina las celdas A2 a D2 para centrar el subtítulo
-    $sheet->getStyle('A2')->getFont()->setItalic(true); // Poner en cursiva
-    $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); // Centrar subtítulo
+    $sheet->mergeCells('A2:D2');
+    $sheet->getStyle('A2')->getFont()->setItalic(true);
+    $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
     // Encabezados de la hoja de Excel
-    $sheet->setCellValue('A3', 'ID Cliente');
-    $sheet->setCellValue('B3', 'Nombre Cliente');
-    $sheet->setCellValue('C3', 'Total Compras');
-    $sheet->setCellValue('D3', 'Total Gastado');
-
-    // Formato de encabezado
-    $sheet->getStyle('A3:D3')->getFont()->setBold(true);
-    $sheet->getStyle('A3:D3')->getFill()
-        ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-        ->getStartColor()->setARGB('FF00FF00'); // Color verde
+    $encabezados = ['ID Cliente', 'Nombre Cliente', 'Total Compras', 'Total Gastado'];
+    $col = 'A';
+    foreach ($encabezados as $encabezado) {
+        $sheet->setCellValue($col . '3', $encabezado);
+        $sheet->getStyle($col . '3')->getFont()->setBold(true)->getColor()->setARGB(Color::COLOR_WHITE);
+        $sheet->getStyle($col . '3')->getFill()
+            ->setFillType(Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('04531a'); // Color verde oscuro
+        $col++;
+    }
 
     // Variables para filas y acumulador de ingresos
     $rowIndex = 4;
@@ -73,6 +85,11 @@
             $sheet->setCellValue('C' . $rowIndex, $row['total_compras']);
             $sheet->setCellValue('D' . $rowIndex, $row['total_gastado']);
             
+            // Aplicar color a la fila
+            $sheet->getStyle('A' . $rowIndex . ':D' . $rowIndex)->getFill()
+                ->setFillType(Fill::FILL_SOLID)
+                ->getStartColor()->setARGB('D2CFD3'); // Color de fondo gris claro
+
             $totalGastado += $row['total_gastado'];
             $rowIndex++;
         }
@@ -81,16 +98,27 @@
         $sheet->setCellValue('C' . $rowIndex, 'Total Gastado:');
         $sheet->setCellValue('D' . $rowIndex, $totalGastado);
         $sheet->getStyle('C' . $rowIndex . ':D' . $rowIndex)->getFont()->setBold(true);
-        $sheet->getStyle('D' . $rowIndex)->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLUE); // Color azul
+        $sheet->getStyle('D' . $rowIndex)->getFont()->getColor()->setARGB(Color::COLOR_BLUE); // Color azul
     } else {
         $sheet->setCellValue('A4', 'No hay compras registradas en este mes y estado.');
         $sheet->mergeCells('A4:D4');
+        $sheet->getStyle('A4')->getFont()->setItalic(true);
     }
 
     // Ajuste de ancho automático para las columnas
     foreach (range('A', 'D') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
+
+    // Aplicar bordes a la tabla
+    $sheet->getStyle('A3:D' . ($rowIndex - 1))->applyFromArray([
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => Border::BORDER_THIN,
+                'color' => ['argb' => Color::COLOR_BLACK],
+            ],
+        ],
+    ]);
 
     // Generar el archivo Excel para descarga
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

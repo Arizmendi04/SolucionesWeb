@@ -107,7 +107,7 @@
                         }
                     ?>
                 </select>
-                <button type="submit">Generar Excel</button>
+                <button type="submit">Generar PDF</button>
             </form>
         </div>
 
@@ -210,7 +210,7 @@
                 <a href="#" class="consultas-box" id="descargar-clientes">Descargar lista de clientes</a>
                 <a href="#" class="consultas-box" id="descargar-productos">Descargar lista de productos</a>
                 <a href="#" class="consultas-box" id="descargar-empleados">Descargar lista de empleados</a>
-                <a href="#" class="consultas-box" id="descargar-empleados">Descargar lista de recepciones</a>
+                <a href="#" class="consultas-box" id="descargar-recepciones">Descargar lista de recepciones</a>
         </section>
 
         <!-- Formulario de filtro (inicialmente oculto) -->
@@ -283,6 +283,23 @@
                     <option value="Femenino">Femenino</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Otro">Otro</option>
+                </select>
+                <button type="submit">Descargar Excel</button>
+            </form>
+        </div>
+
+        <div id="recepciones-container" class="container" style="display:none;">
+            <h3>Descargar Lista de Recepciones</h3>
+            <form action="/SolucionesWeb/Static/Controller/ConsultaListaRec.php" id="descargarRec" class="formDescargaRec" method="GET">
+                <label for="proveedor">Seleccione el Proveedor:</label>
+                <select id="proveedor" name="proveedor" required>
+                    <?php
+                        // Código PHP para obtener la lista de proveedores
+                        $proveedores = solicitarProveedores($conn);
+                        foreach ($proveedores as $proveedor) {
+                            echo "<option value='{$proveedor['idProveedor']}'>{$proveedor['razonSocial']}</option>";
+                        }
+                    ?>
                 </select>
                 <button type="submit">Descargar Excel</button>
             </form>
