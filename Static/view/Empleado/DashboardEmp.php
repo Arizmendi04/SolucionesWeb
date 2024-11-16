@@ -13,13 +13,9 @@
             </header>
             <h2>Reportes</h2>
             <div class="report-grid">
-
                 <a href="#" class="report-box" id="existencias-productos">Existencias de productos por proveedor</a>
-
                 <a href="#" class="report-box" id="mejores-precios">Proveedores con mejores precios</a>
-
             </div>
-
         </section>
 
         <!-- Formulario para el reporte de productos disponibles (existencia) por tipo y proveedor-->
@@ -156,6 +152,6 @@
         </div>
 
     </div>
-    <script src="../../Controller/Js/ReportesConsultas.js"></script>
+    <script src="../../Controller/ControllerEmpleado/Js/ReportesConsultas.js"></script>
 </body>
 </html>

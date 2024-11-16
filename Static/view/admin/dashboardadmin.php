@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../Css/filtroForm.css">
     <div class="main-content">
  
+    
         <section class="reports">
             <header>
                 <h1>Dashboard</h1>
