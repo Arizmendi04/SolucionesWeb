@@ -27,8 +27,7 @@
                     $idNotaVenta = $ultimaNota['idNotaVenta'];
                 } else {
                     // Si no hay una nota de venta pendiente, crear una nueva
-                    $queryNuevaNota = "INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEmpleado) 
-                                       VALUES (CURDATE(), 0, 0, 0, 'Pendiente', NULL, NULL)";
+                    $queryNuevaNota = "INSERT INTO notaVenta (fecha, subtotal, iva, pagoTotal, estatus, noCliente, noEmpleado) VALUES (CURDATE(), 0, 0, 0, 'Pendiente', NULL, NULL)";
                     if ($conn->query($queryNuevaNota) === TRUE) {
                         $idNotaVenta = $conn->insert_id; // Obtener el ID de la nueva nota
                     }
@@ -60,7 +59,7 @@
             <div class="busqueda">
                 <h2 align="center">Ticket</h2>
                 <input type="text" id="busqueda" placeholder="Buscar por producto" oninput="filtrarVentas(this.value)">
-                <label for="idNotaVenta">ID Ticket: <?php echo $idNotaVenta; ?></label><br><br>
+                <label for="idNotaVenta">ID Ticket: <?php echo $idNotaVenta; ?></label>
             </div>
             <table id="tablaVentas">
                 <thead>
