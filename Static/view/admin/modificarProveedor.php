@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../Css/Crud.css">
+    <link rel="stylesheet" href="../../Css/modificar.css">
 </head>
 <body>
     <!-- Formulario de modificación de proveedor -->
@@ -51,7 +51,7 @@
                     <input type="email" id="correo" name="correo" value="<?php echo $proveedor['correo']; ?>" required>
                     <p class="alert alert-danger" id="errorCorreo" style="display:none;">Por favor, ingresa un correo válido</p>
 
-                    <button type="submit" name="accion" value="actualizar" onclick="return validacionProveedor();">Actualizar</button>
+                    <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionProveedor();">Actualizar</button>
 
                     <br><br>
                 </form>

@@ -73,107 +73,6 @@ body {
     font-size: 15px;
 }
 
-/* Media queries */
-
-/* 1300px or less */
-@media (max-width: 1300px) {
-    .sidebar {
-        width: 15%;
-    }
-    .main-content {
-        width: 85%;
-    }
-    .menu-item img {
-        width: 28px;
-        height: 28px;
-    }
-    .sidebar .user-image {
-        width: 65px;
-    }
-}
-
-/* 1000px or less */
-@media (max-width: 1000px) {
-    .sidebar {
-        width: 25%;
-    }
-    .main-content {
-        width: 75%;
-    }
-    .menu-item img {
-        width: 24px;
-        height: 24px;
-    }
-    .sidebar .user-image {
-        width: 55px;
-    }
-    .alert-box {
-        width: 250px;
-    }
-}
-
-/* 800px or less */
-@media (max-width: 800px) {
-    .main-content {
-        flex-direction: column;
-        width: 100%;
-    }
-    .sidebar {
-        width: 100%;
-        height: auto;
-        padding: 10px;
-    }
-    .menu-item img {
-        width: 20px;
-        height: 20px;
-    }
-    .sidebar .user-image {
-        width: 45px;
-    }
-    .alert-box {
-        width: 220px;
-    }
-    .consultas, .reports {
-        width: 100%;
-        padding: 10px;
-    }
-    .report-grid, .consultas-grid {
-        grid-template-columns: 1fr; /* Cambia a una columna */
-    }
-}
-
-/* 500px or less */
-@media (max-width: 500px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-    }
-    .main-content {
-        flex-direction: column;
-        width: 100%;
-    }
-    .menu-item img {
-        width: 18px;
-        height: 18px;
-    }
-    .sidebar .user-image {
-        width: 35px;
-    }
-    .alert-box {
-        width: 180px;
-    }
-    .consultas, .reports {
-        width: 100%;
-        padding: 8px;
-    }
-}
-
-@media (max-width: 320px) {
-    .report-grid {
-        grid-template-columns: 1fr; /* Cambia a una columna */
-    }
-}
-
 /* Sidebar detalles */
 .sidebar .user-profile {
     text-align: center;
@@ -407,3 +306,161 @@ header p {
     background: linear-gradient(135deg, #638d77, #41ba00);
 }
 
+/* 1300px or less */
+@media (max-width: 1300px) {
+    .sidebar {
+        width: 15%;
+    }
+    .main-content {
+        width: 85%;
+    }
+    .menu-item img {
+        width: 28px;
+        height: 28px;
+    }
+    .sidebar .user-image {
+        width: 65px;
+    }
+    .alert-box {
+        width: 280px; /* Mejor ajuste para pantallas intermedias */
+    }
+}
+
+/* 1000px or less */
+@media (max-width: 1000px) {
+    .sidebar {
+        width: 20%; /* Ajuste para evitar que la barra ocupe mucho espacio */
+    }
+    .main-content {
+        width: 80%;
+    }
+    .menu-item img {
+        width: 24px;
+        height: 24px;
+    }
+    .sidebar .user-image {
+        width: 55px;
+    }
+    .alert-box {
+        width: 250px;
+    }
+    .report-box,
+    .consultas-box {
+        font-size: 0.9em; /* Reducir texto en contenedores grandes */
+    }
+}
+
+/* 800px or less */
+@media (max-width: 800px) {
+    .main-content {
+        flex-direction: column;
+        width: 100%;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        flex-wrap: wrap; /* Permitir el ajuste de elementos en la barra lateral */
+    }
+    .menu-item img {
+        width: 20px;
+        height: 20px;
+    }
+    .sidebar .user-image {
+        width: 45px;
+    }
+    .alert-box {
+        width: 220px;
+    }
+    .consultas, .reports {
+        width: 100%;
+        padding: 10px;
+    }
+    .report-grid,
+    .consultas-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajustar columnas dinámicamente */
+        gap: 15px; /* Espacio entre botones */
+    }
+    .report-box {
+        width: auto; /* Ajustar dinámicamente al contenedor */
+        margin: auto;
+    }
+    .dashboard-container {
+        padding: 15px;
+        background-color: #008000; /* Color verde */
+        width: 100%;
+        min-height: 100vh; /* Asegura que cubra toda la pantalla */
+    }
+}
+
+/* 500px or less */
+@media (max-width: 500px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+    .main-content {
+        flex-direction: column;
+        width: 100%;
+    }
+    .menu-item img {
+        width: 18px;
+        height: 18px;
+    }
+    .sidebar .user-image {
+        width: 35px;
+    }
+    .alert-box {
+        width: 180px;
+    }
+    .consultas, .reports {
+        width: 100%;
+        padding: 8px;
+    }
+    .report-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Ajustar columnas dinámicamente */
+        gap: 10px; /* Reducir espacio entre reportes */
+    }
+    .report-box {
+        height: auto; /* Permitir ajuste dinámico de altura */
+        text-align: center; /* Centrar texto e íconos */
+    }
+    .dashboard-container {
+        padding: 10px;
+        background-color: #008000; /* Color verde */
+        width: 100%;
+        min-height: 100vh; /* Asegura que cubra toda la pantalla */
+    }
+}
+
+
+/* 320px or less */
+@media (max-width: 320px) {
+    .report-grid {
+        grid-template-columns: 1fr; /* Cambia a una columna */
+    }
+    .alert-box {
+        width: 150px; /* Ajustar tamaño para dispositivos ultra pequeños */
+    }
+    .menu-item {
+        font-size: 0.8em; /* Reducir texto en el menú */
+    }
+    .sidebar .user-profile {
+        display: none; /* Ocultar información de perfil en pantallas muy pequeñas */
+    }
+    .menu-item img {
+        margin-right: 5px; /* Reducir espacio entre ícono y texto */
+    }
+    header h1 {
+        font-size: 1.2em; /* Escalar título */
+    }
+    header p {
+        font-size: 0.8em;
+    }
+    .consultas-box,
+    .report-box {
+        margin: 15px auto; /* Mejor alineación */
+    }
+}

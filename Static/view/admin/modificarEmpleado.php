@@ -24,7 +24,7 @@ if ($empleadoId) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Viga&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../Css/Crud.css">
+    <link rel="stylesheet" href="../../Css/modificar.css">
 </head>
 <body>
     <!-- Formulario de modificación de empleado -->
@@ -51,10 +51,10 @@ if ($empleadoId) {
                     </select>
 
                     <label for="fechaNac">Fecha de Nacimiento:</label>
-                    <input type="date" id="fechaNac" name="fechaNac" value="<?php echo $empleado['fechaNac']; ?>" readonly>
+                    <input type="date" id="fechaNac" name="fechaNac" value="<?php echo $empleado['fechaNac']; ?>" readonly class="form-control custom-date">
 
                     <label for="fechaIngreso">Fecha de Ingreso:</label>
-                    <input type="date" id="fechaIngreso" name="fechaIngreso" value="<?php echo $empleado['fechaIngreso']; ?>" readonly>
+                    <input type="date" id="fechaIngreso" name="fechaIngreso" value="<?php echo $empleado['fechaIngreso']; ?>" readonly class="form-control custom-date">
 
                     <!-- Campos editables -->
                     <label for="sueldo">Sueldo:</label>
@@ -74,7 +74,7 @@ if ($empleadoId) {
                     <label for="fotoPerfil">Foto de Perfil:</label>
                     <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
 
-                    <button type="submit" name="accion" value="actualizar" onclick="return validacionModiEmpleado();">Actualizar</button>
+                    <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionModiEmpleado();">Actualizar</button>
 
                     <br><br>
 
