@@ -1,6 +1,6 @@
-drop database if exists danielt2_plagas2024;
-create database danielt2_plagas2024;
-	use danielt2_plagas2024;
+drop database if exists soluPlagas;
+create database soluPlagas;
+	use soluPlagas;
 
 create table proveedor(
 	idProveedor int(4) zerofill primary key auto_increment,

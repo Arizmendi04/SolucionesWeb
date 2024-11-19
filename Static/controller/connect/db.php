@@ -3,7 +3,7 @@
         'localhost',
         'root',     
         '',        
-        'danielt2_plagas2024' 
+        'soluPlagas' 
     );
 
     // Verificación de la conexión
