@@ -45,8 +45,15 @@
     $sheet->mergeCells('A1:J1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
+    // Verificar el estado y asignar 'Todos' si está vacío
+    if (empty($categoria)) {
+        $categoriaMostrada = 'Todas';
+    } else {
+        $categoriaMostrada = $categoria;
+    }
+
     // Información de la categoría seleccionada
-    $sheet->setCellValue('A2', 'Categoría: ' . $categoria);
+    $sheet->setCellValue('A2', 'Categoría: ' . $categoriaMostrada);
     $sheet->getStyle('A2')->getFont()->setItalic(true);
 
     // Encabezados de la hoja

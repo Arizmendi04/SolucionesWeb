@@ -47,8 +47,15 @@
     $sheet->mergeCells('A1:J1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
+    // Verificar el estado y asignar 'Todos' si está vacío
+    if (empty($generoFiltro)) {
+        $generoMostrado = 'Todos';
+    } else {
+        $generoMostrado = $generoFiltro;
+    }
+
     // Información del género seleccionado
-    $sheet->setCellValue('A2', 'Género: ' . $generoFiltro);
+    $sheet->setCellValue('A2', 'Género: ' . $generoMostrado);
     $sheet->getStyle('A2')->getFont()->setItalic(true);
 
     // Encabezados de la hoja de Excel

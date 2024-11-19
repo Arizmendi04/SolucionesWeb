@@ -71,9 +71,9 @@
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         $output = fopen('php://output', 'w');
 
-        fwrite($output, "DROP DATABASE IF EXISTS danielt2_plagas2024;\n");
-        fwrite($output, "CREATE DATABASE danielt2_plagas2024;\n");
-        fwrite($output, "USE danielt2_plagas2024;\n\n");
+        fwrite($output, "DROP DATABASE IF EXISTS soluPlagas;\n");
+        fwrite($output, "CREATE DATABASE soluPlagas;\n");
+        fwrite($output, "USE soluPlagas;\n\n");
 
         foreach ($tables as $table) {
             fwrite($output, "DROP TABLE IF EXISTS $table;\n");

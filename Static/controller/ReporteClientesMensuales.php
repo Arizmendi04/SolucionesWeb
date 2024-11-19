@@ -56,8 +56,14 @@
     $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
+    // Verificar el estado y asignar 'Todos' si está vacío
+    if (empty($estado)) {
+        $estadoMostrado = 'Todos';
+    } else {
+        $estadoMostrado = $estado;
+    }
     // Agregar un subtítulo con el mes y el estado seleccionados
-    $sheet->setCellValue('A2', "Mes: $mes, Estado: $estado");
+    $sheet->setCellValue('A2', "Mes: $mes, Estado: $estadoMostrado");
     $sheet->mergeCells('A2:D2');
     $sheet->getStyle('A2')->getFont()->setItalic(true);
     $sheet->getStyle('A2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);

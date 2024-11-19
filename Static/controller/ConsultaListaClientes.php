@@ -50,8 +50,15 @@
     $sheet->mergeCells('A1:L1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-    // Información del proveedor seleccionado
-    $sheet->setCellValue('A2', 'Estado: ' . $estadoFiltro);
+    // Verificar el estado y asignar 'Todos' si está vacío
+    if (empty($estadoFiltro)) {
+        $estadoMostrado = 'Todos';
+    } else {
+        $estadoMostrado = $estadoFiltro;
+    }
+
+    // Información del estado seleccionado
+    $sheet->setCellValue('A2', 'Estado: ' . $estadoMostrado);
     $sheet->getStyle('A2')->getFont()->setItalic(true);
 
     // Encabezados de la hoja de Excel
