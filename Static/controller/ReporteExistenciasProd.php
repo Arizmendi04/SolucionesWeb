@@ -1,6 +1,6 @@
 <?php
     require __DIR__ . '/../../vendor/autoload.php';
-    require __DIR__ . '/Connect/db.php'; 
+    require __DIR__ . '/Connect/db.php';
 
     // Recuperar los valores seleccionados en el formulario
     $categoria = $_GET['categoria'];
@@ -10,34 +10,29 @@
     $pdf = new TCPDF();
     $pdf->AddPage();
     $pdf->SetFont('helvetica', '', 10);
-    
-    // Agregar la imagen del logo en la parte superior derecha con tamaño ajustado
-    $logoPath = __DIR__ . '/../img/logosinletras.png'; // Ruta de la imagen del logo
-    $pdf->Image($logoPath, 170, 10, 25, 25, '', '', '', false, 300, '', false, false, 0, false, false, false);
-
-    // Establecer el color verde para el título y hacerlo en negrita
-    $pdf->SetFont('helvetica', 'B', 12);
     $pdf->SetTextColor(0, 128, 0);
-    $pdf->Cell(0, 15, 'Reporte de Productos Disponibles por Tipo y Proveedor', 0, 1, 'C');
+
+
+    // Título del documento
+    $pdf->Cell(0, 10, 'Reporte de Productos Disponibles por Tipo y Proveedor', 0, 1, 'C');
     $pdf->Ln(5);
-
-
-    $pdf->Ln(15);
-
+    
     // Reiniciar el color del texto para el resto del contenido
     $pdf->SetTextColor(0, 0, 0);
 
-    // Encabezados de la tabla con el nuevo campo para el proveedor y estilo para fondo gris
-    $tbl = '<table border="1" cellpadding="4">
-                <tr style="background-color: #D3D3D3;">
-                    <th><strong>Producto</strong></th>
-                    <th><strong>Tipo</strong></th>
-                    <th><strong>Unidad de Medida</strong></th>
-                    <th><strong>Existencia</strong></th>
-                    <th><strong>Proveedor</strong></th>
-                </tr>';
+
+     // Encabezados de la tabla con el nuevo campo para el proveedor y estilo para fondo gris
+     $tbl = '<table border="1" cellpadding="4">
+     <tr style="background-color: #D3D3D3;">
+         <th><strong>Producto</strong></th>
+         <th><strong>Tipo</strong></th>
+         <th><strong>Unidad de Medida</strong></th>
+         <th><strong>Existencia</strong></th>
+         <th><strong>Proveedor</strong></th>
+     </tr>';
 
     $totalExistencias = 0; // Variable para acumular las existencias totales
+
 
     try {
         // Modificar la consulta SQL para incluir el nombre del proveedor
@@ -55,31 +50,24 @@
         $data = $result->fetch_all(MYSQLI_ASSOC); // Recuperar los resultados como un array asociativo
 
         if (empty($data)) {
-            // Mostrar mensaje de "No se encontraron productos" y asignar total en 0
-            $tbl .= '<tr>
-                        <td colspan="5" style="text-align: center;"><strong>No se encontraron productos para los criterios seleccionados.</strong></td>
-                    </tr>';
-            $totalExistencias = 0;
-        } else {
-            // Agregar los datos a la tabla, ahora con el nombre del proveedor
-            foreach ($data as $row) {
-                $tbl .= '<tr>
-                            <td>' . htmlspecialchars($row['nombreProd']) . '</td>
-                            <td>' . htmlspecialchars($row['tipo_producto']) . '</td>
-                            <td>' . htmlspecialchars($row['unidadM']) . '</td>
-                            <td>' . htmlspecialchars($row['cantidad_disponible']) . '</td>
-                            <td>' . htmlspecialchars($row['razonSocial']) . '</td>
-                        </tr>';
+            throw new Exception("No se encontraron productos para los criterios seleccionados.");
+        }
 
-                // Acumular la cantidad de existencias
-                $totalExistencias += $row['cantidad_disponible'];
-            }
+        // Agregar los datos a la tabla, ahora con el nombre del proveedor
+        foreach ($data as $row) {
+            $tbl .= '<tr>
+                        <td>' . htmlspecialchars($row['nombreProd']) . '</td>
+                        <td>' . htmlspecialchars($row['tipo_producto']) . '</td>
+                        <td>' . htmlspecialchars($row['unidadM']) . '</td>
+                        <td>' . htmlspecialchars($row['cantidad_disponible']) . '</td>
+                        <td>' . htmlspecialchars($row['razonSocial']) . '</td>
+                    </tr>';
+
+            // Acumular la cantidad de existencias
+            $totalExistencias += $row['cantidad_disponible'];
         }
     } catch (Exception $e) {
-        $tbl .= '<tr>
-                    <td colspan="5" style="text-align: center;"><strong>Error: ' . htmlspecialchars($e->getMessage()) . '</strong></td>
-                </tr>';
-        $totalExistencias = 0;
+        die("Error: " . $e->getMessage());
     }
 
     $tbl .= '<tr style="background-color: #04531a;">
@@ -89,6 +77,44 @@
 
     $tbl .= '</table>';
     $pdf->writeHTML($tbl, true, false, false, false, '');
+
+    // Crear el gráfico de barras
+    $barWidth = 20;
+    $barSpacing = 10;
+    $xPos = 50;
+    $yPos = 140;
+    $maxHeight = 50;
+    $maxValue = max(array_column($data, 'cantidad_disponible')); // Obtener el valor máximo de existencia
+
+    // Título del gráfico
+    $pdf->SetXY(10, 70); // Usa una posición específica en el PDF
+    $pdf->Cell(0, 30, 'Existencias de Productos por Tipo y Proveedor', 0, 1, 'C');
+
+    // Etiquetas de los ejes
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->SetXY(15, 110); // Posición de la etiqueta del eje Y
+    $pdf->Cell(10, 10, 'Cantidad', 0, 0, 'C');
+    $pdf->SetXY($xPos + (count($data) * ($barWidth + $barSpacing)) / 2, $yPos + 30); // Posición de la etiqueta del eje X
+    $pdf->Cell(10, 10, 'Productos', 0, 0, 'C');
+    $pdf->SetFont('helvetica', '', 10);
+
+    // Dibujar las barras y las etiquetas de cantidad
+    foreach ($data as $index => $row) {
+        $barHeight = ($row['cantidad_disponible'] / $maxValue) * $maxHeight; // Escalar la altura de la barra
+        $pdf->Rect($xPos + ($index * ($barWidth + $barSpacing)), $yPos - $barHeight, $barWidth, $barHeight, 'DF', [], [0, 128, 255]);
+
+        // Rotar la etiqueta de la barra (45 grados)
+        $pdf->StartTransform();
+        $pdf->Rotate(45, $xPos + ($index * ($barWidth + $barSpacing)) + ($barWidth / 2), $yPos + 15);
+        $pdf->SetXY($xPos + ($index * ($barWidth + $barSpacing)), $yPos + 15);
+        $pdf->Cell($barWidth, 10, $row['nombreProd'], 0, 0, 'C');
+        $pdf->StopTransform();
+
+        // Etiqueta de cantidad en el eje Y (a la izquierda de las barras)
+        $pdf->SetXY($xPos - 10, $yPos - $barHeight);
+        $pdf->Cell(10, 10, $row['cantidad_disponible'], 0, 0, 'R');
+    }
+
 
     // Salida del PDF
     $pdf->Output('ReporteProductosPorTipoYProveedor.pdf', 'I');
