@@ -27,7 +27,7 @@
                 <h2>Registrar Empleado</h2>
                 <form action="../../Controller/Empleados.php" method="POST" enctype="multipart/form-data">
                     <label for="name">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="nombre" name="nombre" required >
                     <p class="alert alert-danger" id="errorNombre" style="display:none;">
                         Ingresa un nombre válido, por favor.
                     </p>
