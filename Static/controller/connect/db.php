@@ -1,4 +1,5 @@
-<?php 
+<?php
+    //Datos de la conexión
     $conn = mysqli_connect(
         'localhost',
         'root',     

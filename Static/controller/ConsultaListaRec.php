@@ -10,7 +10,7 @@
     use PhpOffice\PhpSpreadsheet\Style\Border;
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
-    // Obtener el proveedor seleccionado del formulario
+    // Obtenemos el proveedor seleccionado del formulario
     $idProveedor = isset($_GET['proveedor']) ? $_GET['proveedor'] : '';
 
     // Consulta para obtener las recepciones basadas en el proveedor seleccionado
@@ -39,12 +39,12 @@
         exit;
     }
 
-    // Crear el archivo de Excel
+    // Creamos el archivo de Excel
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle("Recepciones del Proveedor");
 
-    // Insertar el logo de la empresa en la esquina derecha (celda F1)
+    // Insertamos el logo de la empresa en la esquina derecha (celda F1)
     $logo = new Drawing();
     $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
     $logo->setCoordinates('F1');
@@ -74,7 +74,7 @@
     // Variables para las filas
     $rowIndex = 6;
 
-    // Verificar si hay resultados
+    // Verificamos si hay resultados
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $sheet->setCellValue('A' . $rowIndex, $row['idRecepcion']);
@@ -97,7 +97,7 @@
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
-    // Aplicar estilo de tabla con color de fondo y bordes
+    // Aplicamos estilo de tabla con color de fondo y bordes
     $sheet->getStyle('A5:F' . ($rowIndex - 1))->applyFromArray([
         'borders' => [
             'allBorders' => [

@@ -10,20 +10,20 @@
     use PhpOffice\PhpSpreadsheet\Style\Border;
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
-    // Obtener el valor del filtro de estado, si existe
+    // Obtenemos el valor del filtro de estado, si existe
     $estadoFiltro = isset($_GET['estado']) ? $_GET['estado'] : '';
 
-    // Ajustar la consulta SQL con el filtro
+    // Ajustamos la consulta SQL con el filtro
     $sql = "SELECT noCliente, clienteRFC, nombreC, razonSocial, email, telefonoC, calle, colonia, localidad, municipio, estado, clienteCP FROM cliente";
 
-    // Si se seleccionó un estado, agregar el filtro a la consulta
+    // Si se seleccionó un estado, agregamos el filtro a la consulta
     if ($estadoFiltro) {
         $sql .= " WHERE estado = ?";
     }
 
     $stmt = $conn->prepare($sql);
 
-    // Si se agregó un filtro, se debe vincular el parámetro
+    // Si el usuario agregó un filtro, vinculamos el parámetro
     if ($estadoFiltro) {
         $stmt->bind_param('s', $estadoFiltro);
     }
@@ -31,12 +31,12 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Crear el archivo de Excel
+    // Creamos el archivo de Excel
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle("Clientes");
 
-    // Insertar el logo de la empresa en la esquina derecha (celda M1)
+    // Insertamos el logo de la empresa en la esquina derecha (celda M1)
     $logo = new Drawing();
     $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
     $logo->setCoordinates('M1');
@@ -50,7 +50,7 @@
     $sheet->mergeCells('A1:L1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-    // Verificar el estado y asignar 'Todos' si está vacío
+    // Verificamos el estado y asignamos 'Todos' si está vacío
     if (empty($estadoFiltro)) {
         $estadoMostrado = 'Todos';
     } else {
@@ -73,7 +73,7 @@
     // Variables para las filas
     $fila = 6;
 
-    // Verificar si hay resultados
+    // Verificamos si hay resultados
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $sheet->setCellValue('A' . $fila, $row['noCliente']);
@@ -102,7 +102,7 @@
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
-    // Aplicar estilo de tabla con color de fondo y bordes
+    // Aplicamos estilo de tabla con color de fondo y bordes
     $sheet->getStyle('A5:L' . ($fila - 1))->applyFromArray([
         'borders' => [
             'allBorders' => [

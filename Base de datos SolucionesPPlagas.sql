@@ -99,7 +99,7 @@ create table usuario(
 
 INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion) VALUES
 ('Jorge', 'Salazar Lopez', 'Masculino','2000-03-09', '2018-12-12', 45000.00, 'Admin', '7775562703', 'Avenida Teopanzolco 24'),
-('Compras', 'App', 'Otro', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '555-1111', 'NA');
+('Compras', 'App', 'Otro', '1990-01-15', '2020-05-01', 12000.00, 'Vendedor', '4895551110', 'NA');
 
 insert into usuario VALUES
 (0, 'Admin', 'Ad2401@', 'Admin', 1),

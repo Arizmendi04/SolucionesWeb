@@ -1,19 +1,15 @@
-<?php include __DIR__ . '/Connect/Db.php'; ?>
-
 <?php
-
+    include __DIR__ . '/Connect/Db.php';
     session_start();
 
     $user = $_POST["usuario"];
     $password = $_POST["contrasena"];
 
-    $sql = "Select * from usuario where nombreU = '$user' and contrasena = '$password'";
-
+    $sql = "SELECT * FROM usuario WHERE nombreU = '$user' AND contrasena = '$password'";
     $execute = mysqli_query($conn, $sql);
 
-    $row = mysqli_fetch_array($execute);
-
-    if(($row["nombreU"] == $user) && ($row["contrasena"] == $password)){
+    if ($row = mysqli_fetch_array($execute)) {
+        // Si las credenciales son correctas, configurar sesión y redirigir
         $_SESSION["usuario"] = $user;
         $_SESSION["noEmpleado"] = $row["noEmpleado"]; // Guardar el noEmpleado en la sesión
         if ($row["tipoU"] === "Admin") {
@@ -23,8 +19,10 @@
         } else {
             header("Location: /SolucionesWeb/Static/View/Login.php");
         }
-    }else{
+    } else {
+        // Si las credenciales son incorrectas, guardar mensaje de error y redirigir
+        $_SESSION["mensaje_error"] = "Usuario o contraseña incorrectos.";
         header("Location: /SolucionesWeb/Static/View/Login.php");
+        exit();
     }
-
 ?>

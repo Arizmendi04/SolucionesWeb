@@ -50,6 +50,9 @@
                 // Crear objeto Proveedor con los datos actuales y nuevos del formulario
                 $proveedor = new Proveedor($conn);
                 $proveedor->setIdProveedor($id);
+
+                //Si $_POST['razonSocial'] está definido y no es null, utilizamos ese valor.
+                //De lo contrario, usamos el valor razonSocial que viene de $proveedorData.
                 $proveedor->setRazonSocial($_POST['razonSocial'] ?? $proveedorData['razonSocial']);
                 $proveedor->setNombreComercial($_POST['nombreComercial'] ?? $proveedorData['nombreComercial']);
                 $proveedor->setTelefono($_POST['telefono'] ?? $proveedorData['telefono']);
@@ -76,7 +79,7 @@
         $resultado = $proveedor->eliminarProveedor($id); // Llamar al método para eliminar proveedor
         if ($resultado) {
             header('Location: ../View/Admin/ViewGestionProve.php');
-            exit; // Asegurarse de salir después de redirigir
+            exit; // Salir después de redirigir
         } else {
             echo "Error al eliminar proveedor: " . $conn->error;
         }

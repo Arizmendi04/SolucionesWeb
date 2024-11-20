@@ -91,9 +91,9 @@
                 $Producto->setDescripcion($_POST['descripcion'] ?? $ProductoData['descripcion']);
                 $Producto->setPrecio($_POST['precio'] ?? $ProductoData['precio']);
                 $Producto->setExistencia($_POST['existencia'] ?? $ProductoData['existencia']);
-                $Producto->setTipo($_POST['categoria'] ?? $ProductoData['tipo']); // Agregado para incluir categoría
-                $Producto->setPeso($_POST['peso'] ?? $ProductoData['peso']); // Agregado para incluir peso
-                $Producto->setUnidadM($_POST['unidadM'] ?? $ProductoData['unidadM']); // Agregado para incluir unidad
+                $Producto->setTipo($_POST['categoria'] ?? $ProductoData['tipo']); 
+                $Producto->setPeso($_POST['peso'] ?? $ProductoData['peso']); 
+                $Producto->setUnidadM($_POST['unidadM'] ?? $ProductoData['unidadM']); 
                 $Producto->setUrlImagen($ProductoData['urlImagen']); // Mantener imagen actual
 
                 // Manejo de nueva imagen

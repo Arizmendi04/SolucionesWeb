@@ -1,10 +1,12 @@
+// Seleccionamos todos los botones con el id 'agregarCarrito' y los recorremos
 document.querySelectorAll('#agregarCarrito').forEach(button => {
     button.addEventListener('click', function (event) {
-        event.preventDefault();
-        const url = this.getAttribute('href');
+        event.preventDefault(); // Evitamos que el enlace recargue la página por defecto
+        const url = this.getAttribute('href'); // Obtenemos la URL del atributo 'href' del botón
 
+        // Realizamos la solicitud a la URL obtenida
         fetch(url)
-            .then(response => response.json())
+            .then(response => response.json()) // Convertimos la respuesta a JSON
             .then(data => {
                 if (data.success) {
                     mostrarMensaje('Producto agregado al carrito con éxito.');
@@ -20,7 +22,7 @@ document.querySelectorAll('#agregarCarrito').forEach(button => {
 });
 
 function mostrarMensaje(mensaje, tipo = 'success') {
-    const mensajeExito = document.getElementById('mensajeExito');
+    const mensajeExito = document.getElementById('mensajeExito'); // Seleccionamos el contenedor del mensaje
     const mensajeTexto = document.getElementById('mensajeTexto');
 
     mensajeTexto.textContent = mensaje;

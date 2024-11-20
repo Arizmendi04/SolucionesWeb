@@ -8,13 +8,13 @@
 
 <?php
 
-    // Obtener lista de tickets
+    // Obtenemos lista de tickets
     function solicitarTickets($conn) {
         $Ticket = new Ticket($conn);
         return $Ticket->obtenerTickets();
     }
 
-    // Crear Ticket
+    // Creamos Ticket
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'crear') {
         $ticket = new Ticket($conn);
         $ticket->setFecha($_POST['fecha']);

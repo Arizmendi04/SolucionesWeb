@@ -21,14 +21,14 @@
 ?>
 
 <?php
-    // Verificar si los datos se han recibido
+    // Verificamos si los datos se han recibido
     if (isset($_GET['idVenta'], $_GET['folioProducto'], $_GET['cantidad'], $_GET['precio'])) {
         $idVenta = $_GET['idVenta'];
         $folioProducto = $_GET['folioProducto'];
-        $cantidad = (float)$_GET['cantidad'];  // Cambié canti a cantidad
+        $cantidad = (float)$_GET['cantidad'];  // Cambiamos canti a cantidad
         $precio = (float)$_GET['precio'];
 
-        // Consultar si el producto ya existe en la venta
+        // Consultamos si el producto ya existe en la venta
         $query = "SELECT * FROM venta WHERE idVenta = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $idVenta);

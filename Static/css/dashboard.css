@@ -44,14 +44,30 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #2f5d3b;
+    background-color: #63df4a;
     color: #fff;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
 .alert-button:hover {
-    background-color: #3b7f53;
+    background-color: #2f5d3b;
+}
+
+.alert-buttonCance {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #db2626;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.alert-buttonCance:hover {
+    background-color: #f12929;
 }
 
 #alertMessage {

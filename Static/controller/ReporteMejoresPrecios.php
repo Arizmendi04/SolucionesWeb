@@ -6,11 +6,8 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
     use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-    use PhpOffice\PhpSpreadsheet\Style\Fill;
-    use PhpOffice\PhpSpreadsheet\Style\Border;
-    use PhpOffice\PhpSpreadsheet\Style\Color;
 
-    // Obtener los valores del formulario
+    // Obtenemos los valores del formulario
     $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
     $peso = isset($_GET['peso']) ? $_GET['peso'] : '';
     $unidad = isset($_GET['unidad']) ? $_GET['unidad'] : '';
@@ -37,12 +34,12 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Crear un nuevo documento de Excel
+    // Creamos un nuevo documento de Excel
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle('Reporte Comparativo de Precios');
 
-    // Insertar el logo de la empresa en la esquina derecha (celda F1)
+    // Insertamos el logo de la empresa en la esquina derecha (celda F1)
     $logo = new Drawing();
     $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
     $logo->setCoordinates('F1');

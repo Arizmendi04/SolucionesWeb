@@ -28,6 +28,14 @@
                 <div class="login-box">
                     <h2>Iniciar Sesión</h2>
                     
+                    <!-- Mostrar mensaje de error si existe -->
+                    <?php
+                        session_start();
+                        if (isset($_SESSION["mensaje_error"])) {
+                            echo "<p style='color: red; font-weight: bold; text-align: center;'>" . $_SESSION["mensaje_error"] . "</p>";
+                            unset($_SESSION["mensaje_error"]);
+                        }
+                    ?>
                     <form method="POST" name="frm1" id="frm1" action="../Controller/Autentificacion.php" onsubmit="return validacionc();">
                         <label for="usuario">Usuario</label>
                         <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>

@@ -39,9 +39,9 @@
         $producto->setDescripcion($_POST['descripcion']);
         $producto->setPrecio($_POST['precio']);
         $producto->setExistencia($_POST['cantidad']);
-        $producto->setTipo($_POST['categoria']); // Agregado para incluir categoría
-        $producto->setPeso($_POST['peso']); // Agregado para incluir peso
-        $producto->setUnidadM($_POST['unidad']); // Agregado para incluir unidad
+        $producto->setTipo($_POST['categoria']); 
+        $producto->setPeso($_POST['peso']); 
+        $producto->setUnidadM($_POST['unidad']); 
         $producto->setIdProveedor($_POST['idProveedor']);
 
 
@@ -62,7 +62,7 @@
                     try {
                         $producto->insertarProducto();
                         header('Location: /SolucionesWeb/Static/View/Empleado/ViewGestionProd.php');
-                        exit; // Asegurarse de salir después de redirigir
+                        exit; //Salir después de redirigir
                     } catch (mysqli_sql_exception $e) {
                         echo "Error al insertar el producto: " . $e->getMessage();
                     }
@@ -91,10 +91,10 @@
                 $Producto->setDescripcion($_POST['descripcion'] ?? $ProductoData['descripcion']);
                 $Producto->setPrecio($_POST['precio'] ?? $ProductoData['precio']);
                 $Producto->setExistencia($_POST['existencia'] ?? $ProductoData['existencia']);
-                $Producto->setTipo($_POST['categoria'] ?? $ProductoData['tipo']); // Agregado para incluir categoría
-                $Producto->setPeso($_POST['peso'] ?? $ProductoData['peso']); // Agregado para incluir peso
-                $Producto->setUnidadM($_POST['unidadM'] ?? $ProductoData['unidadM']); // Agregado para incluir unidad
-                $Producto->setUrlImagen($ProductoData['urlImagen']); // Mantener imagen actual
+                $Producto->setTipo($_POST['categoria'] ?? $ProductoData['tipo']); 
+                $Producto->setPeso($_POST['peso'] ?? $ProductoData['peso']); 
+                $Producto->setUnidadM($_POST['unidadM'] ?? $ProductoData['unidadM']);
+                $Producto->setUrlImagen($ProductoData['urlImagen']);
 
                 // Manejo de nueva imagen
                 if (isset($_FILES['fotoProducto']) && $_FILES['fotoProducto']['error'] == 0) {

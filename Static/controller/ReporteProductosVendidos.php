@@ -3,11 +3,11 @@
     require __DIR__ . '/Connect/db.php'; // Ajusta la ruta de conexión
     include 'Sesion.php';
 
-    // Obtener el rango de fechas desde los parámetros GET
+    // Obtenemos el rango de fechas desde los parámetros GET
     $fechaInicio = isset($_GET['fechaInicio']) ? $_GET['fechaInicio'] : '';
     $fechaFin = isset($_GET['fechaFin']) ? $_GET['fechaFin'] : '';
 
-    // Ajustar la consulta SQL con el filtro de fechas
+    // Ajustamos la consulta SQL con el filtro de fechas
     $sql = "SELECT 
                 p.folio, 
                 p.nombreProd, 
@@ -31,7 +31,7 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Crear el objeto TCPDF
+    // Creamos el objeto TCPDF
     $pdf = new TCPDF();
     $pdf->SetTitle('Reporte de Productos Más Vendidos');
     $pdf->SetHeaderData('', 0, 'Reporte de Productos Más Vendidos', "Fecha: " . date('d/m/Y'));
@@ -39,13 +39,13 @@
     // Configuración de fuente
     $pdf->SetFont('helvetica', '', 8);
 
-    // Agregar una página
+    // Agregamos una página
     $pdf->AddPage();
 
     // Título
     $pdf->SetFont('helvetica', 'B', 14);
     $pdf->Cell(0, 25, 'Productos Más Vendidos', 0, 1, 'C');
-    // Agregar la imagen del logo en la parte superior derecha con tamaño ajustado
+    // Agregamos la imagen del logo en la parte superior derecha con tamaño ajustado
     $logoPath = __DIR__ . '/../img/logosinletras.png'; // Ruta de la imagen del logo
     $pdf->Image($logoPath, 170, 10, 25, 25, '', '', '', false, 200, '', false, false, 0, false, false, false);
 
@@ -60,7 +60,7 @@
     $pdf->Cell(30, 7, 'Cantidad Vendida', 1, 0, 'C', 1);
     $pdf->Cell(30, 7, 'Ingresos Generados', 1, 1, 'C', 1);
 
-    // Establecer el estilo de celdas de contenido
+    // Establecemos el estilo de celdas de contenido
     $pdf->SetFont('helvetica', '', 8);
 
     // Variable para acumular los ingresos generados

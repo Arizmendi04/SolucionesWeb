@@ -10,7 +10,7 @@
     use PhpOffice\PhpSpreadsheet\Style\Border;
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
-    // Obtener mes y empleado desde GET
+    // Obtenemos mes y empleado desde GET
     $mes = isset($_GET['mes']) ? $_GET['mes'] : '';
     $empleado = isset($_GET['empleado']) ? $_GET['empleado'] : '';
 
@@ -52,7 +52,7 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Crear documento Excel
+    // Creamos documento Excel
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle('Reporte de Ventas Mensuales');

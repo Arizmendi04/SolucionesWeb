@@ -10,7 +10,7 @@
     use PhpOffice\PhpSpreadsheet\Style\Border;
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
-    // Obtener la categoría seleccionada del formulario
+    // Obtenemos la categoría seleccionada del formulario
     $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
     // Consulta para obtener los productos de la categoría seleccionada
@@ -31,7 +31,7 @@
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle("Productos");
 
-    // Insertar el logo de la empresa en la esquina derecha (celda K1)
+    // Insertamos el logo de la empresa en la esquina derecha (celda K1)
     $logo = new Drawing();
     $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
     $logo->setCoordinates('K1');
@@ -45,7 +45,7 @@
     $sheet->mergeCells('A1:J1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-    // Verificar el estado y asignar 'Todos' si está vacío
+    // Verificamos el estado y asignar 'Todos' si está vacío
     if (empty($categoria)) {
         $categoriaMostrada = 'Todas';
     } else {
@@ -68,7 +68,7 @@
     // Variables para las filas
     $fila = 4;
 
-    // Verificar si hay productos
+    // Verificamos si hay productos
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $sheet->setCellValue('A' . $fila, $row['folio']);
@@ -89,12 +89,12 @@
         $sheet->getStyle('A4')->getFont()->setItalic(true);
     }
 
-    // Ajuste de ancho automático para las columnas
+    // Ajustamos el ancho automático para las columnas
     foreach (range('A', 'J') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
-    // Aplicar estilo de tabla con color de fondo y bordes
+    // Aplicamos estilo de tabla con color de fondo y bordes
     $sheet->getStyle('A3:J' . ($fila - 1))->applyFromArray([
         'borders' => [
             'allBorders' => [

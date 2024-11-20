@@ -58,7 +58,7 @@
     <div class="alert-box" id="alertBox">
         <p id="alertMessage">¿Estás seguro de que quieres cerrar sesión?</p>
         <button class="alert-button" onclick="confirmLogout()">Cerrar sesión</button>
-        <button class="alert-button" onclick="closeAlert()">Cancelar</button>
+        <button class="alert-buttonCance" onclick="closeAlert()">Cancelar</button>
     </div>
 
     <script src="/SolucionesWeb/Static/Controller/Js/Logout.js"></script>

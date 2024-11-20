@@ -10,7 +10,7 @@
     use PhpOffice\PhpSpreadsheet\Style\Border;
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
-    // Obtener el mes y el estado desde los parámetros GET
+    // Obtenemos el mes y el estado desde los parámetros GET
     $mes = isset($_GET['mes']) ? $_GET['mes'] : '';
     $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 
@@ -37,12 +37,12 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Crear un nuevo documento de Excel
+    // Creamos un nuevo documento de Excel
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle('Reporte de Compras por Cliente');
 
-    // Insertar el logo de la empresa en la esquina derecha (celda F1)
+    // Insertamos el logo de la empresa en la esquina derecha (celda F1)
     $logo = new Drawing();
     $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen del logo
     $logo->setCoordinates('F1');
@@ -50,19 +50,19 @@
     $logo->setHeight(80);
     $logo->setWorksheet($sheet);
 
-    // Agregar un título al reporte en la primera fila
+    // Agregamos un título al reporte en la primera fila
     $sheet->setCellValue('A1', 'Reporte de Compras por Cliente');
     $sheet->mergeCells('A1:D1');
     $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-    // Verificar el estado y asignar 'Todos' si está vacío
+    // Verificamos el estado y asignar 'Todos' si está vacío
     if (empty($estado)) {
         $estadoMostrado = 'Todos';
     } else {
         $estadoMostrado = $estado;
     }
-    // Agregar un subtítulo con el mes y el estado seleccionados
+    // Agregamos un subtítulo con el mes y el estado seleccionados
     $sheet->setCellValue('A2', "Mes: $mes, Estado: $estadoMostrado");
     $sheet->mergeCells('A2:D2');
     $sheet->getStyle('A2')->getFont()->setItalic(true);
@@ -116,7 +116,7 @@
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
-    // Aplicar bordes a la tabla
+    // Aplicamos bordes a la tabla
     $sheet->getStyle('A3:D' . ($rowIndex - 1))->applyFromArray([
         'borders' => [
             'allBorders' => [

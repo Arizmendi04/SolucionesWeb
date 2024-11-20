@@ -12,9 +12,11 @@
 
     $generoFiltro = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
+    // Creamos la consulta SQL para obtener los empleados, excluyendo IDs específicos
     $sql = "SELECT noEmpleado, nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion 
             FROM empleado WHERE noEmpleado NOT IN (1, 2)";
     
+    // Agregamos un filtro adicional para el género si está definido
     if ($generoFiltro) {
         $sql .= " AND sexo = ?";
     }
@@ -28,12 +30,12 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Crear el archivo de Excel
+    // Creamos el archivo de Excel
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle("Empleados");
 
-    // Insertar el logo en la esquina derecha
+    // Insertamos el logo en la esquina derecha
     $logo = new Drawing();
     $logo->setPath(__DIR__ . '/../img/logosinletras.png'); // Ruta de la imagen
     $logo->setCoordinates('K1');
@@ -47,7 +49,7 @@
     $sheet->mergeCells('A1:J1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-    // Verificar el estado y asignar 'Todos' si está vacío
+    // Verificamos el estado y asignar 'Todos' si está vacío
     if (empty($generoFiltro)) {
         $generoMostrado = 'Todos';
     } else {
@@ -61,16 +63,23 @@
     // Encabezados de la hoja de Excel
     $encabezados = ['ID Empleado', 'Nombre', 'Apellido', 'Género', 'Fecha de Nacimiento', 'Fecha de Ingreso', 'Sueldo', 'Cargo', 'Teléfono', 'Dirección'];
     $col = 'A';
+
+    // Recorremos la lista de encabezados para escribirlos en las columnas de la fila 3
     foreach ($encabezados as $encabezado) {
+        // Agregamos el texto del encabezado en la celda correspondiente (por ejemplo, A3, B3, C3, etc.)
         $sheet->setCellValue($col . '3', $encabezado);
+
+        // Aplicamos estilo al encabezado: ponemos el texto en negrita
         $sheet->getStyle($col . '3')->getFont()->setBold(true);
+
+        // Pasamos a la siguiente columna (A -> B -> C, etc.)
         $col++;
     }
 
     // Variables para las filas de datos
     $rowIndex = 4;
 
-    // Verificar si hay resultados
+    // Verificamos si hay resultados
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $sheet->setCellValue('A' . $rowIndex, $row['noEmpleado']);
@@ -92,27 +101,30 @@
         $sheet->getStyle('A3')->getFont()->setItalic(true);
     }
 
-    // Ajuste de ancho automático para las columnas
+    // Ajustamos el ancho automático para las columnas
     foreach (range('A', 'J') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
-    // Aplicar estilo de tabla
+    // Aplicamos estilo de tabla
     $sheet->getStyle('A3:J' . ($rowIndex - 1))->applyFromArray([
-        'borders' => [
+        'borders' => [ // Agregamos bordes a todas las celdas del rango
             'allBorders' => [
-                'borderStyle' => Border::BORDER_THIN,
-                'color' => ['argb' => Color::COLOR_BLACK],
+                'borderStyle' => Border::BORDER_THIN, // Usamos un borde delgado
+                'color' => ['argb' => Color::COLOR_BLACK], // El color del borde será negro
             ],
         ],
         'fill' => [
-            'fillType' => Fill::FILL_SOLID,
+            'fillType' => Fill::FILL_SOLID, // Relleno sólido
             'startColor' => [
                 'argb' => 'D2CFD3', // Fondo verde claro para encabezados
             ],
         ],
     ]);
-    $sheet->getStyle('A3:J3')->getFont()->setBold(true)->getColor()->setARGB(Color::COLOR_WHITE);
+
+    // Estilizamos la fila 3 específicamente (encabezados de la tabla)
+    $sheet->getStyle('A3:J3')->getFont()->setBold(true)->getColor()->setARGB(Color::COLOR_WHITE); // Cambiamos el color del texto a blanco
+    
     $sheet->getStyle('A3:J3')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('04531a'); // Encabezado en verde oscuro
 
     // Descargar el archivo como Excel

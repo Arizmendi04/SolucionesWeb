@@ -21,9 +21,9 @@ function obtenerRecepcionPorID($conn, $idRecepcion) {
     return $Recepcion->obtenerRecepcion($idRecepcion);
 }
 
-// Crear una nueva recepción
+// Creamos una nueva recepción
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Verifica si la acción es 'crear' y si los campos necesarios están presentes
+    // Verificamos si la acción es 'crear' y si los campos necesarios están presentes
     if ($_POST['accion'] == 'crear' && isset($_POST['idProducto'], $_POST['cantidadProducto'], $_POST['fecha'], $_POST['idProveedor'])) {
         $folio = $_POST['idProducto']; // Obtén el folio del producto seleccionado
         $cantidadProducto = $_POST['cantidadProducto'];
@@ -31,16 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $comentario = isset($_POST['comentario']) ? $_POST['comentario'] : ''; // Comentario opcional
         $idProveedor = $_POST['idProveedor'];
 
-        // Crear la instancia de la clase Recepcion y pasar los valores
+        // Creamos la instancia de la clase Recepcion y pasar los valores
         $Recepcion = new Recepcion($conn);
         $Recepcion->setCantidadProducto($cantidadProducto);
         $Recepcion->setFecha($fecha);
         $Recepcion->setComentario($comentario);
         $Recepcion->setIdProveedor($idProveedor);
-        $Recepcion->setFolio($folio); // Asegúrate de que el folio sea correcto
+        $Recepcion->setFolio($folio); 
 
         try {
-            // Insertar la recepción en la base de datos
+            // Insertamos la recepción en la base de datos
             $Recepcion->insertarRecepcion();
             header('Location: ../View/Admin/ViewGestionRec.php');
             exit;
@@ -49,25 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-    // Modificar una recepción existente
+    // Modificamos una recepción existente
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'editar') {
-        if (isset($_POST['id'])) {  // Verificar que el ID de recepción esté presente
-            $idRep = $_POST['id'];  // Obtener el ID de recepción desde el formulario
+        if (isset($_POST['id'])) {  // Verificamos que el ID de recepción esté presente
+            $idRep = $_POST['id'];  // Obtenemos el ID de recepción desde el formulario
 
-            // Crear una instancia de Recepcion para obtener los datos actuales
-            $recepcionData = obtenerRecepcionPorID($conn, $idRep);  // Obtener datos actuales de la recepción
+            // Creamos una instancia de Recepcion para obtener los datos actuales
+            $recepcionData = obtenerRecepcionPorID($conn, $idRep);  // Obtenemos datos actuales de la recepción
         
             if ($recepcionData) {
                 $recepcion = new Recepcion($conn);
-                $recepcion->setIdRep($idRep);  // Establecer el ID de la recepción
+                $recepcion->setIdRep($idRep);  // Establecemos el ID de la recepción
                 $recepcion->setCantidadProducto($_POST['cantidadProducto'] ?? $recepcionData['cantidadProducto']);
                 $recepcion->setFecha($_POST['fecha'] ?? $recepcionData['fecha']);
                 $recepcion->setComentario($_POST['comentario'] ?? $recepcionData['comentario']);
                 $recepcion->setIdProveedor($_POST['idProveedor'] ?? $recepcionData['idProveedor']);
                 $recepcion->setFolio($_POST['folio'] ?? $recepcionData['folio']);
         
-                // Ejecutar la actualización en la base de datos
-                $respuesta = $recepcion->modificarRecepcion();  // Llamar al método de modificación
+                // Ejecutamos la actualización en la base de datos
+                $respuesta = $recepcion->modificarRecepcion();  // Llamamos al método de modificación
                 if ($respuesta) {
                     header('Location: /SolucionesWeb/Static/View/Admin/ViewGestionRec.php');
                     exit;

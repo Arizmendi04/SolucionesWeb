@@ -68,7 +68,7 @@
         }
     }
 
-    // Filtrar tickets por fecha (AJAX)
+    // Filtrar tickets por fecha
     if (isset($_GET['accion']) && $_GET['accion'] == 'filtrar') {
         $fecha = $_GET['fecha'] ?? ''; // Verifica si la fecha fue pasada
         $Ticket = new Ticket($conn);
@@ -82,10 +82,10 @@
                     WHERE v.fecha LIKE ? and v.noEmpleado != 2
                     ORDER BY v.idNotaVenta ASC";
             $stmt = $conn->prepare($query);
-            $likeFecha = "$fecha%"; // Solo se filtra por fechas que comienzan con el valor ingresado
+            $likeFecha = "$fecha%"; // Solo filtrar por fechas que comienzan con el valor ingresado
             $stmt->bind_param("s", $likeFecha);
         } else {
-            // Si no se proporciona fecha, obtiene todos los registros
+            // Si no se proporciona fecha, obtener todos los registros
             $query = "SELECT v.idNotaVenta, v.fecha, v.subtotal, v.iva, v.PagoTotal, v.estatus, 
                             c.nombreC AS cliente, CONCAT(e.nombre, ' ', e.apellido) AS empleado
                     FROM notaVenta v
@@ -101,8 +101,9 @@
 
         $resultados = [];
         if ($result->num_rows > 0) {
+            // Si hay resultados, los recorremos para almacenarlos en un arreglo
             while ($venta = $result->fetch_assoc()) {
-                $resultados[] = $venta;
+                $resultados[] = $venta; // Agregamos cada fila de resultados al arreglo
             }
         }
         $stmt->close();
@@ -110,6 +111,7 @@
         // Construcción segura de HTML
         $html = "";
         if (!empty($resultados)) {
+            // Si hay resultados, generamos filas de tabla con los datos
             foreach ($resultados as $venta) {
                 $html .= "<tr>
                             <td>" . htmlspecialchars($venta['idNotaVenta']) . "</td>
@@ -121,6 +123,7 @@
                             <td>" . htmlspecialchars($venta['cliente']) . "</td>
                             <td>" . htmlspecialchars($venta['empleado']) . "</td>
                         </tr>";
+                        //Utilizamos `htmlspecialchars` para prevenir inyección de HTML
             }
         } else {
             $html .= "<tr><td colspan='8'>No hay tickets que coincidan con la búsqueda</td></tr>";
