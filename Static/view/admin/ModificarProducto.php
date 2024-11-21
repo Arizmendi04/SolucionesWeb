@@ -73,25 +73,15 @@
                         <label for="proveedor">Proveedor:</label>
                         <div class="busqueda mb-3">
                             <?php
-                                // Obtener el proveedor por ID y verificar si se encuentra
                                 $proveedor = obtenerProveedorPorID($conn, $Producto['idProveedor'] ?? null);
                                 $nombreProveedor = $proveedor ? (!empty($proveedor['nombreComercial']) ? $proveedor['nombreComercial'] : $proveedor['razonSocial']) : 'Proveedor no encontrado';
                             ?>
-                            <input type="text" id="proveedorNombre" value="<?php echo htmlspecialchars($nombreProveedor); ?>" required placeholder="Busca un proveedor" class="form-control" autocomplete="off" oninput="buscarProveedor(this.value)">
+                            <!-- Campo de texto para mostrar el nombre del proveedor (solo lectura) -->
+                            <input type="text" id="proveedorNombre" value="<?php echo htmlspecialchars($nombreProveedor); ?>" readonly class="form-control">
+                            <!-- Campo oculto para enviar el ID del proveedor -->
                             <input type="hidden" id="idProveedor" name="idProveedor" value="<?php echo htmlspecialchars($Producto['idProveedor'] ?? ''); ?>">
                         </div>
 
-                        <p class="alert alert-danger" id="errorIdProveedor" style="display:none;">
-                            Selecciona a un proveedor, por favor.
-                        </p>
-
-                        <div id="listaProveedores" class="list-group" style="display: none;">
-                            <?php
-                            foreach ($proveedores as $proveedor) {
-                                echo "<a href='javascript:void(0)' onclick='seleccionarProveedor({$proveedor['id']}, \"{$proveedor['nombre']}\")' class='list-group-item list-group-item-action'>{$proveedor['nombre']}</a>";
-                            }
-                            ?>
-                        </div> <!-- Contenedor de la lista de proveedores -->
 
                         <label for="descripcion">Descripción:</label>
                         <textarea id="descripcion" name="descripcion" class="desc"  required><?php echo htmlspecialchars($Producto['descripcion'] ?? ''); ?></textarea>
@@ -107,10 +97,10 @@
                         <label for="fotoProducto" class="custom-file-upload btn btn-secondary mt-3">
                             <p class="letraBlanca"> Subir foto del producto</p>
                         </label>
-                        <input type="file" id="fotoProducto" name="fotoProducto" accept=".png, .jpg, .jpeg, .gif, .svg" class="form-control-file" style="display: none;" required>
+                        <input type="file" id="fotoProducto" name="fotoProducto" accept=".png, .jpg, .jpeg, .gif, .svg" class="form-control-file" style="display: none;">
 
                         <!-- Contenedor para la imagen de previsualización con la X para eliminar -->
-                        <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionProducto();">Actualizar</button>
+                        <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionModiProducto();">Actualizar</button>
                         <br>
 
                     </form>

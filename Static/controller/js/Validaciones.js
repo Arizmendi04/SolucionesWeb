@@ -20,7 +20,7 @@ function validarSueldo(sueldo) {
 }
 
 function validarCantidad(cantidad) {
-    cantidad = parseInt(cantidad);
+    cantidad = parseFloat(cantidad);
     return !isNaN(cantidad) && cantidad > 0;
 }
 
@@ -214,5 +214,33 @@ function validacionProducto() {
         return false;
     } else {
         document.getElementById("errorIdProveedor").style.display = "none";
+    }
+}
+
+/*Validaciones para modificar productos*/
+function validacionModiProducto() {
+    const peso = document.getElementById("peso").value.trim();
+    const precio = document.getElementById("precio").value.trim();
+    const existencias = document.getElementById("existencia").value.trim();
+
+    if (!validarCantidad(peso)) {
+        document.getElementById("errorPeso").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorPeso").style.display = "none";
+    }
+
+    if (!validarCantidad(precio)) {
+        document.getElementById("errorPrecio").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorPrecio").style.display = "none";
+    }
+
+    if (!validarCantidad(existencias)) {
+        document.getElementById("errorExistencias").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorExistencias").style.display = "none";
     }
 }

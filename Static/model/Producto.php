@@ -209,7 +209,7 @@ class Producto {
             $idProveedor = $this->idProveedor;
             $folio = $this->folio;
             // Vincular parámetros
-            $stmt->bind_param("sssidssssi", 
+            $stmt->bind_param("sssidsdsii", 
                 $nombreProd, 
                 $tipo, 
                 $unidadM, 
