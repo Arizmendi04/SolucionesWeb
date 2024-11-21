@@ -95,6 +95,14 @@
 
                         <label for="descripcion">Descripción:</label>
                         <textarea id="descripcion" name="descripcion" class="desc"  required><?php echo htmlspecialchars($Producto['descripcion'] ?? ''); ?></textarea>
+                        
+                        <div id="previewContainer">
+                            <label>Imagen:</label>
+                            <br>
+                            <img id="previewImg" src="/SolucionesWeb/Static/Img/Productos/<?php echo htmlspecialchars($Producto['urlImagen'] ?? '/SolucionesWeb/Static/Img/Productos/imagengenerica.png'); ?>" name="previewImg" class="previewImg" style="display: block;">
+                            <div id="removePreview" name="removePreview">&times;</div>
+                            <br>
+                        </div>
 
                         <label for="fotoProducto" class="custom-file-upload btn btn-secondary mt-3">
                             <p class="letraBlanca"> Subir foto del producto</p>
@@ -102,20 +110,6 @@
                         <input type="file" id="fotoProducto" name="fotoProducto" accept=".png, .jpg, .jpeg, .gif, .svg" class="form-control-file" style="display: none;" required>
 
                         <!-- Contenedor para la imagen de previsualización con la X para eliminar -->
-
-                        <br>
-
-                        <div id="previewContainer" class="contenedorImagen">
-                            <div class="contenedorTexto"> 
-                                <label>Imagen:</label>
-                            </div>
-
-                            <img id="previewImg" src="/SolucionesWeb/Static/Img/Productos/<?php echo htmlspecialchars($Producto['urlImagen'] ?? '/SolucionesWeb/Static/Img/Productos/imagengenerica.png'); ?>" name="previewImg" class="previewImg" style="display: block;">
-                            <div id="removePreview" name="removePreview">&times;</div>
-                            <br>
-                        </div>
-                        <br>
-
                         <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionProducto();">Actualizar</button>
                         <br>
 
