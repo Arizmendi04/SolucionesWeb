@@ -2,7 +2,9 @@
     include 'HeaderA.php';
     include '../../Controller/Recepciones.php';
     include '../../Controller/Connect/Db.php';
+    include '../../Controller/Proveedores.php';
     include '../../Controller/Sesion.php';
+    include '../../Controller/Productos.php';
 
     $RecepcionId = isset($_GET['id']) ? $_GET['id'] : null;
     $Recepcion = null;
@@ -38,15 +40,33 @@
                         <input type="text" id="cantidadProducto" value="<?php echo $Recepcion['cantidadProducto']; ?>" disabled>
 
 
-                        <!-- Campo folio bloqueado -->
-                        <label for="folio">Folio Producto:</label>
-                        <input type="text" id="folio" value="<?php echo $Recepcion['folio']; ?>" disabled>
+                        <!-- Campo nombre de producto bloqueado -->
+                        <label for="proveedor">Producto:</label>
+                        <div class="busqueda mb-3">
+                            <?php
+                                $producto = obtenerProductoPorID($conn, $Recepcion['folio'] ?? null);
+                                $nombreProd = $producto ? (!empty($producto['nombreProd']) ? $producto['nombreProd'] : 'Producto no encontrado') : 'Producto no encontrado';
 
-                        <!-- Campo proveedor bloqueado -->
+                            ?>
+                            <!-- Campo de texto para mostrar el nombre del producto (solo lectura) -->
+                            <input type="text" id="nombre" value="<?php echo htmlspecialchars($nombreProd); ?>" readonly class="form-control">
+                            <!-- Campo oculto para enviar el ID del proveedor -->
+                            <input type="hidden" id="idProducto" name="idProducto" value="<?php echo htmlspecialchars($Recepcion['folio'] ?? ''); ?>">
+                        </div>
+
                         <label for="proveedor">Proveedor:</label>
-                        <input type="text" id="idProveedor" value="<?php echo $Recepcion['idProveedor']; ?>" disabled>
+                        <div class="busqueda mb-3">
+                            <?php
+                                $proveedor = obtenerProveedorPorID($conn, $Recepcion['idProveedor'] ?? null);
+                                $nombreProveedor = $proveedor ? (!empty($proveedor['nombreComercial']) ? $proveedor['nombreComercial'] : $proveedor['razonSocial']) : 'Proveedor no encontrado';
+                            ?>
+                            <!-- Campo de texto para mostrar el nombre del proveedor (solo lectura) -->
+                            <input type="text" id="proveedorNombre" value="<?php echo htmlspecialchars($nombreProveedor); ?>" readonly class="form-control">
+                            <!-- Campo oculto para enviar el ID del proveedor -->
+                            <input type="hidden" id="idProveedor" name="idProveedor" value="<?php echo htmlspecialchars($Recepcion['idProveedor'] ?? ''); ?>">
+                        </div>
 
-                        <br><br>
+                        <br>
 
                         <label for="fecha" class="form-label">Fecha de Recepción:</label>
                         <input type="date" id="fecha" name="fecha" value="<?php echo $Recepcion['fecha']; ?>" required class="form-control custom-date">
