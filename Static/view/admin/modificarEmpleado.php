@@ -71,8 +71,6 @@
 
                         <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionModiEmpleado();">Actualizar</button>
 
-                        <br><br>
-
                     </form>
 
                     <!-- Botón de Cancelar -->

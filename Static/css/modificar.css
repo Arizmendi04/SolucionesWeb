@@ -20,6 +20,8 @@ body {
     flex-direction: column;
     gap: 15px;
     height: auto;
+    max-height: 600px; /* Limita la altura máxima del formulario */
+    overflow-y: auto;
 }
 
 h2 {
@@ -111,6 +113,18 @@ textarea {
     font-size: 17px;
     transition: background-color 0.3s;
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    .btn-primario,
+    .btn-secundario {
+        width: 48%;  /* Ajusta los botones a un 50% de ancho en pantallas más pequeñas */
+        margin-right: 4%;  /* Da un pequeño margen entre ellos */
+    }
+
+    .btn-secundario {
+        margin-right: 0;
+    }
 }
 
 /* Estilo general para el campo de fecha */
