@@ -32,8 +32,10 @@
                         <?php
                             session_start();
                             if (isset($_SESSION["mensaje_error"])) {
-                                echo "<p style='color: red; font-weight: bold; text-align: center;'>" . $_SESSION["mensaje_error"] . "</p>";
-                                unset($_SESSION["mensaje_error"]);
+                                echo "<div class='alert alert-danger text-center' role='alert'>";
+                                echo $_SESSION["mensaje_error"];
+                                echo "</div>";
+                                unset($_SESSION["mensaje_error"]); // Borra el mensaje después de mostrarlo
                             }
                         ?>
                         <form method="POST" name="frm1" id="frm1" action="../Controller/Autentificacion.php" onsubmit="return validacionc();">
