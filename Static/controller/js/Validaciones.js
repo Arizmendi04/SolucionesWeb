@@ -110,6 +110,23 @@ function validacionModiEmpleado() {
 function validacionProveedor() {
     const telefono = document.getElementById("telefono").value.trim();
     const correo = document.getElementById("correo").value.trim();
+    const razonSocial = document.getElementById("razonSocial").value.trim();
+    const nombreComercial = document.getElementById("nombreComercial").value.trim();
+
+    
+    if (razonSocial === "") {
+        document.getElementById("errorRazonSocial").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorRazonSocial").style.display = "none";
+    }
+
+    if (nombreComercial === "") {
+        document.getElementById("errorNombreC").style.display = "block";
+        return false;
+    } else {
+        document.getElementById("errorNombreC").style.display = "none";
+    }
 
     if (!validarTelefono(telefono)) {
         document.getElementById("errorTelefono").style.display = "block";
@@ -182,39 +199,46 @@ function validacionModiRecepcion() {
 
 /*Validaciones para productos*/
 function validacionProducto() {
-    const peso = document.getElementById("peso").value.trim();
-    const precio = document.getElementById("precio").value.trim();
-    const existencias = document.getElementById("existencia").value.trim();
+    let valido = true;
+
+    const peso = parseFloat(document.getElementById("peso").value.trim());
+    const precio = parseFloat(document.getElementById("precio").value.trim());
+    const existencias = parseInt(document.getElementById("cantidad").value.trim(), 10);
     const idProveedor = document.getElementById("idProveedor").value.trim();
 
-    if (!validarCantidad(peso)) {
+    // Validación del peso
+    if (isNaN(peso) || peso <= 0) {
         document.getElementById("errorPeso").style.display = "block";
-        return false;
+        valido = false;
     } else {
         document.getElementById("errorPeso").style.display = "none";
     }
 
-    if (!validarCantidad(precio)) {
+    // Validación del precio
+    if (isNaN(precio) || precio <= 0) {
         document.getElementById("errorPrecio").style.display = "block";
-        return false;
+        valido = false;
     } else {
         document.getElementById("errorPrecio").style.display = "none";
     }
 
-    if (!validarCantidad(existencias)) {
+    // Validación de existencias
+    if (isNaN(existencias) || existencias < 0) {
         document.getElementById("errorExistencias").style.display = "block";
-        return false;
+        valido = false;
     } else {
         document.getElementById("errorExistencias").style.display = "none";
     }
 
-     // Validación de ID de proveedor
-     if (idProveedor === "") {
+    // Validación de proveedor
+    if (idProveedor === "") {
         document.getElementById("errorIdProveedor").style.display = "block";
-        return false;
+        valido = false;
     } else {
         document.getElementById("errorIdProveedor").style.display = "none";
     }
+
+    return valido; // Solo envía el formulario si todas las validaciones pasan
 }
 
 /*Validaciones para modificar productos*/
