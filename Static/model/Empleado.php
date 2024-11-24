@@ -185,8 +185,8 @@ class Empleado {
                     sueldo = ?, 
                     cargo = ?, 
                     telefono = ?, 
-                    direccion = ?, 
-                  WHERE noEmpleado = ?";
+                    direccion = ? 
+                    WHERE noEmpleado = ?";
         // Preparar la sentencia
         if ($stmt = $this->conn->prepare($query)) {
             // Obtener los datos del objeto empleado
@@ -201,7 +201,7 @@ class Empleado {
             $direccion = $this->direccion;
             $noEmpleado = $this->noEmpleado;
             // Vincular parámetros
-            $stmt->bind_param("sssssdsssd", 
+            $stmt->bind_param("sssssdsssi", 
                 $nombre, 
                 $apellido, 
                 $sexo, 
