@@ -1,5 +1,8 @@
 <?php
+    include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Controller/Sesion.php');
+?>
 
+<?php
     class Ticket {
 
         // Propiedades de la clase
