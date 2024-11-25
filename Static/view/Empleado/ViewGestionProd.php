@@ -2,6 +2,7 @@
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/ControllerEmpleado/Productos.php'; ?>
 <?php include '../../Controller/ControllerEmpleado/Proveedores.php'; ?>
+<?php include '../../Controller/Sesion.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">

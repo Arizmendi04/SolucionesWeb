@@ -3,6 +3,7 @@
 <?php include '../../Controller/Productos.php'; ?>
 <?php include '../../Controller/Proveedores.php'; ?>
 <?php include '../../Controller/Recepciones.php'; ?>
+<?php include '../../Controller/Sesion.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
