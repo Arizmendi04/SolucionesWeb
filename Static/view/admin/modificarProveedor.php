@@ -39,9 +39,11 @@
 
                         <label for="razonSocial">Razón Social:</label>
                         <input type="text" id="razonSocial" name="razonSocial" value="<?php echo $proveedor['razonSocial']; ?>" required>
+                        <p class="alert alert-danger" id="errorRazonSocial" style="display:none;">Este campo es requerido</p>
 
                         <label for="nombreComercial">Nombre Comercial:</label>
                         <input type="text" id="nombreComercial" name="nombreComercial" value="<?php echo $proveedor['nombreComercial']; ?>" required>
+                        <p class="alert alert-danger" id="errorNombreC" style="display:none;">Este campo es requerido</p>
 
                         <label for="telefono">Teléfono:</label>
                         <input type="text" id="telefono" name="telefono" value="<?php echo $proveedor['telefono']; ?>" required>

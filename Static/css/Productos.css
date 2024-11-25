@@ -28,6 +28,7 @@ h2 {
     display: flex; /* Habilitar Flexbox para el contenedor */
     flex-direction: column; /* Para que el título esté encima de los contenedores */
     align-items: center;
+    overflow-y: auto;
 }
 
 /* Estilos para el título */

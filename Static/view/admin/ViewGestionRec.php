@@ -3,6 +3,7 @@
 <?php include '../../Controller/Productos.php'; ?>
 <?php include '../../Controller/Proveedores.php'; ?>
 <?php include '../../Controller/Recepciones.php'; ?>
+<?php include '../../Controller/Sesion.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -184,7 +185,7 @@
 
                     for (let i = 1; i < filas.length; i++) {
                         const celdas = filas[i].getElementsByTagName("td");
-                        const fechaRecepcion = celdas[2].innerText.toLowerCase(); // Celda de Fecha de Recepción (suponiendo que está en la columna 2)
+                        const fechaRecepcion = celdas[2].innerText.toLowerCase(); // Celda de Fecha de Recepción 
 
                         // Verificar si la fecha completa contiene el query
                         const encontrado = fechaRecepcion.includes(queryLower);

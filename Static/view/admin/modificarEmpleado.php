@@ -69,12 +69,7 @@
                         <label for="direccion">Dirección:</label>
                         <input type="text" id="direccion" name="direccion" value="<?php echo $empleado['direccion']; ?>" required>
 
-                        <label for="fotoPerfil">Foto de Perfil:</label>
-                        <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
-
                         <button type="submit" name="accion" class="btn-primario" value="actualizar" onclick="return validacionModiEmpleado();">Actualizar</button>
-
-                        <br><br>
 
                     </form>
 

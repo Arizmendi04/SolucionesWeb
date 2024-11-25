@@ -1,7 +1,12 @@
 <?php
-    include __DIR__ . '/Connect/Db.php';
+    
     session_start();
+    include __DIR__ . '/Connect/Db.php';
 
+    if (!$conn) {
+        header("Location: ../View/Login.php");
+        exit;
+    }
     $user = $_POST["usuario"];
     $password = $_POST["contrasena"];
 

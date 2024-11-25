@@ -1,6 +1,7 @@
 <?php
     require __DIR__ . '/../../vendor/autoload.php';
     require __DIR__ . '/Connect/db.php';
+    include 'Sesion.php';
 
     // Recuperar los valores seleccionados en el formulario
     $categoria = $_GET['categoria'];

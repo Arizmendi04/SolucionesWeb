@@ -95,6 +95,7 @@
                 $Producto->setPeso($_POST['peso'] ?? $ProductoData['peso']); 
                 $Producto->setUnidadM($_POST['unidadM'] ?? $ProductoData['unidadM']); 
                 $Producto->setUrlImagen($ProductoData['urlImagen']); // Mantener imagen actual
+                $Producto->setIdProveedor($_POST['idProveedor'] ?? $ProductoData['idProveedor']);
 
                 // Manejo de nueva imagen
                 if (isset($_FILES['fotoProducto']) && $_FILES['fotoProducto']['error'] == 0) {
