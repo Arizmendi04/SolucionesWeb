@@ -1,8 +1,14 @@
 <?php
+    /* Inclusión del controlador del usuario autentificado */
     include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Controller/Sesion.php');
 ?>
 
 <?php
+    /**
+     * Modelo del MVC de Empleado
+     * Clase para definir atributos de un objeto POO de tipo Empleado
+     * Clase con metodos para CRUD en la base de datos
+     */
     class Empleado {
 
         // Propiedades de la clase
@@ -105,7 +111,7 @@
             return $this->direccion;
         }
 
-        // Métodos para manejar empleados
+        // Método para obtener un empleado por su id
         public function obtenerEmpleado($idEmpleado) {
             $sql = "SELECT * FROM empleado WHERE noEmpleado = ? and noEmpleado NOT IN (1, 2);";
             $stmt = $this->conn->prepare($sql);
@@ -115,6 +121,7 @@
             return $resultado->fetch_assoc();
         }
 
+        // Metodo para obtener todos los empleados
         public function obtenerEmpleados() {
             // Consulta para obtener los empleados
             $sql = "SELECT * FROM empleado where noEmpleado not in (1,2)";
@@ -126,6 +133,7 @@
             return $empleados;
         }
 
+        // Metodo para verificar la existencia de un empleado
         public function existeEmpleado() {
             $query = "SELECT * FROM empleado WHERE nombre = ? AND apellido = ?
             AND fechaNac = ? AND telefono = ?";
@@ -138,6 +146,7 @@
             return $resultado->num_rows > 0; // Retorna verdadero si el empleado existe
         }
 
+        // Metodo para insertar un objeto de tipo Empleado en la base de datos
         public function insertarEmpleado() {
             // Preparar la consulta de inserción
             $sql = "INSERT INTO empleado (nombre, apellido, sexo, fechaNac, fechaIngreso, sueldo, cargo, telefono, direccion) 
@@ -170,6 +179,7 @@
             }
         }
 
+        // Metodo para eliminar un empleado de la base de datos por su id
         public function eliminarEmpleado($id){
             $sql = "DELETE FROM empleado WHERE noEmpleado = ?";
             $stmt = $this->conn->prepare($sql);
@@ -177,6 +187,7 @@
             return $stmt->execute();
         }
         
+        // Metodo para realizar un update de empleado en la base de datos
         public function modificarEmpleado() {
             // Prepare la consulta SQL
             $query = "UPDATE empleado SET 
@@ -230,6 +241,7 @@
             }
         }
 
+        // Metodo para consultar empleados dado un parametro
         public function filtrarEmpleado($parametro) {
             // Preparar la consulta SQL
             $sql = "SELECT * FROM empleado 

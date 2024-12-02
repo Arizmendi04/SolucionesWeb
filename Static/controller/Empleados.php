@@ -1,8 +1,12 @@
 <?php include 'Connect/Db.php'; ?>
 <?php include 'Sesion.php'; ?>
 <?php include($_SERVER['DOCUMENT_ROOT'].'/SolucionesWeb/Static/Model/Empleado.php'); ?>
+<!-- Inclusión de controlador de conexion a la base de datos, sesion y del modelo de tipo Empleado -->
 
 <?php
+
+    // Metodos para conectar la vista con el modelo de la base de datos.
+
     function solicitarEmpleados($conn) {
         $empleado = new Empleado($conn);
         $resultado = $empleado->obtenerEmpleados();

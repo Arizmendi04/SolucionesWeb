@@ -2,6 +2,7 @@
 <?php include '../../Controller/Empleados.php'; ?>
 <?php include '../../Controller/Connect/Db.php'; ?>
 <?php include '../../Controller/Sesion.php'; ?>
+<!-- Inclusión de controladores de conexion a la base de datos, sesion y de empleados. Ademas del header del administrador -->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -15,6 +16,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Viga&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../../Css/Crud.css">
+
+        <!-- Enlaces para fuentes, css y bootstrap -->
         
     </head>
     <body>
@@ -134,6 +137,7 @@
 
         </div>
 
+        <!-- Modal de confirmación de eliminación -->
         <div id="confirmModal" class="modal">
             <div class="modal-content">
                 <h2>Confirmar Eliminación</h2>
@@ -143,11 +147,14 @@
             </div>
         </div>
 
+        <!-- Enlaces a los script de JS -->
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
         <script src="../../Controller/Js/ConfirmElim.js"></script>
         <script src="../../Controller/Js/Validaciones.js"></script>
 
+        <!-- Script para actualizar la tabla en tiempo real -->
         <script>
             function filtrarEmpleados(query) {
                 const tabla = document.getElementById("tablaEmpleados");
